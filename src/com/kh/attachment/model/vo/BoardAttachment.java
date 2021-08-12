@@ -11,7 +11,7 @@ public class BoardAttachment {
 	private String changeName; // 수정파일명
 	private String filePath; // 저장폴더경로
 	private Date uploadDate; // 업로드날짜
-	private int fileLevel; // 파일레벨(1공지/2문의/3신고/4자유)
+	private int fileLevel; // 파일레벨(1공지/2신고/3자유)
 	private String status; // 상태값(Y/N)
 
 }
