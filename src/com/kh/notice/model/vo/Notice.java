@@ -2,6 +2,9 @@ package com.kh.notice.model.vo;
 //테스트
 import java.util.Date;
 
+import lombok.Data;
+
+@Data
 public class Notice {
 	//공지사항
 	
