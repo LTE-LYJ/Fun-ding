@@ -1,7 +1,7 @@
 package com.kh.member.model.vo;
 
 import java.util.Date;
-
+// 테스트입니다!!! 와아아아아><
 public class Member {
 	//회원정보
 	
