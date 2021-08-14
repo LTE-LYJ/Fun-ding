@@ -2,8 +2,10 @@ package com.kh.board.model.vo;
 
 import java.util.Date;
 
+import lombok.Data;
+
+@Data
 public class Board {
-	//자유게시판
 	
 	private int boardNo; //게시글번호
 	private String boardTitle; //게시글제목
