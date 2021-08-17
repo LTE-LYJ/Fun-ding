@@ -65,7 +65,7 @@
       
 </style>
 <meta charset="UTF-8">
-<title>login</title>
+<title>로그인</title>
 </head>
 <body>
  <%@ include file ="../common/menubar.jsp" %>
@@ -88,12 +88,13 @@
                     </tr>
                     
                     <tr>
-                        <td style="height:60px"><a href="">아이디 찾기</a> | <a href="">비밀번호 재설정</a></td>
+                        <td style="height:60px"><a href="<%=request.getContextPath()%>/findIdForm.me">아이디 찾기</a> | <a href="<%=request.getContextPath()%>/findPwdForm.me">비밀번호 찾기</a></td>
                         <th></th>
                      </tr>
                 </table>
             </form> 
             </div>      
         </div>
+        <%@ include file ="../common/footer.jsp" %>
 </body>
 </html>
