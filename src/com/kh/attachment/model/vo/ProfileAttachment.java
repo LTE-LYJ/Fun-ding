@@ -2,6 +2,8 @@ package com.kh.attachment.model.vo;
 
 import java.sql.Date;
 
+import lombok.Data;
+@Data
 public class ProfileAttachment {
 	//프로필 이미지
 

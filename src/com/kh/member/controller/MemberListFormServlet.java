@@ -1,28 +1,28 @@
 package com.kh.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class MemberListFormServlet
  */
-@WebServlet("/login.me")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/memberList.bo")
+public class MemberListFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public MemberListFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,34 +31,19 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 전체 회원 조회하는 페이지(sql문에서 관리자 회원번호는 제외할 것)
+		//ArrayList<Member> list = new MemberService().selectList();	
+		ArrayList<Member> list = new ArrayList();
+		//Member member = new Member();
+		//member.setMemNo(100);
+		//member.setMemId("admin");
+		//member.setMemName("관리자");
 		
-		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
+		//list.add(member);
 		
-		String originPwd = request.getParameter("userPwd");
-		System.out.println(userId);
-		System.out.println(userPwd);
-		
-		Member loginUser = new MemberService().loginMember(userId, userPwd);
-		System.out.println(loginUser);
-		//ProfileAttachment at = new MemberService().memberProfile(userId);
-		
-		
-		if(loginUser != null) {
-			
-			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", loginUser);
-			session.setAttribute("originPwd", originPwd);
-			//session.setAttribute("at", at);
-			
-			response.sendRedirect(request.getContextPath());
-			
-		} else {
-			request.setAttribute("msg", "로그인에 실패하였습니다.");
-			
-			request.getRequestDispatcher("views/common/errorPage.jsp");
-		}
-		
+		request.setAttribute("list",list);
+		request.getRequestDispatcher("views/member/memberList.jsp").forward(request, response);
+
 	}
 
 	/**
