@@ -10,7 +10,7 @@
  <%@ include file ="views/common/menubar.jsp" %>
  
  <br><div>메인메뉴</div><br>
- 
+   <a href="<%=request.getContextPath()%>/proInfo.list">상세페이지 확인용 링크</a>
  <%@ include file ="views/common/footer.jsp" %>
 </body>
 </html>

@@ -1,0 +1,157 @@
+@charset "UTF-8";
+ body{
+            margin: 0 auto;
+        }
+        #body_content1{
+            margin: 87px;
+            margin-bottom: 60px;
+        }
+        #content{
+            display: inline-flex;
+            width: 100%;
+            justify-content: center;
+        }
+        #content_in{
+            width: 1125px; /* width: 950px;  */
+        }
+        #proimage{
+            width: 236px;
+            height: 145px;
+            background-color: pink;
+            margin-right: 20px;
+        }
+        #pro{
+            display: inline-flex;
+            margin-top: 20px;
+        }
+        #pro_sub, #percent{
+            margin-top: 0px;
+            margin-bottom: 15px;
+        }
+        #pro_sub{
+            font-size: 17px;
+        }
+        #pro_ab{
+            display: inline;
+        }
+        #percent{
+            color: red;
+        }
+        #much{
+            display: inline-flex;
+            width: 100%;
+            justify-content: space-between;
+        }
+        #much h4{
+            margin-top: 0px;
+        }
+        table{
+            width: 91%;
+            float: none;
+            margin: auto;
+        }
+        tr :nth-child(1), tr :nth-child(2){
+            text-align: left;
+        }
+        tr :nth-child(3){
+            text-align: right;
+        }
+        tr :nth-child(4){
+            text-align: right;
+            width:120px;
+        }
+        th h3{
+            margin-bottom: 7px;
+            margin-top: 8px;
+            width: 127px;
+        }
+        td h4{
+            margin-bottom: 7px;
+            margin-top: 8px;
+        }
+        th {
+            width: 150px;
+        }
+        .paybt {
+            background-color: lightgray;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            font-weight: bolder;
+            font-size: 16px;
+            width: 85px;
+            height: 35px;
+            padding-left: 11px;
+            cursor: pointer;
+        }
+        tr textarea{
+            height: 21px;
+            resize:none;
+            font-size: 15px;
+        }
+        .btn_di{
+            background-color: lightgray;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            font-weight: bolder;
+            font-size: 16px;
+            width: 108px;
+            height: 35px;
+            padding-left: 11px;
+            cursor: pointer;
+        }
+        #coinerr{
+            color: red;
+            text-align: right;
+            display: none;
+        }
+        .count{
+            width: 330px;
+            font-weight: bolder;
+        }
+        td h2{
+            margin: 0px;
+        }
+        th input[type="checkbox"]{
+            width: 20px;
+            height: 20px;
+        }
+        .checkbox{
+            width: 40px;
+        }
+        #btn_back, #btn_fini{
+            width: 250px;
+            height: 45px;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            font-weight: bolder;
+            font-size: 25px;
+            
+        }
+        #btn_back{
+            background-color: lightgray;
+            margin-left:250px;
+        }
+        #btn_fini{
+            background-color: rgb(192, 57, 43);
+            color: white;
+            margin-right: 250px;
+        }
+        #btn{
+            display: flex;
+            justify-content: space-around;
+        }
+        input[type="button"]{
+        	cursor: pointer;
+        }
+        #howMuch{
+        	color: red;
+        }
+        #finish, #finishsub{
+        	text-align:center;
+        }
+        #finish{
+        	color: red;
+        }
