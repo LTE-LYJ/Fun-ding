@@ -7,6 +7,7 @@ import lombok.Data;
 public class Member {
 	//회원정보
 	//push 테스트
+	//push테스트22222-주연
 	private int memNo; //회원번호
 	private String memId; //아이디
 	private String memPwd; //비밀번호
