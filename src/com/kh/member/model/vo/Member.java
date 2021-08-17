@@ -1,5 +1,5 @@
 package com.kh.member.model.vo;
-
+//테스트
 import java.util.Date;
 
 import lombok.Data;
