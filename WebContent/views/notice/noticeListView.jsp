@@ -27,11 +27,10 @@
 		<h1>고객지원</h1>
 		<br>
 		<div class="row">
-			<div class="col-3"><a class="text-body" href=""><h3>공지사항</h3></a></div>
-			<div class="col-3"><a class="text-secondary" href="" ><h3>신고게시판</h3></a></div>
+			<div class="col-3"><a class="text-body" href="/FundingPro/views/notice/noticeListView.jsp"><h3>공지사항</h3></a></div>
+			<div class="col-3"><a class="text-secondary" href="/FundingPro/views/project_report/projectReportListView.jsp" ><h3>신고게시판</h3></a></div>
 			
 		</div>
-		<a></a>
 		<hr>
 		<table class="table table-bordered table-sm">
 			<thead class="thead-dark">
