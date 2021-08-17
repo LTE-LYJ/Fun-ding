@@ -1,10 +1,12 @@
 package com.kh.member.model.vo;
 
 import java.util.Date;
-// 테스트입니다!!! 와아아아아><
+
+import lombok.Data;
+@Data
 public class Member {
 	//회원정보
-	
+	//push 테스트
 	private int memNo; //회원번호
 	private String memId; //아이디
 	private String memPwd; //비밀번호
