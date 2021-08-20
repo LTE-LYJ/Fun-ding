@@ -14,7 +14,7 @@
         margin: 100px;;
         color:rgba(156, 228, 228);
         text-align: center;
-       	font-size: 45px;
+       	font-size: 38px;
         font-weight:bold;
         margin-bottom: 0px;
     }
@@ -34,12 +34,13 @@
         justify-content: center;
         align-items: center;
        	background-color: rgba(156, 228, 228, 0.253);
-       	width:700px;
+       	width:800px;
         height:500px;
     }
 
     table {
         font-size: 12pt;
+        border-collapse:collapse;
     }
 
     input {       
@@ -53,8 +54,10 @@
 
     #enrollForm th:nth-child(2){
         width:150px;
-    }
-
+     
+    }  
+		
+		
     #enrollForm th:nth-child(3){
         width:150px;
         text-align:left;
@@ -88,43 +91,43 @@
 <body>
  <%@ include file ="../common/menubar.jsp" %>
         <div id="title">
-            <h1 style="line-height: 80px;">Welcome to Fund-ing</h1>
+            <h1 style="line-height: 80px;">Welcome to fund-ing</h1>
         </div>
         <div id="wrap">
             <div id="enroll">
                 <form id="enrollForm" action="<%=request.getContextPath()%>/insert.me" method="post" onsubmit="return joinValidate();" enctype="multipart/form-data">
-                <table>
+                <table border=3px; >
                     <tr>
                         <th rowspan="5"><img id="profilImg" width= "120" height= "120"></th>
                         <th><input type="text" maxlength="13" name="userId" placeholder="ID" required></th>
-                        <th>
+                        <th style= "border-top: none; border-bottom: none; border-left: none; border-right: none;">
                             &nbsp; <button type="button" id="idCheckBtn" onclick="checkId();">중복확인</button>
                         </th>
                     </tr>
                     <tr>
                         <!--<td></td>-->
                         <th><input type="password" maxlength="15" name="userPwd" placeholder="PWD" required></th>
-                        <th></th>
+                        <th style= "border-top: none; border-bottom: none; border-left: none; border-right: none;"></th>
                     </tr>
                     <tr>
                          <!--<td></td>-->
-                        <th style= "border-right: 0;"><input type="password" maxlength="15" name="checkPwd" required placeholder="PWD Check"></th>
-                        <th><label id = "pwdResult"></label></th>
+                        <th><input type="password" maxlength="15" name="checkPwd" required placeholder="PWD Check"></th>
+                        <th style= "border-top: none; border-bottom: none; border-left: none; border-right: none;"><label id = "pwdResult"></label></th>
                     </tr>	
                     <tr>
                          <!--<td></td>-->
-                        <th style= "border-right: none;"><input type="text" maxlength="5" name="userName" required placeholder="Name"></th>
-                        <th></th>
+                        <th><input type="text" maxlength="5" name="userName" required placeholder="Name"></th>
+                        <th style= "border-top: none; border-bottom: none; border-left: none; border-right: none;"></th>
                     </tr>
                     <tr>
                          <!--<td></td>-->
-                        <th style= "border-right: none;"><input type="tel" maxlength="11" name="phone" placeholder="Phone(-없이)" required></th>
-                        <th></th>
+                        <th><input type="tel" maxlength="11" name="phone" placeholder="Phone(-없이)" required></th>
+                        <th style= "border-top: none; border-bottom: none; border-left: none; border-right: none;"></th>
                     </tr>
                     <tr>
                         <th rowspan="2"> 프로필 사진</th>
-                        <th style= "border-right: none;"><input type="email" name="email" required placeholder="Email"></th>
-                        <th></th>
+                        <th><input type="email" name="email" required placeholder="Email"></th>
+                        <th style= "border-top: none; border-bottom: none; border-left: none; border-right: none;"></th>
                     </tr>
                     <tr>
                         <!--<td></td>-->
@@ -145,7 +148,7 @@
 							<input type="text" name="address1" class="form-control postcodify_address" value="${ address1 }"  placeholder="Address">   
 						</th>  
 						                   
-                        <th style="text-align:left;"> 
+                        <th style="text-align:left; border-top: none; border-bottom: none; border-left: none; border-right: none;"> 
                              &nbsp;<button type="button" class="btn btn-primary" id="postcodify_search_button" style=" width:50px;">검색</button>
                         </th>
                     </tr>
@@ -212,7 +215,7 @@
 	function checkId() {
 		var userId = $("#enrollForm input[name=userId]")
 		if (userId.val() == "") {
-			alert("id를 입력해주세요");
+			alert("ID를 입력해주세요");
 			return false;
 		}
 
@@ -224,16 +227,16 @@
 			},
 			success : function(result) {
 				if (result == "fail") {
-					alert("사용할 수 없는 아이디 입니다.");
-					userId.focus();
+					alert("사용할 수 없는 아이디입니다.");
+					 $("#enrollForm input[name=userId]").focus();
 
 				} else {
 					if (confirm("사용가능한 아이디입니다. 사용하시겠습니까?")) {
 						userId.attr("readonly", "true");
 						$("#joinBtn").removeAttr("disabled");
+						
 					} else {
-						userId.focus();
-
+						 $("#enrollForm input[name=userId]").focus();
 					}
 				}
 			},

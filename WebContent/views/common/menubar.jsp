@@ -13,7 +13,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Fund-ing</title>
 </head>
-    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
 <style>
 body {
 	min-width: 1200px;
@@ -110,8 +111,20 @@ img {
 	float: right;
 	margin-right: 20px;
 	margin-top: 5px;
+	border-radius: 70%;
 }
 </style>
+<script>
+$(function(){
+    var msg = "<%=message%>";
+    
+    if(msg != "null"){
+       alert(msg);	
+       
+       <%session.removeAttribute("msg");%>
+    }
+ 	});
+</script>
 
 <body>
 	<% if(loginUser == null){ %>
@@ -148,8 +161,8 @@ img {
 		<img src="<%=request.getContextPath()%>/resources/images/default.PNG" style="width:50px; height:50px"> 
 		
 		<span class="userInfo">
-            <a href="<%=request.getContextPath()%>/memberList.bo" style="font-size:15px; font-weight:bold;">회원관리리스트</a><br>
-            <a href="<%=request.getContextPath()%>/logout.me" style="font-size:10px; font-weight:bold;"> 로그아웃</a>
+            <a href="<%=request.getContextPath()%>/memberList.bo" style="font-size:15px; font-weight:bold;">회원 리스트</a><br>
+            <a href="<%=request.getContextPath()%>/logout.me" style="font-size:10px; font-weight:bold; color:red;"> 로그아웃</a>
         </span>
 		<hr style="height: 1px; background-color: black;">
 		</div>
@@ -170,13 +183,13 @@ img {
 		<%if(at == null){ %>
 		<img src="<%=request.getContextPath()%>/resources/images/default.PNG" style="width:50px; height:50px"> 
 		<%} else { %>
-		<img src="<%=request.getContextPath() %>/resources/images/<%= at.getChangeName() %>" style="width:50px; height:50px"> 
+		<img src="<%=request.getContextPath() %>/resources/upfiles_profile/<%= at.getChangeName()%>" style="width:50px; height:50px"> 
 		<%} %>
 		
 		 
 		<span class="userInfo">
             <a href="" style="font-size:15px; font-weight:bold;"><%= loginUser.getMemName() %></a><br>
-            <a href="<%=request.getContextPath()%>/logout.me" style="font-size:10px; font-weight:bold;"> 로그아웃</a>
+            <a href="<%=request.getContextPath()%>/logout.me" style="font-size:10px; font-weight:bold; color:red;"> 로그아웃</a>
         </span>
 		<hr style="height: 1px; background-color: black;">
 		</div>

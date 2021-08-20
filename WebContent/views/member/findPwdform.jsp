@@ -1,50 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
-    body{
-        min-width:865px;
-    }
-
-    #title{
-        margin: 100px;;
-        color:rgba(156, 228, 228);
+    body {background-color:azure;}
+    
+     #title{
+        margin: 30px;
         text-align: center;
-       	font-size: 45px;
         font-weight:bold;
         margin-bottom: 0px;
     }
-
-    #find{
-        margin: 87px;
-        margin-top:40px;
+   
+   #find{
         display: flex;
-        height:500px;
         justify-content: center;
         align-items: center;
+        margin-top: 10px;
+        
     }
 
     #findBox{
-        margin: 87px;
-        margin-top:40px;
-        height:350px;
-        width: 600px;
-        background-color: rgba(156, 228, 228, 0.253);
+        margin: 60px;
+        margin-top: 10px;
+        height:200px;
+        width:500px;
+        border: 1px solid black;
+        background-color:white;
     }
 
-    #findPwd {
-        margin-top:40px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
 
     table{
-        margin-top:80px;
+     	margin-top: 20px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -71,15 +63,12 @@
     </style>
 </head>
 <body>
- <%@ include file ="../common/menubar.jsp" %>
     <div id="title">
         <h1 style="line-height: 80px;">비밀번호 찾기</h1>
     </div>
 
     <div id="find">
         <div id="findBox">
-            <div id="findPwd"> </div>
-        <form id="findForm" action="" method="post" >
             <table>
                 <tr>  
                     <th><input id="userId" type="text" name="userId" placeholder="ID"></th>&nbsp;
@@ -90,15 +79,13 @@
                    
                 </tr>
             </table>
-            <br><br>
+            <br>
                 <div class="btns" align="center">
-                    <button id="goMain" onclick="history.go(-1)">취소</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button id="close" onclick=window.close();>취소</button>&nbsp;&nbsp;&nbsp;&nbsp;
                     <button id="confirmBtn" onclick="findPwd();">확인</button>
                 </div>
-        </form> 
         </div>      
     </div>
-    <%@ include file ="../common/footer.jsp" %>
 </body>
 <script>
 	function findPwd() {
@@ -114,8 +101,24 @@
 			type:"post",
 			success: function(result){
 				console.log("ajax 통신 성공");
-				$("#findPwd").text("회원님의 비밀번호는 " + result + " 입니다.");
-				$("table").css("margin-top","55px");
+				
+				var pwd = "";
+				
+				
+				if(result.length == 0 ){
+					alert("일치하는 회원정보가 없습니다.")
+					
+				} else {
+					for(var i= 0; i<2; i++){
+						pwd += result.charAt(i);
+					}
+					
+					for(var i=2; i<result.length;i++){
+						pwd += '*';
+					}
+					alert("회원님의 비밀번호는 " + pwd + " 입니다.")
+				}
+				
 			},
 			error:function(e){
 				$("#findPwd").text("ajax 통신 실패");
