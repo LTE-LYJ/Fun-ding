@@ -168,7 +168,8 @@
                 </div>
                 <br><br>
                 <div class="btns" align="center">
-                    <button type="button" id="goMain" onclick="history.go(-1)">취소</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" id="goMain" onclick="main()">취소</button>&nbsp;&nbsp;&nbsp;&nbsp;
+
                     <button type="submit" id="joinBtn" disabled>가입</button>
                 </div>
                 </form>
@@ -201,6 +202,11 @@
 			}
 		}
 	}
+	
+	function main() { //취소버튼 클릭시 메인페이지 이동
+		  location.href="<%=request.getContextPath()%>";
+	}
+	
 	
 	//비밀번호, 비밀번호 확인이 일치하는지 확인
 	function joinValidate(){
