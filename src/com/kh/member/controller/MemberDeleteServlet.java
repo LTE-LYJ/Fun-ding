@@ -1,6 +1,8 @@
 package com.kh.member.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,16 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.member.model.service.MemberService;
 
 /**
- * Servlet implementation class FindPwdServlet
+ * Servlet implementation class MemberDeleteServlet
  */
-@WebServlet("/findPwd.me")
-public class FindPwdServlet extends HttpServlet {
+@WebServlet("/delete.me")
+public class MemberDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FindPwdServlet() {
+    public MemberDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,17 +30,20 @@ public class FindPwdServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("userId");
-		String userName = request.getParameter("userName");
+		String memId = request.getParameter("memId");
 		
-		String userPwd = new MemberService().findPwd(userId, userName);
+		//System.out.println(memId);
 		
-		if(userPwd==null) {
-			userPwd = "";
+		int result = new MemberService().deleteMember(memId);
+		
+		if(result > 0) {
+			response.sendRedirect("memberList.bo");
+		} else {
+			request.setAttribute("msg", "멤버 탈퇴 실패");
+			
+			RequestDispatcher view = request.getRequestDispatcher("/views/common/errorPage.jsp");
+			view.forward(request, response);
 		}
-	
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().print(userPwd);
 	}
 
 	/**

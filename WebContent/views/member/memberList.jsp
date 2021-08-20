@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원 관리 리스트</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
 <style>
     body{
@@ -102,9 +102,16 @@
         height:30px;
     }
 
-    table th:nth-child(4){
+    table td:nth-child(4){
+        text-align:center;
+        width:180px; 
+        height:30px;
+    }
+    
+     table th:nth-child(5){
         text-align:left;
     }
+    
 
     #deleteBtn{
         background-color: white;
@@ -119,6 +126,11 @@
         background-color: rgb(31, 80, 126);
         color:white;
     }
+    
+	#memberTable >tbody >tr {
+		cursor: pointer;
+	}
+
 </style>
 </head>
 <body>
@@ -135,40 +147,41 @@
 
         <div id="wrap">
             <div id="memberList">
-             <table id="memberTable" >
-                 <%if(list.isEmpty()){%>
-                 <tbody>
+             <table id="memberTable">
+                 <thead>
+                 <tr>
+                     <th class="line" style="width:120px;">회원번호</th>
+                     <th class="line" style="width:150px;;">아이디</th>
+                     <th class="line" style="width:150px;;">이름</th>
+                     <th class="line" style="width:180px;">이메일</th>
+                     <th class="line"></th>
+                 </tr>
+             	</thead>
+             	 <tbody>
+             	<%if(list.isEmpty()){%>
                  <tr>
                  	<td colspan="4" style="width:500px; padding:30px;">조회된 회원 리스트가 없습니다.</td>
                  </tr>
-                 </tbody>
-                 
                  <%} else { %>
-                 
-                 <thead>
-                 <tr>
-                     <th class="line">회원번호</th>
-                     <th class="line">회원이름</th>
-                     <th class="line">회원Id</th>
-                     <th class="line"></th>
-                 </tr>
-             </thead>
-                 <tbody>
-                 	<%for(Member mList : list) {%>
-                 <tr>
-                     <td class="line"><%= mList.getMemNo() %></th>
-                     <td class="line"><%= mList.getMemId() %></th>
-                     <td class="line"><%= mList.getMemNo() %></th>
-                     <td class="line">&nbsp;<button id="deleteBtn">탈퇴</button></th>
-                 </tr>
-            <%} %>
-           		 </tbody>
-            <%} %>
+             	 <%for(Member mList : list) {%>
+                 	<tr>
+                     	<td class="line"><%= mList.getMemNo() %></td>
+                     	<td class="line"><%= mList.getMemId() %></td>
+                     	<td class="line"><%= mList.getMemName() %></td>
+                     	<td class="line"><%= mList.getEmail() %></td>
+                     	<th class="line">&nbsp;<button id="deleteBtn" type="button" onclick="deleteMember()">탈퇴</button></th>
+                 	</tr>
+                 	
+            	<%} %>
+            	<%} %>
+            </tbody>
              </table>
-             <script>
+            </div>
+        </div>
+           <script>
              		$("#searchBtn").click(function(){
              			var memName = $("#memName").val();
-             			
+             			console.log(memName);
              			$.ajax({
              				url: "searchMember.bo",
              				data: { memName : memName },
@@ -177,25 +190,41 @@
              				success: function(list){
              					console.log(list);
              					
-             					var $tableBody = $("memberTable tbody");
+             					if(list.length != 0){
+             						
              					
+             					$("#memberTable > tbody").empty();
+             					
+             					var str = '';
              					
              					$.each(list, function(i){
-             						var $tr = $("<tr>");
-    								var $noTd = $('<td class="line">').text(list[i].no);
-    								var $naemTd = $('<td class="line">').text(list[i].name);
-    								var $ageTd = $('<td class="line">').text(list[i].id);
-    								var $genderTd = $('<td class="line">').text('&nbsp;<button id="deleteBtn">탈퇴</button>');
-    								
-    								$tr.append($noTd);
-    								$tr.append($naemTd);
-    								$tr.append($ageTd);
-    								$tr.append($genderTd);
-    								
-    								$tableBody.append($tr);
-    								
-             					})
+             						str += '<tr>'+'<td class="line">'+
+ 		                  	 	 	list[i].no + '</td><td class="line">'+
+ 		                  		 	list[i].id + '</td><td class="line">'+
+ 		                  		 	list[i].name + '</td><td class="line">'+
+ 		                  		 	list[i].email + '</td><th class="line">'+
+ 		                  			'&nbsp;<button id="deleteBtn" type="button" onclick="deleteMember()">탈퇴</button>' + '</th>'
+ 		                  			+ '</tr>'
+ 		               			   
+ 		           				});
              					
+                    
+ 									$("#memberTable").append(str); 
+ 									
+             					} else if(list.length == 0) {
+             						
+             						//$("#memberTable > thead").empty();
+             						$("#memberTable > tbody").empty();
+             						
+             						var str = '<tbody><tr>'+
+             						'<td colspan="4" style="width:500px; padding:30px;">'
+             						+ "조회된 회원 리스트가 없습니다. 이름을 정확히 입력해주세요." + '</td>' 
+             						+ '</tr></<tbody>'
+             						
+             						$("#memberTable").append(str); 
+             					}
+             					
+                     
              				},
              				error:function(){
     							console.log("Ajax 통신 실패");
@@ -203,10 +232,36 @@
              			
              			})
              		})
-             	
+             		
+             		<%if(!list.isEmpty()) {%>
+             		$(function(){
+             			$(document).on("mouseenter", "#memberTable > tbody >tr", function (e) { 
+             				$(this).css("background-color","#1b5ac2");
+         					$(this).css("color","white");
+             			});
+             			
+             			$(document).on("mouseleave", "#memberTable  > tbody > tr", function (e) { 
+             				$(this).css("background-color","white");
+         					$(this).css("color","black");
+             			});
+             			
+             			$(document).on("click", "#memberTable >tbody > tr >td", function (e) { 
+             				var memId = $(this).parent().children().eq(1).text();
+         					window.open("<%=request.getContextPath()%>/aboutMember.me?memId="+ memId, "멤버 조회", "width=750, height=650");
+             			});
+             
+             		})
+             		<%}%>
+             		
+             		function deleteMember() {
+             			for (let i = 1; i < memberTable.rows.length; i++) {
+                 			memberTable.rows[i].cells[4].onclick = function(){
+                 				let memId = memberTable.rows[i].cells[1].innerText;
+                     			location.href = "<%=request.getContextPath()%>/delete.me?memId="+ memId;
+                 			}
+                 		}
+             		}
              </script>
-            </div>
-        </div>
   <%@ include file ="../common/footer.jsp" %>
 </body>
 </html>
