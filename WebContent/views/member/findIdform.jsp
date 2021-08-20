@@ -34,7 +34,7 @@
     }
 
 
-    table{
+    #findIdtable{
         margin-top: 40px;
         display: flex;
         justify-content: center;
@@ -66,7 +66,7 @@
     </div>
     <div id="find">
         <div id="findBox">
-            <table>
+            <table id="findIdtable">
                 <tr>
                     <th><input id="userName" type="text" name="userName" placeholder="Name"></th>
                 </tr>

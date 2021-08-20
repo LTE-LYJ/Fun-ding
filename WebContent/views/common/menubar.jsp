@@ -107,7 +107,7 @@ a:hover {
 	text-decoration: none;
 }
 
-img {
+#profile {
 	float: right;
 	margin-right: 20px;
 	margin-top: 5px;
@@ -158,7 +158,7 @@ $(function(){
 
 		</span> 
 		
-		<img src="<%=request.getContextPath()%>/resources/images/default.PNG" style="width:50px; height:50px"> 
+		<img id="profile" src="<%=request.getContextPath()%>/resources/images/default.PNG" style="width:50px; height:50px"> 
 		
 		<span class="userInfo">
             <a href="<%=request.getContextPath()%>/memberList.bo" style="font-size:15px; font-weight:bold;">회원 리스트</a><br>
@@ -181,9 +181,9 @@ $(function(){
 		</span> 
 		
 		<%if(at == null){ %>
-		<img src="<%=request.getContextPath()%>/resources/images/default.PNG" style="width:50px; height:50px"> 
+		<img id="profile" src="<%=request.getContextPath()%>/resources/images/default.PNG" style="width:50px; height:50px"> 
 		<%} else { %>
-		<img src="<%=request.getContextPath() %>/resources/upfiles_profile/<%= at.getChangeName()%>" style="width:50px; height:50px"> 
+		<img id="profile"  src="<%=request.getContextPath() %>/resources/upfiles_profile/<%= at.getChangeName()%>" style="width:50px; height:50px"> 
 		<%} %>
 		
 		 

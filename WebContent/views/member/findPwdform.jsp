@@ -35,7 +35,7 @@
     }
 
 
-    table{
+    #findPwdtable{
      	margin-top: 20px;
         display: flex;
         justify-content: center;
@@ -69,7 +69,7 @@
 
     <div id="find">
         <div id="findBox">
-            <table>
+            <table id="findPwdtable">
                 <tr>  
                     <th><input id="userId" type="text" name="userId" placeholder="ID"></th>&nbsp;
                    
