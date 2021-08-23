@@ -100,7 +100,6 @@
 				
 				if(result.length == 0 ){
 					alert("일치하는 회원정보가 없습니다.")
-				
 
 
                 }else {

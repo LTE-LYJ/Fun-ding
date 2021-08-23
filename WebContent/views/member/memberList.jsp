@@ -2,6 +2,13 @@
     pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.member.model.vo.*"%>
 <% 
 	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");
+	MemberPageInfo pi = (MemberPageInfo) request.getAttribute("pi");
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
 
 %>
 <!DOCTYPE html>
@@ -36,16 +43,23 @@
         justify-content: center;
         align-items: center;
     }
+    
+    #category {
+     margin-left:200px;
+     border: 1px solid #1b5ac2;
+     width:80px;
+     height:35px;
+    }
 
     #memberSearch{
         height:35px;
         width:250px;
         border: 1px solid #1b5ac2;
         background-color: #ffffff;
-        margin-left:250px;
+        margin-left:10px;
     }
 
-    #memName{
+    #mem{
         font-size: 12px;
         width:150px;
         padding: 10px;
@@ -67,9 +81,6 @@
         margin: 87px;
         margin-left: 100px;
         margin-top:40px;
-        display: flex;
-        justify-content: center;
-        align-items:flex-start;
        	width:700px;
         height:500px;
     }
@@ -77,7 +88,6 @@
     table {
         font-size: 12pt;
         border-collapse:collapse;
-
     }
 
     .line{
@@ -139,8 +149,13 @@
             <h1 style="line-height: 80px;">회원 리스트</h1>
         </div>
         <div id="searchWrap">
+         <select id="category" >
+    			  <option value="no" selected>회원번호</option>
+    			  <option value="name">회원이름</option>
+    			  <option value="id">아이디</option>
+  			 </select>
             <div id="memberSearch">
-                <input id="memName" type="text" placeholder="회원이름 검색">
+                <input id="mem" type="text">
                 <button id="searchBtn">검색</button>
             </div>
         </div>
@@ -154,13 +169,13 @@
                      <th class="line" style="width:150px;;">아이디</th>
                      <th class="line" style="width:150px;;">이름</th>
                      <th class="line" style="width:180px;">이메일</th>
-                     <th class="line"></th>
+                     <th class="line" style="width:60px;"></th>
                  </tr>
              	</thead>
              	 <tbody>
              	<%if(list.isEmpty()){%>
                  <tr>
-                 	<td colspan="4" style="width:500px; padding:30px;">조회된 회원 리스트가 없습니다.</td>
+                 	<td colspan="5" style="width:500px; padding:30px;">조회된 회원 리스트가 없습니다.</td>
                  </tr>
                  <%} else { %>
              	 <%for(Member mList : list) {%>
@@ -175,16 +190,50 @@
             	<%} %>
             	<%} %>
             </tbody>
-             </table>
+            </table>
+            <br>
+            <div class=pagingArea align="center">
+             		<button onclick="location.href = '<%=request.getContextPath()%>/memberList.bo?currentPage=1'">&lt;&lt;</button>
+             		
+             		<%if(currentPage == 1) { %>
+             			<button disabled>&lt;</button>
+             		<%} else { %>
+             			<button onclick="location.href = '<%=request.getContextPath()%>/memberList.bo?currentPage=<%= currentPage-1%>'">&lt;</button>
+             		<%} %>
+             		
+             		<%for(int p=startPage; p<=endPage; p++){ %>
+             			<%if(p == currentPage) { %>
+             				<button disabled><%= p%></button>
+             			<%} else { %>
+             				<button onclick="location.href = '<%=request.getContextPath()%>/memberList.bo?currentPage=<%=p%>'"> <%= p %></button>
+             			<%} %>
+             		<%} %>
+             		
+             		<%if(currentPage == maxPage) { %>
+             			<button disabled>&gt;</button>
+             		<%} else { %>
+             		    <button onclick="location.href = '<%=request.getContextPath()%>/memberList.bo?currentPage=<%= currentPage+1%>'">&gt;</button>
+             		<%} %>
+             		<button onclick="location.href = '<%=request.getContextPath()%>/memberList.bo?currentPage=<%= maxPage%>>'">&gt;&gt;</button>
+             	</div>
             </div>
-        </div>
+             </div>
+             	
+       
            <script>
              		$("#searchBtn").click(function(){
-             			var memName = $("#memName").val();
-             			console.log(memName);
+             			var mem = $("#mem").val();
+             			console.log(mem);
+             			
+             			var selValue = $("#category option:selected").text();
+             		
+             			console.log(selValue);
+             			
              			$.ajax({
              				url: "searchMember.bo",
-             				data: { memName : memName },
+             				data: {
+             					selValue:selValue,
+             					mem : mem },
              				type:"post",
              				dataType:"json",
              				success: function(list){
@@ -192,29 +241,29 @@
              					
              					if(list.length != 0){
              						
+             						$("#memberTable > tbody").empty();
+             						$(".pagingArea").empty();
              					
-             					$("#memberTable > tbody").empty();
-             					
-             					var str = '';
-             					
-             					$.each(list, function(i){
-             						str += '<tr>'+'<td class="line">'+
- 		                  	 	 	list[i].no + '</td><td class="line">'+
- 		                  		 	list[i].id + '</td><td class="line">'+
- 		                  		 	list[i].name + '</td><td class="line">'+
- 		                  		 	list[i].email + '</td><th class="line">'+
- 		                  			'&nbsp;<button id="deleteBtn" type="button" onclick="deleteMember()">탈퇴</button>' + '</th>'
- 		                  			+ '</tr>'
+             						var str = '';
+             						var paging = '';
+             						$.each(list, function(i){
+             							str += '<tr>'+'<td class="line">'+
+ 		                  	 	 		list[i].no + '</td><td class="line">'+
+ 		                  		 		list[i].id + '</td><td class="line">'+
+ 		                  		 		list[i].name + '</td><td class="line">'+
+ 		                  		 		list[i].email + '</td><th class="line">'+
+ 		                  				'&nbsp;<button id="deleteBtn" type="button" onclick="deleteMember()">탈퇴</button>' + '</th>'
+ 		                  				+ '</tr>'
  		               			   
- 		           				});
-             					
-                    
+ 		           					});
+             						
  									$("#memberTable").append(str); 
- 									
+             						
              					} else if(list.length == 0) {
              						
              						//$("#memberTable > thead").empty();
              						$("#memberTable > tbody").empty();
+             						$(".pagingArea").empty();
              						
              						var str = '<tbody><tr>'+
              						'<td colspan="4" style="width:500px; padding:30px;">'
