@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import com.kh.attachment.model.vo.ProfileAttachment;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
+import com.kh.member.model.vo.MemberPageInfo;
 
 public class MemberService {
 
@@ -113,16 +114,26 @@ public class MemberService {
 		return userPwd;
 	}
 
-	public ArrayList<Member> selectList() { //관리자 페이지의 멤버 조회 
+	public ArrayList<Member> selectList(MemberPageInfo pi) { //관리자 페이지의 멤버 조회 
 		Connection conn = getConnection();
 		
-		ArrayList<Member> list = new MemberDao().selectList(conn);
+		ArrayList<Member> list = new MemberDao().selectList(conn, pi);
 		
 		close(conn);
 		
 		return list;
 
 		
+	}
+	
+	public ArrayList<Member> searchList() {
+		Connection conn = getConnection();
+		
+		ArrayList<Member> list = new MemberDao().searchList(conn);
+		
+		close(conn);
+		
+		return list;
 	}
 
 	public Member selectMember(String memId) { //관리자 페이지의 멤버 상세조회
@@ -150,6 +161,17 @@ public class MemberService {
 		return result;
 	}
 
+	public int getListCount() {
+		Connection conn = getConnection();
+		
+		int listCount = new MemberDao().getListCount(conn);
+		
+		close(conn);
+		
+		return listCount;
+	}
+
+	
 	
 
 }

@@ -9,11 +9,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.attachment.model.vo.ProfileAttachment;
 import com.kh.member.model.vo.Member;
+import com.kh.member.model.vo.MemberPageInfo;
 
 public class MemberDao {
 	
@@ -306,14 +308,61 @@ public class MemberDao {
 		return userPwd;
 	}
 
-	public ArrayList<Member> selectList(Connection conn) {
+	public ArrayList<Member> selectList(Connection conn, MemberPageInfo pi) {
 		
 		ArrayList<Member> list = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectList");
+		
+		int startRow = (pi.getCurrentPage()-1)*pi.getBoardLimit()+1;
+		
+		int endRow = startRow + pi.getBoardLimit()-1;
+		
+		System.out.println("startRow : " + startRow);
+		System.out.println("endRow : " + endRow);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next())  {
+				Member member = new Member();
+				
+				member.setMemNo(rset.getInt("MEM_NO"));
+				member.setMemId(rset.getString("MEM_ID"));
+				member.setMemPwd(rset.getString("MEM_PWD"));
+				member.setMemName(rset.getString("MEM_NAME"));	
+				member.setPhone(rset.getString("PHONE"));
+				member.setEmail(rset.getString("EMAIL"));
+				member.setAddress(rset.getString("ADDRESS"));	
+				member.setEnrollDate(rset.getDate("ENROLL_DATE"));
+				member.setStatus(rset.getString("STATUS"));
+				member.setCoin(rset.getInt("COIN"));
+				
+				list.add(member);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 	
+	public ArrayList<Member> searchList(Connection conn) {
+		ArrayList<Member> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("searchList");
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
@@ -335,7 +384,7 @@ public class MemberDao {
 				
 				list.add(member);
 			}
-			
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -408,4 +457,32 @@ public class MemberDao {
 		
 		return result;
 	}
+
+	public int getListCount(Connection conn) {
+		int listCount = 0;
+		
+		Statement stmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getListCount");
+		
+		try {
+			
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(sql);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return listCount;
+	}
+
+	
 }

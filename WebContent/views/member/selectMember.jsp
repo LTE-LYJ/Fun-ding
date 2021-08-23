@@ -17,7 +17,7 @@
     <style>
      #title{
         margin-top: 70px;
-        color:rgba(156, 228, 228);
+        color:#1b5ac2;
         text-align: center;
         font-weight:bold;
         margin-bottom: 0px;

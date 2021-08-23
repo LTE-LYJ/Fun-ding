@@ -15,6 +15,7 @@ import org.json.simple.JSONObject;
 
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
+import com.kh.member.model.vo.MemberPageInfo;
 
 /**
  * Servlet implementation class MemberSearchServlet
@@ -36,41 +37,76 @@ public class MemberSearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String memName = request.getParameter("memName");
-		System.out.println(memName);
+		String mem = request.getParameter("mem");
+		String selValue = request.getParameter("selValue");
 		
-		ArrayList<Member> list = new MemberService().selectList();	
-		
-		ArrayList<Member> newList = new ArrayList();
+		ArrayList<Member> list = new MemberService().searchList();	
 		
 		JSONArray jArr = new JSONArray(); 
 		
 		JSONObject jsonUser = null;
 		
-		for(Member member : list) { // 관리자 정보 제외
+
+		if(selValue.equals("회원번호")) {
+			System.out.println("회원번호로 검색");
 			
-			if(member.getMemNo() != 100) {
-				newList.add(member);
-			}
-		}
-		
-		
-		for(Member mem : newList) {
-			System.out.println(mem.getMemName().contains(memName));
-			
-			if(mem.getMemName().contains(memName)) {
-				jsonUser = new JSONObject();
+			for(Member member : list) {
 				
-				jsonUser.put("no", mem.getMemNo());
-				jsonUser.put("name", mem.getMemName());
-				jsonUser.put("id", mem.getMemId());
-				jsonUser.put("email", mem.getEmail());
-			
-				jArr.add(jsonUser);
+				if(member.getMemNo() == Integer.parseInt(mem)) {
+					jsonUser = new JSONObject();
+					
+					jsonUser.put("no", member.getMemNo());
+					jsonUser.put("name", member.getMemName());
+					jsonUser.put("id", member.getMemId());
+					jsonUser.put("email", member.getEmail());
+				
+					jArr.add(jsonUser);
+				}
 			}
+			
+		} else if (selValue.equals("회원이름")) {
+			System.out.println("회원이름으로 검색");
+			
+			for(Member member : list) {
+				
+				if(member.getMemName().contains(mem)) {
+					jsonUser = new JSONObject();
+					
+					jsonUser.put("no", member.getMemNo());
+					jsonUser.put("name", member.getMemName());
+					jsonUser.put("id", member.getMemId());
+					jsonUser.put("email", member.getEmail());
+				
+					jArr.add(jsonUser);
+				}
+			}
+			
+			
+		} else if (selValue.equals("아이디")) {
+			System.out.println("아이디로 검색");
+			
+			for(Member member : list) {
+				
+				if(member.getMemId().contains(mem)) {
+					jsonUser = new JSONObject();
+					
+					jsonUser.put("no", member.getMemNo());
+					jsonUser.put("name", member.getMemName());
+					jsonUser.put("id", member.getMemId());
+					jsonUser.put("email", member.getEmail());
+				
+					jArr.add(jsonUser);
+				}
+			}
+			
 		}
 		
-		System.out.println(jArr.size());
+		
+	
+		
+		
+		
+
 		 response.setContentType("application/json; charset=UTF-8");
 		 PrintWriter out = response.getWriter();
 		 out.print(jArr);
