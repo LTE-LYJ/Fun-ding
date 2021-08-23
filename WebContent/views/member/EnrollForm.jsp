@@ -67,6 +67,7 @@
     	float: right;
     	margin-right: 40px;
     	margin-top: 5px;
+    	border-radius: 70%;
 	}
    
     button{
@@ -133,12 +134,6 @@
                         <!--<td></td>-->
                         
                     <c:forTokens var="addr" items="${ loginUser.address }" delims="/" varStatus="status">
-						<c:if test="${ status.index eq 0 && addr >= '0' && addr <= '99999' }">
-							<c:set var="post" value="${ addr }"/>
-						</c:if>
-						<c:if test="${ status.index eq 0 && !(addr >= '0' && addr <= '99999') }">
-							<c:set var="address1" value="${ addr }"/>
-						</c:if>
 						<c:if test="${ status.index eq 1 }">
 							<c:set var="address1" value="${ addr }"/>
 						</c:if>

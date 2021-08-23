@@ -33,7 +33,7 @@ public class FindIdServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		
 		String userId = new MemberService().findId(userName, email);
-		System.out.println(userId);
+		//System.out.println(userId);
 		
 		if(userId==null) {
 			userId = "";
