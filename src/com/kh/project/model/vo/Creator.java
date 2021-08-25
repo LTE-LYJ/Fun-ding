@@ -7,6 +7,7 @@ public class Creator {
 	private String creName; //창작자 이름
 	private String creContent; //창작자 소개
 	private String memNo; //회원번호
+	private int prjCountNo;// 프로젝트수
 	
 	public Creator() {
 		// TODO Auto-generated constructor stub
@@ -52,9 +53,16 @@ public class Creator {
 		this.memNo = memNo;
 	}
 
+	public int getPrjCountNo() {
+		return prjCountNo;
+	}
+
+	public void setPrjCountNo(int prjCountNo) {
+		this.prjCountNo = prjCountNo;
+	}
 	@Override
 	public String toString() {
-		return "Creator [creNo=" + creNo + ", creName=" + creName + ", creContent=" + creContent + ", memNo=" + memNo
+		return "Creator [creNo=" + creNo + ", creName=" + creName + ", creContent=" + creContent + ", memNo=" + memNo+ ", prjCountNo=" + prjCountNo
 				+ "]";
 	}
 	
