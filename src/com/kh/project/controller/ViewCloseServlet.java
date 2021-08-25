@@ -9,21 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.project.model.vo.PageInfo;
 import com.kh.project.model.service.ProjectService;
+import com.kh.project.model.vo.PageInfo;
 import com.kh.project.model.vo.Project;
 
 /**
- * Servlet implementation class ViewAllServlet
+ * Servlet implementation class ViewCloseServlet
  */
-@WebServlet("/viewAll.pr")
-public class ViewAllServlet extends HttpServlet {
+@WebServlet("/viewClose.pr")
+public class ViewCloseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewAllServlet() {
+    public ViewCloseServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,7 +42,7 @@ public class ViewAllServlet extends HttpServlet {
 		int pageLimit; // 한 페이지 하단에 보여질 페이지 최대 갯수
 		int boardLimit; // 한 페이지에 보여질 게시글 최대 갯수
 
-		listCount = new ProjectService().getListCount();
+		listCount = new ProjectService().getCloseListCount();
 
 		currentPage = 1;
 
@@ -51,9 +51,9 @@ public class ViewAllServlet extends HttpServlet {
 		}
 
 		pageLimit = 10;
-		
+
 		boardLimit = 6;
-		
+
 		maxPage = (int) Math.ceil((double) listCount / boardLimit);
 		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
 		endPage = startPage + pageLimit - 1;
@@ -64,13 +64,13 @@ public class ViewAllServlet extends HttpServlet {
 
 		PageInfo pi = new PageInfo(listCount, currentPage, startPage, endPage, maxPage, pageLimit, boardLimit);
 
-		ArrayList<Project> list = new ProjectService().selectList(pi);
+		ArrayList<Project> list = new ProjectService().selectCloseList(pi);
 
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
 		request.setAttribute("allListCount", listCount);
 
-		request.getRequestDispatcher("views/project/viewAllProject.jsp").forward(request, response);
+		request.getRequestDispatcher("views/project/viewCloseProject.jsp").forward(request, response);
 	}
 
 	/**

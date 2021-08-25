@@ -161,7 +161,7 @@ h1 {
 	<%@ include file="../common/menubar.jsp" %>
 	
     <div class="outer">
-        <h1 style="margin-left:10px">모든 프로젝트 둘러보기</h1>
+        <h1 style="margin-left:10px">인기 프로젝트 둘러보기</h1>
         <h3 style="margin-left:10px"><%= allListCount %>개의 프로젝트가 있습니다.</h3>
 		<hr>
 
@@ -220,13 +220,13 @@ h1 {
 		<!-- 페이징바 만들기 -->
 		<div class="pagingArea" align="center">
 			<!-- 맨 처음으로 (<<) -->
-			<button onclick="location.href='<%= request.getContextPath() %>/viewAll.pr?currentPage=1'"> &lt;&lt; </button>
+			<button onclick="location.href='<%= request.getContextPath() %>/viewPopular.pr?currentPage=1'"> &lt;&lt; </button>
 		
 			<!-- 이전페이지로(<) -->
 			<%if(currentPage == 1){ %>
 			<button disabled> &lt; </button>
 			<%}else{ %>
-			<button onclick="location.href='<%= request.getContextPath() %>/viewAll.pr?currentPage=<%= currentPage-1 %>'"> &lt; </button>
+			<button onclick="location.href='<%= request.getContextPath() %>/viewPopular.pr?currentPage=<%= currentPage-1 %>'"> &lt; </button>
 			<%} %>
 			
 			<!-- 페이지 목록 -->
@@ -235,7 +235,7 @@ h1 {
 				<%if(p == currentPage){ %>
 				<button disabled> <%= p %> </button>
 				<%}else{ %>
-				<button onclick="location.href='<%= request.getContextPath() %>/viewAll.pr?currentPage=<%= p %>'"> <%= p %> </button>
+				<button onclick="location.href='<%= request.getContextPath() %>/viewPopular.pr?currentPage=<%= p %>'"> <%= p %> </button>
 				<%} %>
 				
 			<%} %>
@@ -244,11 +244,11 @@ h1 {
 			<%if(currentPage == maxPage){ %>
 			<button disabled> &gt; </button>
 			<%}else { %>
-			<button onclick="location.href='<%= request.getContextPath() %>/viewAll.pr?currentPage=<%= currentPage+1 %>'"> &gt; </button>
+			<button onclick="location.href='<%= request.getContextPath() %>/viewPopular.pr?currentPage=<%= currentPage+1 %>'"> &gt; </button>
 			<%} %>
 		
 			<!-- 맨 끝으로 (>>) -->
-			<button onclick="location.href='<%= request.getContextPath() %>/viewAll.pr?currentPage=<%=maxPage%>'"> &gt;&gt; </button>
+			<button onclick="location.href='<%= request.getContextPath() %>/viewPopular.pr?currentPage=<%=maxPage%>'"> &gt;&gt; </button>
 		</div> 
 	</div>
 	

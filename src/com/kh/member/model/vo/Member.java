@@ -18,6 +18,6 @@ public class Member {
 	private Date enrollDate; //회원가입일
 	private String status; //상태값(Y/N)
 	private int coin; //보유코인
-	private int prjNo; //프로젝트 번호
+	private int prjNo; //프로젝트 번호	
 	
 }
