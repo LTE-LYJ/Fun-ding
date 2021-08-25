@@ -11,8 +11,8 @@ public class Project {
 	private String prjStartDate; //펀딩 시작일
 	private String prjEndDate; //펀딩 종료일
 	private int prjRecount; //재펀딩 요청 회수
-//	private int creNo; //창작자 번호
-//	private int prjCatNo; //프로젝트 카테고리 번호
+	private int creNo; //회원 번호
+	private int prjCatNo; //프로젝트 카테고리 번호
 	private String creName; //창작자 이름
 	private String prjCatName; //프로젝트 카테고리 이름
 	private int attachmentNo; //첨부 이미지 번호
@@ -51,6 +51,22 @@ public class Project {
 		this.prjCatName = prjCatName;
 	}
 
+	public int getCreNo() {
+		return creNo;
+	}
+	
+	public void setCreNo(int creNo) {
+		this.creNo = creNo;
+	}
+	
+	public int getPrjCatNo() {
+		return prjCatNo;
+	}
+	
+	public void setPrjCatNo(int prjCatNo) {
+		this.prjCatNo = prjCatNo;
+	}
+	
 	public int getPrjNo() {
 		return prjNo;
 	}
@@ -152,7 +168,7 @@ public class Project {
 		return "Project [prjNo=" + prjNo + ", prjTitle=" + prjTitle + ", prjContent=" + prjContent + ", prjTarget="
 				+ prjTarget + ", prjCurrent=" + prjCurrent + ", prjStartDate=" + prjStartDate + ", prjEndDate="
 				+ prjEndDate + ", prjRecount=" + prjRecount + ", creName=" + creName + ", prjCatName=" + prjCatName
-				+ ", attachmentNo=" + attachmentNo + ", status=" + status + "]";
+				+ ", attachmentNo=" + attachmentNo + ", status=" + status +", creNo=" + creNo+", prjCatNo=" + prjCatNo+"]";
 	}
 
 }

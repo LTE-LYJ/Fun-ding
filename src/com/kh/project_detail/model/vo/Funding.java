@@ -1,5 +1,10 @@
 package com.kh.project_detail.model.vo;
 
+import java.util.Date;
+
+import lombok.Data;
+
+@Data
 public class Funding {
 	//후원정보
 	//주석입니다.
