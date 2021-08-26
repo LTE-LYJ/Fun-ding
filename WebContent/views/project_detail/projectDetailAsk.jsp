@@ -83,11 +83,7 @@ Date date = new Date();
 	        	            })
 	        	         })
 	        	      function selectList(){
-	        	    	  <%if(project.getStatus().equals("Y")){%>
-                          <input type="button" id="btn_fd" value="펀딩하기" onclick="checkLogin();"></input>
-                         <%}else{%>
-                         $("#buttonarea").empty(); //기존 내용 지우고 다시 불러온다. 
-                          <%}%>
+	                	$("#buttonarea").empty(); //기존 내용 지우고 다시 불러온다. 
 	        	         $.ajax({
 	        	            url:"countSelect.de",
 	        	            data:{num : <%=num%>}, <%--프로젝트 넘버를 넘겨서 --%>
@@ -233,7 +229,8 @@ Date date = new Date();
             	window.open("views/project_detail/projectDetailAskNewPop.jsp?num="+<%=num%>, "문의쓰기", "top=100px, left=300px, height=430px, width=600px, resizable=no");
             	
     			<%}else{%>
-				alert("로그인이 필요합니다.");
+				alert("로그인 후 이용 가능합니다.")
+				location.href="<%=request.getContextPath()%>/loginform.me";
 			<%}%>
 			}
             $('#proAsk').css('color','black');
@@ -255,7 +252,8 @@ Date date = new Date();
                   	window.open("<%=request.getContextPath()%>/detail.prjPop?askNum="+askNum +"&num="+<%=num%>, "문의쓰기", "top=100px, left=300px, height=430px, width=600px, resizable=no");
                   	location.reload();
                   <% }else{  %>
-                  	alert("로그인이 필요합니다.");
+                  	alert("로그인 후 이용 가능합니다.")
+  					location.href="<%=request.getContextPath()%>/loginform.me";
                   <%}%>
                })
             });

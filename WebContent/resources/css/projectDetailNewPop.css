@@ -9,7 +9,7 @@
         	display:flex;
         	justify-content: center;
         	align-items: center;
-			height: 400px;
+        	height: 100%;
         }
         #box_1{
             border: lightgray 3px solid;
@@ -19,7 +19,7 @@
             max-width:498px;
             height:100%;
             padding: 25px;
-            height: 300px;
+            height: 75%;
         }
         #Ask_creater{
             margin-top: 0px;

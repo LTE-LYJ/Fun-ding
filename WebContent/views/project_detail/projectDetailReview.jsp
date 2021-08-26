@@ -74,11 +74,7 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
 	        	            })
 	        	         })
 	        	      function selectList(){
-	        	    	  <%if(project.getStatus().equals("Y")){%>
-                          <input type="button" id="btn_fd" value="펀딩하기" onclick="checkLogin();"></input>
-                         <%}else{%>
                          $("#buttonarea").empty(); //기존 내용 지우고 다시 불러온다. 
-                          <%}%>
 	        	         $.ajax({
 	        	            url:"countSelect.de",
 	        	            data:{num : <%=num%>}, <%--프로젝트 넘버를 넘겨서 --%>

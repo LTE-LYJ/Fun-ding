@@ -42,18 +42,18 @@ $(function() {
             </tr>
             <tr>
                 <th><h4 class="modal_n">문의 제목</h4></th>
-                <th><textarea class="modal_con" cols="50" rows="1" name="title"></textarea></th>
+                <th><textarea class="modal_con" cols="50" rows="1" name="title" >문의합니다!</textarea></th>
             </tr>
             <tr>
                 <th><h4 class="modal_n">문의 내용</h4></th>
-                <th><textarea class="modal_con" cols="50" rows="6" placeholder="프로젝트 진행자에게 말하고 싶은 내용을 적어주세요!" name="content"></textarea></th>
+                <th><textarea class="modal_con" cols="50" rows="6" placeholder="프로젝트 진행자에게 말하고 싶은 내용을 적어주세요!" name="content" id="content" maxlength="300"></textarea></th>
             </tr>
             <tr>
                 <th><input type="hidden" name="num" value="<%=num%>"></th>
+                <th> <input type="text" placeholder="글자 수" id="textLengthCheck" style=" float: right; border: none; text-align:right;"/><th>
             </tr>
         </table>
-       
-		<button id="AskBtn" onclick="checktrim()">뮨의하기</button>
+		<button id="AskBtn" onclick="checktrim()" style="clear: both; margin-top: 5px">뮨의하기</button>
         </form>
     </div>
     </div>
@@ -69,9 +69,18 @@ $(function() {
 	
 		$("#AskForm").submit();
 		window.opener.location.reload();
-
 	}
     
+	$("#content").keyup(function(e) {
+		var content = $(this).val();
+		$("#textLengthCheck").val("(" + content.length + "/ 300)"); // 카운팅
+		if(content.length > 300) {
+			alert("최대 300자까지 입력 가능합니다.");
+			$(this).val(content.substring(0, 300)); // 넘친 글자 지우기
+			$('#textLengthCheck').val("(300 / 최대 300자)");
+			$("#content").focus();
+		}
+	});
     </script>
 </body>
 </html>
