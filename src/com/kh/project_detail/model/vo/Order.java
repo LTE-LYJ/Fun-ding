@@ -1,5 +1,8 @@
 package com.kh.project_detail.model.vo;
 
+import lombok.Data;
+
+@Data
 public class Order {
 	//배송정보
 	
@@ -10,4 +13,16 @@ public class Order {
 	private String shippingAddr; //배송지
 	private int fdNo; //후원번호
 
+
+	public Order() {
+		// TODO Auto-generated constructor stub
+	}
+	public Order(String memName, String phone, String receiverName, String shippingAddr) {
+		super();
+		this.memName = memName;
+		this.phone = phone;
+		this.receiverName = receiverName;
+		this.shippingAddr = shippingAddr;
+	}
+	
 }

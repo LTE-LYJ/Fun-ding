@@ -1,5 +1,8 @@
 package com.kh.project.model.vo;
 
+import lombok.Data;
+
+@Data
 public class ProjectCat {
 	//프로젝트 카테고리
 	
