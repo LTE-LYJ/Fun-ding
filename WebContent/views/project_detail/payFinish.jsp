@@ -29,7 +29,7 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
                     <div id="pro">
                         <img id="proimage" src="resources/upfiles_project/<%=prjAttList.get(0).getChangeName()%>"  style="width: 236px; height: 145px;">
                             <div id="pro_ab">
-                                <p id="pro_sub"  style="height:69px; width:810px;"><%=project.getPrjContent() %></p>
+                                <p id="pro_sub"  style="height:69px; width:810px; overflow: hidden; text-overflow: ellipsis;"><%=project.getPrjContent() %></p>
                                 <h3 id="percent"><fmt:formatNumber value="<%=(float)project.getPrjCurrent()/project.getPrjTarget()%>" type="percent"/> 달성</h3>
                                     <div id="much">
                                         <h4>총 금액 : <fmt:formatNumber value="<%=project.getPrjCurrent()%>" groupingUsed="true"/> 원</h4>

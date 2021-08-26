@@ -33,7 +33,7 @@ $(function() {
 </head>
 <body>
 		<div class="outer">
-		<div id="box_1">
+		<div id="box_1" style="heigth: 75%">
         <h3 id="Ask_creater">창작자에게 문의하기</h3>
         <br>
         <form id="AskDetail"  action="<%=request.getContextPath() %>/delete.ask" method="post">
@@ -71,7 +71,7 @@ $(function() {
             </tr>
         </table>
         <%if(askDetail.getMemId().equals(loginUser.getMemId())){ %>
-		<button id="AskBtn" style="background-color: background-color: rgb(192, 57, 43); cursor: pointer;">삭제하기</button>
+		<button id="AskBtn" style="background-color: background-color: rgb(192, 57, 43); cursor: pointer; margin-top: 0px" >삭제하기</button>
 		<%}%>
 		
         </form>

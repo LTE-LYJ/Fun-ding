@@ -35,7 +35,6 @@ public class projectDetailAskPageServlet extends HttpServlet {
 		Project project = new PrjDeService().selectPList(num);
 		
 		String view ="";
-		System.out.println(project);
 		if(project != null) {
 			request.setAttribute("project", project);
 			view ="views/project_detail/projectDetailAskNewPop.jsp";

@@ -40,7 +40,6 @@ public class prjReviewListServlet extends HttpServlet {
 		ArrayList<ProjectAttachment> prjAttList = new PrjDeService().selectPrjAList(num);	// 프로젝트 사진 리스트
 		
 		String view ="";
-		System.out.println(project);
 		if(project != null) {
 			request.setAttribute("project", project);
 			request.setAttribute("projectCat", projectCat);

@@ -61,7 +61,6 @@
             width: 725px;
             height: 418px;
             min-width: 725px;
-            background-color: pink;
             margin-right: 25px;
         }
         #top_right_bar{
@@ -116,8 +115,7 @@
             display: block;
             width: 725px;
             min-width: 725px;
-            height: 1060px;
-            background-color: pink;
+            height: 100%;
             margin-right: 25px;
         }
         #footer{
@@ -126,7 +124,7 @@
             background-color: gray
         }
 
-        #bottom_right_button1, #bottom_right_button2, #bottom_right_button3, #creator_content, #right_button0{
+        #bottom_right_button1, #bottom_right_button2, #bottom_right_button3, #bottom_right_button4, #creator_content, #right_button0{
             width: 330px;
             margin-bottom: 5%;
             text-align: left;
@@ -137,10 +135,10 @@
             border: 3px solid lightgray;
             
         }
-        #bottom_right_button1:hover, #bottom_right_button2:hover, #bottom_right_button3:hover{
+        #bottom_right_button1:hover, #bottom_right_button2:hover, #bottom_right_button3:hover, #bottom_right_button4:hover{
             background-color: orange;
         }
-        #bottom_right_button1:hover a, #bottom_right_button2:hover a, #bottom_right_button3:hover a{
+        #bottom_right_button1:hover a, #bottom_right_button2:hover a, #bottom_right_button3:hover a, #bottom_right_button4:hover a{
             background-color: orange;
             color: white; 
         }

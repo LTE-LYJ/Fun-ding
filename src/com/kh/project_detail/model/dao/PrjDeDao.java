@@ -625,7 +625,7 @@ public class PrjDeDao {
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				
-				f.setFdNo(rset.getInt("FD_NO"));
+				f.setFdNo(rset.getInt("Max(FD_NO)"));
 				System.out.println(f);
 			}
 		} catch (SQLException e) {

@@ -73,11 +73,6 @@ public class prjAskListServlet extends HttpServlet {
 				request.setAttribute("project", project);
 				request.setAttribute("prjAttList", prjAttList);
 				request.setAttribute("projectCat", projectCat);
-				System.out.println(pi);
-				System.out.println(askList);
-				System.out.println(project);
-				System.out.println(prjAttList);
-				System.out.println(projectCat);
 				RequestDispatcher view = request.getRequestDispatcher("views/project_detail/projectDetailAsk.jsp");
 				view.forward(request, response);
 	}
