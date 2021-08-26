@@ -70,6 +70,7 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
 	        	               data:{num : <%=num%>},
 	        	               success:function(status){
 	        	            	   if(status=="success"){
+	        	            		   alert('재펀딩 요청이 완료되었습니다.');
 	        	            		   selectList();
 	        	            	   }
 		        	            },
@@ -79,11 +80,7 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
 	        	            })
 	        	         })
 	        	      function selectList(){
-	        	    	  <%if(project.getStatus().equals("Y")){%>
-                          <input type="button" id="btn_fd" value="펀딩하기" onclick="checkLogin();"></input>
-                         <%}else{%>
-                         $("#buttonarea").empty(); //기존 내용 지우고 다시 불러온다. 
-                          <%}%>
+	                	$("#buttonarea").empty(); //기존 내용 지우고 다시 불러온다. 
 	        	         $.ajax({
 	        	            url:"countSelect.de",
 	        	            data:{num : <%=num%>}, <%--프로젝트 넘버를 넘겨서 --%>
@@ -120,10 +117,12 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
 	                <div id="body_content2">
 	
 	                    <div id="bottom_content">
-	                <div id="bottom_left_content">
+	                <div id="bottom_left_content" style="height: 100%; margin-top: 0px">
 	                    <%=project.getPrjContent() %>
+	                    <%for(int i =0; i<prjAttList.size();i++){ %>
+	                   	<img src="resources/upfiles_project/<%=prjAttList.get(i).getChangeName()%>" style="width: 725px;">
+	                	<%}%>
 	                </div>
-	
 	
 	                <aside id="aside2">
 	                <%--<div id="bottom_right_button1" class="option">
@@ -179,8 +178,12 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
 				<%} %>
 				
 	                <div id="creator_content">
-	                    <div><img class="profile" src="resources/upfiles_profile/<%=createrPro.getChangeName() %>" style="width: 40px; height: 40px; border-radius: 70%; vertical-align: middle; float:none; margin-bottom:10px; clear: both;">
-	                    <span><h4 id="creatorName" style="display: inline-flex; margin-left: 10px; margin-top:20px"><%=creator.getCreName() %></span></div><br>
+	                 <%if(at == null){ %>
+	                 <div><img class="profile" src="<%=request.getContextPath()%>/resources/images/default.PNG" style="width: 40px; height: 40px; border-radius: 70%; vertical-align: middle; float:none; margin-bottom:10px; clear: both;">
+							<%} else { %>
+							<div><img class="profile" src="resources/upfiles_profile/<%=createrPro.getChangeName() %>" style="width: 40px; height: 40px; border-radius: 70%; vertical-align: middle; float:none; margin-bottom:10px; clear: both;">
+							<%} %>
+	                    <span><h4 id="creatorName" style="display: inline-flex; margin-left: 10px; margin-top:20px"><%=creator.getCreName() %></h4></span></div><br>
 	                    <br><div><%=creator.getCreContent() %></div><br><br>
 	                    <div><h4 style="display: inline;">진행한 프로젝트 : </h4> <span><h4 style="display: inline;"><%=creator.getPrjCountNo() %></h4></span></div>
 	                </div>
@@ -221,7 +224,8 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
 				alert("리워드를 선택해주세요!");
 				}
 			<%}else{%>
-				alert("로그인이 필요합니다.");
+				alert("로그인 후 이용 가능합니다.")
+				location.href="<%=request.getContextPath()%>/loginform.me";
 			<%}%>
 			
 	    };

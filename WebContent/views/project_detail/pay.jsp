@@ -104,11 +104,11 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
             border: 3px solid lightgray;
             
         }
-        #bottom_right_button1:hover, #bottom_right_button2:hover, #bottom_right_button3:hover, #bottom_right_button0:hover, #right_button0:hover, #right_button1:hover, #right_button2:hover, #right_button3:hover{
+        #bottom_right_button1:hover, #bottom_right_button2:hover, #bottom_right_button3:hover, #bottom_right_button4:hover, #bottom_right_button0:hover, #right_button0:hover, #right_button1:hover, #right_button2:hover, #right_button3:hover, #right_button4:hover{
             background-color: orange;
             color: white; 
         }
-        #bottom_right_button1:hover a, #bottom_right_button2:hover a, #bottom_right_button3:hover a, #bottom_right_button0:hover a, #right_button1:hover a, #right_button2:hover a, #right_button3:hover a{
+        #bottom_right_button1:hover a, #bottom_right_button2:hover a, #bottom_right_button3:hover a, #bottom_right_button4:hover a , #bottom_right_button0:hover a, #right_button1:hover a, #right_button2:hover a, #right_button3:hover a, #right_button4:hover a{
             background-color: orange;
             color: white; 
         }
@@ -180,7 +180,7 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
                     <div id="pro">
                         <img id="proimage" src="resources/upfiles_project/<%=prjAttList.get(0).getChangeName()%>" style="width: 236px; height: 145px;">
                             <div id="pro_ab">
-                                <p id="pro_sub" style="height:69px; width:810px;"><%=project.getPrjContent() %></p>
+                                <p id="pro_sub" style="height:69px; width:810px; overflow: hidden; text-overflow: ellipsis;"><%=project.getPrjContent() %></p>
                                 <h3 id="percent"><fmt:formatNumber value="<%=(float)project.getPrjCurrent()/project.getPrjTarget()%>" type="percent"/> 달성</h3>
                                     <div id="much">
                                         <h4>총 금액 : <fmt:formatNumber value="<%=project.getPrjCurrent()%>" groupingUsed="true"/> 원</h4>
@@ -305,7 +305,7 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
                             <td><textarea cols="50" rows="1" id="userAddrsub"></textarea></td>
                             <td><input type="hidden" id="deliAddr" name="deliAddr" value=""></td>
                             <td><button type="button" id="search_button" class="paybt">주소검색</button></td>
-                            <td><button type="button" class="btn_di"onclick="takeMy();">내정보 등록</button></td>
+                            <td style="margin-left: 10px; width: 110px"><button type="button" class="btn_di"onclick="takeMy();">내정보 등록</button></td>
                         </tr>
                     </table>
                 </form>
@@ -328,15 +328,15 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
                         </tr>
                         <tr>
                             <th><h3>보유 코인</h3></th>
-                            <td class="count" id="howHave"><p style="display: inline;"><%=coin %></p><span style="display: inline;"> 코인</span></td>
+                            <td class="count" id="howHave"><p style="display: inline;"><%=coin %></p><span> 코인</span></td>
                              <td ><input type="hidden" id="hidd" value=""></input></td>
                         </tr>
                         <tr>
                             <th><h3>부족한 코인</h3></th>
                             <%if((loginUser.getCoin())-(re.getRwPrice()/100)<0) {%>
-                           <td colspan="2" class="count" id="lessCoin"><%=Math.abs(loginUser.getCoin()-(re.getRwPrice()/100))%> 코인</td>
+                           <td colspan="2" class="count" id="lessCoin" style="color: red;"><%=Math.abs(loginUser.getCoin()-(re.getRwPrice()/100))%> 코인</td>
                             <%}else{ %>
-                             <td colspan="2" class="count" id="lessCoin">0 코인</td>
+                             <td colspan="2" class="count" id="lessCoin" style="color: red;">0 코인</td>
                             <%}%>
                         </tr>
                         <tr>
@@ -409,7 +409,7 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
 	             </tr> <tr>
 	              <th colspan="14">카드 유효기간</th>
 	             </tr><tr>
-	               <td colspan="14"><textarea  name="cardBirthCheck" id="cardBirthCheck" rows="10" cols="50" style="margin-bottom: 15px" placeholder="예시 ) 19920101"></textarea></td>
+	               <td colspan="14"><textarea  name="cardBirthCheck" id="cardBirthCheck" rows="10" cols="50" style="margin-bottom: 15px" placeholder="예시 ) 202105"></textarea></td>
 	             </tr>
         </table>
        <button class="AskBtn" onclick="deletePlus()">취소하기</button>
@@ -458,7 +458,7 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
 	             </tr><tr>
 	              <th colspan="8">생년월일</th>
 	             </tr><tr>
-	               <td colspan="8"><textarea  name="cardBirth" id="cardBirth" rows="10" cols="50" style="margin-bottom: 15px" placeholder="예시 ) 199201"></textarea></td>
+	               <td colspan="8"><textarea  name="cardBirth" id="cardBirth" rows="10" cols="50" style="margin-bottom: 15px" placeholder="예시 ) 19920101"></textarea></td>
 	             </tr>   
 	             <tr>
 	             <td colspan="8"><input type="checkbox" id="cardAgree"></input><label for="cardAgree">결제시 정보 제공 동의</label></td>
@@ -700,23 +700,33 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
 	               async:false,
 	               data:{ writer : <%=loginUser.getMemNo()%>},
 	               success:function(getCoin){
-	            	   var v = ""
-	            	   var les=""
-	            	   var lef=""
+	            	   var v = "";
+	            	   var les="";
+	            	   var lef="";
        	   			   getCoin*=1;
-	            	   v= getCoin
+	            	   v= getCoin +' 코인';
 	            	   les = <%=re.getRwPrice()/100 %>-getCoin
-               	   if(les<=0){
+               	   if(les<0){
                		les="0 코인";
+               		$("#coinerr").hide();
+               	   }else if(les=0){
+               		les="0 코인";       
+               		$("#coinerr").hide();
                	   }else{
                		les = <%=re.getRwPrice()/100 %>-getCoin +' 코인'
+               		$("#coinerr").show();
                	   }
 			       	   	var lef ="";
 			       	 lef= getCoin-<%=re.getRwPrice()/100 %>
-            	   if(lef<=0){
+            	   if(lef<0){
             		   lef="0 코인";
+            		   $("#coinerr").show();
+            	   }else if(lef=0){
+            		   lef="0 코인";
+            		   $("#coinerr").hide();
             	   }else{
             		   lef= Math.abs(getCoin-<%=re.getRwPrice()/100 %>)+' 코인'
+            		   $("#coinerr").hide();
             	   }
  	            	  $("#howHave").empty();
                       $("#lessCoin").empty();
@@ -856,20 +866,30 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
 	               success:function(getCoin){
 	            	   getCoin*=1;
 	            	   var value = ""
-    	            	   value= getCoin
+    	            	   value= getCoin+' 코인'
     	            	var less ="";
 	            	   			less = <%=re.getRwPrice()/100 %>-getCoin
-                        	   if(less<=0){
+                        	   if(less<0){
                         		   less="0 코인";
+                        		   $("#coinerr").hide();
+                        	   }else if(less=0){
+                        		   less="0 코인";
+                        		   $("#coinerr").hide();
                         	   }else{
                         		   less = <%=re.getRwPrice()/100 %>-getCoin +' 코인'
+                        		   $("#coinerr").show();
                         	   }
 	            	   	var left ="";
 	            	   		left= getCoin-<%=re.getRwPrice()/100 %>
-	                 	   if(left<=0){
+	                 	   if(left<0){
 	                 		  left="0 코인";
+	                 		  $("#coinerr").show();
+	                 	   }else if(left=0){
+	                 		  left="0 코인";
+	                 		 $("#coinerr").hide();
 	                 	   }else{
 	                 		 left= Math.abs(getCoin-<%=re.getRwPrice()/100 %>)+' 코인'
+	                 		$("#coinerr").hide();
 	                 	   }
 	            	   			
                         $("#howHave").empty();
@@ -904,7 +924,7 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
     	}else if(gogo<<%=re.getRwPrice()/100 %>){
     		alert("결제 가능한 금액이 부족합니다.");
     	}else{
-    		$("#deliAddr").val($("#userAddrNew").val()+$("#userAddrsub").val())
+    		$("#deliAddr").val($("#userAddrNew").val()+" "+$("#userAddrsub").val())
     		
     		$("#finishform").submit();
      	}
