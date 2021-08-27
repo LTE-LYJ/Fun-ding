@@ -16,6 +16,7 @@ public class Project {
 	private String creName; //창작자 이름
 	private String prjCatName; //프로젝트 카테고리 이름
 	private int attachmentNo; //첨부 이미지 번호
+	private String attachmentName; //첨부 이미지 이름
 	private String status; //상태값(Y/N)
 	
 	public Project() {
@@ -48,6 +49,22 @@ public class Project {
 		this.prjStartDate = prjStartDate;
 		this.prjEndDate = prjEndDate;
 		this.creName = creName;
+		this.prjCatName = prjCatName;
+	}
+
+	public Project(int prjNo, double prjTarget, String prjStartDate, String prjEndDate) {
+		super();
+		this.prjNo = prjNo;
+		this.prjTarget = prjTarget;
+		this.prjStartDate = prjStartDate;
+		this.prjEndDate = prjEndDate;
+	}
+
+	public Project(int prjNo, String prjTitle, String prjContent, String prjCatName) {
+		super();
+		this.prjNo = prjNo;
+		this.prjTitle = prjTitle;
+		this.prjContent = prjContent;
 		this.prjCatName = prjCatName;
 	}
 
@@ -161,6 +178,14 @@ public class Project {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getAttachmentName() {
+		return attachmentName;
+	}
+
+	public void setAttachmentName(String attachmentName) {
+		this.attachmentName = attachmentName;
 	}
 
 	@Override

@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.project.model.vo.*"%>    
+<%
+	Project project = (Project)request.getAttribute("project");
+	int pno = (int)request.getAttribute("pno");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,10 +19,11 @@
 	
 		<section class="panel important">
 			<h2>펀딩 계획</h2>
-			<form id="insertForm" action="writeReward.pr" method="post">
+			<form id="insertForm" action="updateReward.pr" method="post">
 				<div class="twothirds">
+					<input type="hidden" name="pno" value="<%= pno %>">
 					목표 금액:<br>
-					<input type="text" id="target" name="target" size="40" placeholder="프로젝트를 완수하기 위해 필요한 금액을 설정해주세요." onchange="printName()"/>
+					<input type="text" id="target" name="target" size="40" placeholder="프로젝트를 완수하기 위해 필요한 금액을 설정해주세요." value="<%= project.getPrjTarget() %>" onchange="printName()"/>
 					<div class="subdiv">
 						<br>
 						목표 금액 달성 시 예상 수령액<br>
@@ -31,12 +37,12 @@
 					</div>
 					<br>
 					펀딩 시작일:<br>
-					<input type="date" name="startDate" id="startDate"><br>
+					<input type="date" name="startDate" id="startDate" value="<%= project.getPrjStartDate() %>"><br>
 					펀딩 종료일:<br>
-					<input type="date" name="endDate" id="endDate"><br>
+					<input type="date" name="endDate" id="endDate" value="<%= project.getPrjEndDate() %>"><br>
 					<div class="btnsPro" align="center">
 						<button type="submit" class="btnPro" name="next">다음으로</button>
-						<button type="button" class="btnPro" name="previous" onclick="location.href='writeCreator.pr'">이전으로</button>
+						<button type="button" class="btnPro" name="previous" onclick="location.href='updateCreator.pr'">이전으로</button>
 					</div>
 				</div>				
 			</form>
