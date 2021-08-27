@@ -2,6 +2,9 @@ package com.kh.board.model.vo;
 
 import java.util.Date;
 
+import lombok.Data;
+
+@Data
 public class BoardReply {
 	//자유게시판 댓글
 	
