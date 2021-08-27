@@ -1,0 +1,136 @@
+@charset "UTF-8";
+
+
+
+*{
+	margin: 0;
+	padding: 0;
+}
+caption {
+	display: none;
+}
+table {
+	border-collapse: collapse;
+}
+
+a {
+	text-decoration: none;
+	color : inherit;
+}
+
+
+
+
+.main{
+	margin-left: 15%;
+	margin-right: 15%;
+}
+.board_list_wrap{
+	
+	padding: 50px;
+}
+
+.board_list {
+	width: 100%;
+}
+
+
+
+.board_list tr {
+	border-bottom: 1px solid #999;
+}
+
+.board_list td, th {
+	padding: 25px;
+	
+	text-align : center;
+}
+
+.board_list th {
+	background: black;
+	color: white;
+}
+
+.board_list .title {
+	display: inline-block;
+	
+}
+
+.board_list .title:hover {
+	text-decoration: underline;
+	
+}
+.page{
+	text-align: right;
+}
+.board_list_wrap .paging{
+	margin-top: 10px;
+	text-align: center;
+}
+.board_list_wrap .paging a {
+	font-size: 15px;
+	margin-left: 10px;
+	padding: 5px 10px;
+}
+
+
+.board_list_wrap .paging a:first-child {
+	margin-left: 0;
+	
+}
+
+.board_list_wrap .paging a:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+ .num{
+  font-weight: 600;
+}
+
+.search {
+	text-align: center;
+}
+.btn-search{
+	width: 50px;
+	height: auto;
+}
+
+.write{
+	text-align: right;
+	margin: 10px;
+	
+}
+.write input{
+	font-size: 16px;
+	font-weight: 600;
+	width: 80px;
+	height: auto;
+}
+
+.board_list .num {
+	width: 60px;
+}
+
+.board_list .cate {
+	width: 20px;
+}
+.board_list .title {
+	text-align: left;
+	width: 100%;
+}
+
+.board_list .writer {
+	width: 60px;
+}
+
+.board_list .date {
+	width: 100px;
+}
+
+.board_list .count {
+	width: 60px;
+}
+.board_list .table_head .title  {
+	text-align: center;
+}
