@@ -157,38 +157,39 @@ public class PrjDeDao {
 	}
 
 	public Project selectPList(Connection conn, int num) {
-		Project p = new Project();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("prjList");
-		System.out.println(sql);
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, num);
-			rset = pstmt.executeQuery();
-			DateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
-			if(rset.next()) {
-				p.setPrjNo(rset.getInt("PRJ_NO"));
-				p.setPrjTitle(rset.getString("PRJ_TITLE"));
-				p.setPrjContent(rset.getString("PRJ_CONTENT"));
-				p.setPrjTarget(rset.getInt("PRJ_TARGET"));
-				p.setPrjCurrent(rset.getInt("PRJ_CURRENT"));
-				p.setPrjStartDate(sdFormat.format(rset.getDate("PRJ_STARTDATE")));
-				p.setPrjEndDate(sdFormat.format(rset.getDate("PRJ_ENDDATE")));
-				p.setPrjRecount(rset.getInt("PRJ_RECOUNT"));
-				p.setCreNo(rset.getInt("MEM_NO"));
-				p.setPrjCatNo(rset.getInt("PRJ_CAT_NO"));
-				p.setStatus(rset.getString("STATUS"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return p;
-	}
+	      Project p = new Project();
+	      PreparedStatement pstmt = null;
+	      ResultSet rset = null;
+	      String sql = prop.getProperty("prjList");
+	      System.out.println(sql);
+	      
+	      try {
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setInt(1, num);
+	         rset = pstmt.executeQuery();
+	         DateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
+
+	         if(rset.next()) {
+	            p.setPrjNo(rset.getInt("PRJ_NO"));
+	            p.setPrjTitle(rset.getString("PRJ_TITLE"));
+	            p.setPrjContent(rset.getString("PRJ_CONTENT"));
+	            p.setPrjTarget(rset.getInt("PRJ_TARGET"));
+	            p.setPrjCurrent(rset.getInt("PRJ_CURRENT"));
+	            p.setPrjStartDate(sdFormat.format(rset.getDate("PRJ_STARTDATE")));
+	            p.setPrjEndDate(sdFormat.format(rset.getDate("PRJ_ENDDATE")));
+	            p.setPrjRecount(rset.getInt("PRJ_RECOUNT"));
+	            p.setCreNo(rset.getInt("MEM_NO"));
+	            p.setPrjCatNo(rset.getInt("PRJ_CAT_NO"));
+	            p.setStatus(rset.getString("STATUS"));
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(rset);
+	         close(pstmt);
+	      }
+	      return p;
+	   }
 
 	public ArrayList<Reward> selectRewordList(Connection conn, int num) {
 		ArrayList<Reward> list = new ArrayList<Reward>();

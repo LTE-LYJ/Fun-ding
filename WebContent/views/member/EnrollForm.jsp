@@ -97,7 +97,7 @@
         <div id="wrap">
             <div id="enroll">
                 <form id="enrollForm" action="<%=request.getContextPath()%>/insert.me" method="post" onsubmit="return joinValidate();" enctype="multipart/form-data">
-                <table border=3px; >
+                <table border=3px >
                     <tr>
                         <th rowspan="5"><img id="profilImg" width= "120" height= "120"></th>
                         <th><input type="text" maxlength="13" name="userId" placeholder="ID" required></th>
