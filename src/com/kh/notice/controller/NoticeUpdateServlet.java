@@ -45,6 +45,7 @@ public class NoticeUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
