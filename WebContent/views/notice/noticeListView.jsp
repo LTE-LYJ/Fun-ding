@@ -92,7 +92,7 @@
 
 
 			</div>
-			<c:if test="${memNo == 1}">
+			<c:if test="${memNo == 100}">
 				<div class="bt_wrap right">
 					<a class="on" href="noticeEnrollForm">작성하기</a>
 				</div>
