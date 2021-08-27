@@ -43,7 +43,7 @@ public class prjInfoListServlet extends HttpServlet {
 		Creator creator = new PrjDeService().selectCreList(num, project.getCreNo());// 창작자 정보 
 		ArrayList<Reward> rewordList  = new PrjDeService().selectRewordList(num); // 리워드 정보
 		ProfileAttachment createrPro = new PrjDeService().selectCreatorProfile(num);// 크리에이터 이미지
-		
+
 		String view ="";
 		if(project != null) {
 			request.setAttribute("project", project);
