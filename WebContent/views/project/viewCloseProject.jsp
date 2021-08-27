@@ -170,7 +170,7 @@ h1 {
 				<h3>조회된 리스트가 없습니다.</h3>
 			<%}else{ %>
 				<%for(Project p : list){ %>
-		        <a href="#"> <!-- 클릭 시 링크 설정 -->
+		        <a href="proInfo.list?num=<%= p.getPrjNo() %>"> <!-- 클릭 시 링크 설정 -->
 		
 		            <div class="card">
 		

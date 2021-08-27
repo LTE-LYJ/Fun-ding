@@ -22,6 +22,14 @@ public class Reward {
 		this.prjNo = prjNo;
 	}
 
+	public Reward(int prjNo, String rwName, String reContent, int rwPrice) {
+		super();
+		this.rwName = rwName;
+		this.reContent = reContent;
+		this.rwPrice = rwPrice;
+		this.prjNo = prjNo;
+	}
+
 	public int getRwNo() {
 		return rwNo;
 	}

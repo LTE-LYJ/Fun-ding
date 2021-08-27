@@ -178,4 +178,109 @@ public class ProjectService {
 		return result1 * result2 * result3 * result4;
 	}
 
+	public int deleteProject(int pno) {
+		Connection conn = getConnection();
+		
+		int result1 = new ProjectDao().deleteProject(conn, pno);
+		int result2 = new ProjectDao().deleteAttachment(conn, pno);
+		if(result1 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result1; //첨부파일 넣는 건 필수가 아니기 때문에 result1만 체크
+	}
+
+	
+	//selectProject
+	public Creator selectProjectCreator(int pno) {
+		Connection conn = getConnection();
+		
+		Creator c = new ProjectDao().selectProjectCreator(conn, pno);
+		
+		close(conn);
+		return c;
+	}
+
+	public Project selectProjectPlan(int pno) {
+		Connection conn = getConnection();
+		
+		Project p = new ProjectDao().selectProjectPlan(conn, pno);
+		
+		close(conn);
+		return p;
+	}
+
+	public int getRewardCount(int pno) {
+		Connection conn = getConnection();
+		
+		int rcount = new ProjectDao().getRewardCount(conn, pno);
+		close(conn);
+		return rcount;
+	}
+
+	public Reward[] selectProjectReward(int pno, int rcount) {
+		Connection conn = getConnection();
+		
+		Reward[] r = new ProjectDao().selectProjectReward(conn, pno, rcount);
+		
+		close(conn);
+		return r;
+	}
+
+	public Project selectProjectInfo(int pno) {
+		Connection conn = getConnection();
+		
+		Project p = new ProjectDao().selectProjectInfo(conn, pno);
+		
+		close(conn);
+		return p;
+	}
+
+	public ProjectAttachment selectAttachment(int pno) {
+		Connection conn = getConnection();
+		
+		ProjectAttachment at = new ProjectDao().selectAttachment(conn, pno);
+		
+		close(conn);
+		return at;
+	}
+
+	public int updateProject(Project p, ProjectAttachment at, Reward[] rList, Creator c) {
+		Connection conn = getConnection();
+		
+		int result1 = new ProjectDao().updateProject(conn, p);
+		
+		int result2 = 1;		
+		if(at != null) {
+			if(at.getFileNo() != 0) {
+				result2 = new ProjectDao().updateAttachment(conn, at);
+			} else {
+				result2 = new ProjectDao().insertNewAttachment(conn, at);
+			}
+		}
+		
+//		int result3 = new ProjectDao().updateReward(conn, rList);
+		int result3 = new ProjectDao().deleteReward(conn, p);
+		int result4 = new ProjectDao().insertNewReward(conn, rList, p);
+		
+		int result5 = new ProjectDao().updateCreator(conn, c);
+		
+		System.out.println("result1 : " + result1);
+		System.out.println("result2 : " + result2);
+		System.out.println("result3 : " + result3);
+		System.out.println("result4 : " + result4);
+		System.out.println("result5 : " + result5);
+		System.out.println("result1 * result2 * result3 * result4 * result5 : " + result1 * result2 * result3 * result4 * result5);
+		
+		if(result1 * result2 * result3 * result4 * result5 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result1 * result2 * result3 * result4 * result5;
+	}
+
 }

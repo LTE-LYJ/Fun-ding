@@ -7,6 +7,7 @@ public class Creator {
 	private String creName; //창작자 이름
 	private String creContent; //창작자 소개
 	private String memNo; //회원번호
+	private int prjNo; //프로젝트 번호
 	private int prjCountNo;// 프로젝트수
 	
 	public Creator() {
@@ -19,6 +20,13 @@ public class Creator {
 		this.creName = creName;
 		this.creContent = creContent;
 		this.memNo = memNo;
+	}
+
+	public Creator(int prjNo, String creName, String creContent) {
+		super();
+		this.prjNo = prjNo;
+		this.creName = creName;
+		this.creContent = creContent;
 	}
 
 	public int getCreNo() {
@@ -60,6 +68,15 @@ public class Creator {
 	public void setPrjCountNo(int prjCountNo) {
 		this.prjCountNo = prjCountNo;
 	}
+	
+	public int getPrjNo() {
+		return prjNo;
+	}
+
+	public void setPrjNo(int prjNo) {
+		this.prjNo = prjNo;
+	}
+
 	@Override
 	public String toString() {
 		return "Creator [creNo=" + creNo + ", creName=" + creName + ", creContent=" + creContent + ", memNo=" + memNo+ ", prjCountNo=" + prjCountNo

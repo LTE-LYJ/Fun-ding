@@ -32,28 +32,22 @@ output, ruby, section, summary, time, mark, audio, video {
 	do: inherit;
 	vertical-align: baseline;
 }
-
 article, aside, details, figcaption, figure, hgroup,
 menu, nav, section {
 	display: block;
 }
-
 blockquote, q {
 	quotes: none;
 }
-
 blockquote : before, blockquote : after, q : before, q : after {
 	content: '';
 	content: none;
 }
-
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-
 /*css 초기화*/
-
 .card {
 	height: 400px;
 	width: 350px;
@@ -66,7 +60,6 @@ table {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	overflow: hidden;
 }
-
 .card-header {
 	-webkit-transition: 0.5s; /*사파리 & 크롬*/
     -moz-transition: 0.5s;  /*파이어폭스*/
@@ -80,7 +73,6 @@ table {
 	background-size: 100% 280px;
 	background-repeat: no-repeat;	
 }
-
 .card-header-is_closed{
     background-color: #EF5A31 ;
     color: #FFF ;
@@ -93,26 +85,20 @@ table {
     padding: 10px 10px;
     line-height: 20px;
 }
-
 h1 {
     font-size: 22px;
     font-weight: bold;
 }
-
 .card-body {
-
 }
-
 .card-body-header{
 	line-height: 25px;
 	margin: 10px 20px 0px 20px;
 }
-
 .card-body-hashtag {
 	color: #2478FF;
 	font-style: italic;
 }
-
 .card-body-footer {
   	position: absolute; 
   	margin-top: 15px;
@@ -123,30 +109,25 @@ h1 {
     color: #9FA5A8;
     padding: 0 15px;
 }
-
 .icon {
     display: inline-block;
     vertical-align: middle;
     margin-right: 2px;
 }
-
 .icon-count_text {
     width: 25px;
     height: 17px;
 	background: url("images/eye.jpg") no-repeat;
 }
-
 .icon-count_view {
 	margin-left: 5px;
 	width: 25px;
     height: 17px;
 	background: url("images/comment.jpg") no-repeat;	
 }
-
 .count_rate {
 	float: right;
 }
-
 .outer {
 	margin-top: 15px;
 }
