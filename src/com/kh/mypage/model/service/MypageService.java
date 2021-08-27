@@ -88,7 +88,7 @@ public class MypageService {
 	public ArrayList<Project> selectPrj(PageInfo pi) {
 		Connection conn = getConnection();
 		
-		ArrayList<Board> list = new MypageDao().selectList(conn, pi);
+		ArrayList<Project> list = new MypageDao().selectPrj(conn, pi);
 		close(conn);
 		return list;
 	}
