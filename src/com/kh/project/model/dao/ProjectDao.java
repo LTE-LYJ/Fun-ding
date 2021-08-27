@@ -161,15 +161,18 @@ public class ProjectDao {
 			
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				list.add(new Project(rset.getInt("PRJ_NO"),
-									 rset.getString("PRJ_TITLE"),
-									 rset.getString("CRE_NAME"),
-									 rset.getString("PRJ_CAT_NAME"),
-									 rset.getDouble("PRJ_TARGET"),
-									 rset.getDouble("PRJ_CURRENT"),
-									 rset.getString("PRJ_STARTDATE"),
-									 rset.getString("PRJ_ENDDATE")
-						));
+				Project p = new Project();
+				p.setPrjNo(rset.getInt("PRJ_NO"));
+				p.setPrjTitle(rset.getString("PRJ_TITLE"));
+				p.setCreName(rset.getString("CRE_NAME"));
+				p.setPrjCatName(rset.getString("PRJ_CAT_NAME"));
+				p.setPrjTarget(rset.getDouble("PRJ_TARGET"));
+				p.setPrjCurrent(rset.getDouble("PRJ_CURRENT"));
+				p.setPrjStartDate(rset.getString("PRJ_STARTDATE"));
+				p.setPrjEndDate(rset.getString("PRJ_ENDDATE"));
+				p.setAttachmentName(rset.getString("CHANGE_NAME"));
+				
+				list.add(p);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -200,15 +203,18 @@ public class ProjectDao {
 			
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				list.add(new Project(rset.getInt("PRJ_NO"),
-									 rset.getString("PRJ_TITLE"),
-									 rset.getString("CRE_NAME"),
-									 rset.getString("PRJ_CAT_NAME"),
-									 rset.getDouble("PRJ_TARGET"),
-									 rset.getDouble("PRJ_CURRENT"),
-									 rset.getString("PRJ_STARTDATE"),
-									 rset.getString("PRJ_ENDDATE")
-						));
+				Project p = new Project();
+				p.setPrjNo(rset.getInt("PRJ_NO"));
+				p.setPrjTitle(rset.getString("PRJ_TITLE"));
+				p.setCreName(rset.getString("CRE_NAME"));
+				p.setPrjCatName(rset.getString("PRJ_CAT_NAME"));
+				p.setPrjTarget(rset.getDouble("PRJ_TARGET"));
+				p.setPrjCurrent(rset.getDouble("PRJ_CURRENT"));
+				p.setPrjStartDate(rset.getString("PRJ_STARTDATE"));
+				p.setPrjEndDate(rset.getString("PRJ_ENDDATE"));
+				p.setAttachmentName(rset.getString("CHANGE_NAME"));
+				
+				list.add(p);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -239,15 +245,18 @@ public class ProjectDao {
 			
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				list.add(new Project(rset.getInt("PRJ_NO"),
-									 rset.getString("PRJ_TITLE"),
-									 rset.getString("CRE_NAME"),
-									 rset.getString("PRJ_CAT_NAME"),
-									 rset.getDouble("PRJ_TARGET"),
-									 rset.getDouble("PRJ_CURRENT"),
-									 rset.getString("PRJ_STARTDATE"),
-									 rset.getString("PRJ_ENDDATE")
-						));
+				Project p = new Project();
+				p.setPrjNo(rset.getInt("PRJ_NO"));
+				p.setPrjTitle(rset.getString("PRJ_TITLE"));
+				p.setCreName(rset.getString("CRE_NAME"));
+				p.setPrjCatName(rset.getString("PRJ_CAT_NAME"));
+				p.setPrjTarget(rset.getDouble("PRJ_TARGET"));
+				p.setPrjCurrent(rset.getDouble("PRJ_CURRENT"));
+				p.setPrjStartDate(rset.getString("PRJ_STARTDATE"));
+				p.setPrjEndDate(rset.getString("PRJ_ENDDATE"));
+				p.setAttachmentName(rset.getString("CHANGE_NAME"));
+				
+				list.add(p);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -278,15 +287,18 @@ public class ProjectDao {
 			
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				list.add(new Project(rset.getInt("PRJ_NO"),
-									 rset.getString("PRJ_TITLE"),
-									 rset.getString("CRE_NAME"),
-									 rset.getString("PRJ_CAT_NAME"),
-									 rset.getDouble("PRJ_TARGET"),
-									 rset.getDouble("PRJ_CURRENT"),
-									 rset.getString("PRJ_STARTDATE"),
-									 rset.getString("PRJ_ENDDATE")
-						));
+				Project p = new Project();
+				p.setPrjNo(rset.getInt("PRJ_NO"));
+				p.setPrjTitle(rset.getString("PRJ_TITLE"));
+				p.setCreName(rset.getString("CRE_NAME"));
+				p.setPrjCatName(rset.getString("PRJ_CAT_NAME"));
+				p.setPrjTarget(rset.getDouble("PRJ_TARGET"));
+				p.setPrjCurrent(rset.getDouble("PRJ_CURRENT"));
+				p.setPrjStartDate(rset.getString("PRJ_STARTDATE"));
+				p.setPrjEndDate(rset.getString("PRJ_ENDDATE"));
+				p.setAttachmentName(rset.getString("CHANGE_NAME"));
+				
+				list.add(p);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -320,15 +332,18 @@ public class ProjectDao {
 			
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				list.add(new Project(rset.getInt("PRJ_NO"),
-									 rset.getString("PRJ_TITLE"),
-									 rset.getString("CRE_NAME"),
-									 rset.getString("PRJ_CAT_NAME"),
-									 rset.getDouble("PRJ_TARGET"),
-									 rset.getDouble("PRJ_CURRENT"),
-									 rset.getString("PRJ_STARTDATE"),
-									 rset.getString("PRJ_ENDDATE")
-						));
+				Project p = new Project();
+				p.setPrjNo(rset.getInt("PRJ_NO"));
+				p.setPrjTitle(rset.getString("PRJ_TITLE"));
+				p.setCreName(rset.getString("CRE_NAME"));
+				p.setPrjCatName(rset.getString("PRJ_CAT_NAME"));
+				p.setPrjTarget(rset.getDouble("PRJ_TARGET"));
+				p.setPrjCurrent(rset.getDouble("PRJ_CURRENT"));
+				p.setPrjStartDate(rset.getString("PRJ_STARTDATE"));
+				p.setPrjEndDate(rset.getString("PRJ_ENDDATE"));
+				p.setAttachmentName(rset.getString("CHANGE_NAME"));
+				
+				list.add(p);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -360,15 +375,18 @@ public class ProjectDao {
 			
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				list.add(new Project(rset.getInt("PRJ_NO"),
-									 rset.getString("PRJ_TITLE"),
-									 rset.getString("CRE_NAME"),
-									 rset.getString("PRJ_CAT_NAME"),
-									 rset.getDouble("PRJ_TARGET"),
-									 rset.getDouble("PRJ_CURRENT"),
-									 rset.getString("PRJ_STARTDATE"),
-									 rset.getString("PRJ_ENDDATE")
-						));
+				Project p = new Project();
+				p.setPrjNo(rset.getInt("PRJ_NO"));
+				p.setPrjTitle(rset.getString("PRJ_TITLE"));
+				p.setCreName(rset.getString("CRE_NAME"));
+				p.setPrjCatName(rset.getString("PRJ_CAT_NAME"));
+				p.setPrjTarget(rset.getDouble("PRJ_TARGET"));
+				p.setPrjCurrent(rset.getDouble("PRJ_CURRENT"));
+				p.setPrjStartDate(rset.getString("PRJ_STARTDATE"));
+				p.setPrjEndDate(rset.getString("PRJ_ENDDATE"));
+				p.setAttachmentName(rset.getString("CHANGE_NAME"));
+				
+				list.add(p);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -400,15 +418,18 @@ public class ProjectDao {
 			
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				list.add(new Project(rset.getInt("PRJ_NO"),
-									 rset.getString("PRJ_TITLE"),
-									 rset.getString("CRE_NAME"),
-									 rset.getString("PRJ_CAT_NAME"),
-									 rset.getDouble("PRJ_TARGET"),
-									 rset.getDouble("PRJ_CURRENT"),
-									 rset.getString("PRJ_STARTDATE"),
-									 rset.getString("PRJ_ENDDATE")
-						));
+				Project p = new Project();
+				p.setPrjNo(rset.getInt("PRJ_NO"));
+				p.setPrjTitle(rset.getString("PRJ_TITLE"));
+				p.setCreName(rset.getString("CRE_NAME"));
+				p.setPrjCatName(rset.getString("PRJ_CAT_NAME"));
+				p.setPrjTarget(rset.getDouble("PRJ_TARGET"));
+				p.setPrjCurrent(rset.getDouble("PRJ_CURRENT"));
+				p.setPrjStartDate(rset.getString("PRJ_STARTDATE"));
+				p.setPrjEndDate(rset.getString("PRJ_ENDDATE"));
+				p.setAttachmentName(rset.getString("CHANGE_NAME"));
+				
+				list.add(p);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -440,15 +461,18 @@ public class ProjectDao {
 			
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				list.add(new Project(rset.getInt("PRJ_NO"),
-									 rset.getString("PRJ_TITLE"),
-									 rset.getString("CRE_NAME"),
-									 rset.getString("PRJ_CAT_NAME"),
-									 rset.getDouble("PRJ_TARGET"),
-									 rset.getDouble("PRJ_CURRENT"),
-									 rset.getString("PRJ_STARTDATE"),
-									 rset.getString("PRJ_ENDDATE")
-						));
+				Project p = new Project();
+				p.setPrjNo(rset.getInt("PRJ_NO"));
+				p.setPrjTitle(rset.getString("PRJ_TITLE"));
+				p.setCreName(rset.getString("CRE_NAME"));
+				p.setPrjCatName(rset.getString("PRJ_CAT_NAME"));
+				p.setPrjTarget(rset.getDouble("PRJ_TARGET"));
+				p.setPrjCurrent(rset.getDouble("PRJ_CURRENT"));
+				p.setPrjStartDate(rset.getString("PRJ_STARTDATE"));
+				p.setPrjEndDate(rset.getString("PRJ_ENDDATE"));
+				p.setAttachmentName(rset.getString("CHANGE_NAME"));
+				
+				list.add(p);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

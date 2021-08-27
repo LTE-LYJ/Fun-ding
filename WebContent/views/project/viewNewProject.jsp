@@ -83,9 +83,9 @@ table {
 	border-radius: 15px 15px 0 0;
 	background-image: url("images/korea.jpeg");
 	background-size: 100% 280px;
-	background-repeat: no-repeat;	
+	background-repeat: no-repeat;
+	positon :relative;	
 }
-
 .card-header-is_closed{
     background-color: #EF5A31 ;
     color: #FFF ;
@@ -97,6 +97,8 @@ table {
     font-weight: bold;
     padding: 10px 10px;
     line-height: 20px;
+	position: absolute;
+	right: 0;
 }
 
 h1 {
@@ -153,7 +155,7 @@ h1 {
 }
 
 .outer {
-	margin-top: 15px;
+
 }
 </style>
 </head>
@@ -162,7 +164,7 @@ h1 {
 	
     <div class="outer">
         <h1 style="margin-left:10px">신규 프로젝트 둘러보기</h1>
-        <h3 style="margin-left:10px"><%= allListCount %>개의 프로젝트가 있습니다.</h3>
+        <h3 style="margin-left:10px; margin-bottom:10px"><%= allListCount %>개의 프로젝트가 있습니다.</h3>
 		<hr>
 
 		<div class="listArea" align="center">
@@ -183,7 +185,8 @@ h1 {
 		                        	endDate = sdf.parse(p.getPrjEndDate());
 		                        %>
 		                        <div class="card-header-number"><%= (endDate.getTime() - startDate.getTime()) / (24*60*60*1000) %>일 </div> 
-		                    </div >
+		                    </div>
+		                    <img src="resources/upfiles_project/<%= p.getAttachmentName() %>" width="100%" height="100%">
 		                </div>
 		
 		                <!--  카드 바디 -->

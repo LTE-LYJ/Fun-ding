@@ -23,8 +23,9 @@ public class Project {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Project(int prjNo, String prjTitle, String prjContent, double prjTarget, double prjCurrent, String prjStartDate,
-			String prjEndDate, int prjRecount, String creName, String prjCatName, int attachmentNo, String status) {
+	public Project(int prjNo, String prjTitle, String prjContent, double prjTarget, double prjCurrent,
+			String prjStartDate, String prjEndDate, int prjRecount, int creNo, int prjCatNo, String creName,
+			String prjCatName, int attachmentNo, String attachmentName, String status) {
 		super();
 		this.prjNo = prjNo;
 		this.prjTitle = prjTitle;
@@ -34,9 +35,12 @@ public class Project {
 		this.prjStartDate = prjStartDate;
 		this.prjEndDate = prjEndDate;
 		this.prjRecount = prjRecount;
+		this.creNo = creNo;
+		this.prjCatNo = prjCatNo;
 		this.creName = creName;
 		this.prjCatName = prjCatName;
 		this.attachmentNo = attachmentNo;
+		this.attachmentName = attachmentName;
 		this.status = status;
 	}
 
@@ -192,8 +196,10 @@ public class Project {
 	public String toString() {
 		return "Project [prjNo=" + prjNo + ", prjTitle=" + prjTitle + ", prjContent=" + prjContent + ", prjTarget="
 				+ prjTarget + ", prjCurrent=" + prjCurrent + ", prjStartDate=" + prjStartDate + ", prjEndDate="
-				+ prjEndDate + ", prjRecount=" + prjRecount + ", creName=" + creName + ", prjCatName=" + prjCatName
-				+ ", attachmentNo=" + attachmentNo + ", status=" + status +", creNo=" + creNo+", prjCatNo=" + prjCatNo+"]";
+				+ prjEndDate + ", prjRecount=" + prjRecount + ", creNo=" + creNo + ", prjCatNo=" + prjCatNo
+				+ ", creName=" + creName + ", prjCatName=" + prjCatName + ", attachmentNo=" + attachmentNo
+				+ ", attachmentName=" + attachmentName + ", status=" + status + "]";
 	}
-
+	
+	
 }
