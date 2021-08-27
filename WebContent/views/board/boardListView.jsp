@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항</title>
+<title>자유게시판</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/board/board.css" />
 <link rel="stylesheet"
@@ -22,8 +22,7 @@
 	<br>
 	<div class="head">
 		<h2 class="list">
-			<a class="in" href="noticeListView">공지사항</a> <a class="out"
-				href="../project_report/projectReportListView">신고게시판</a>
+			<a class="in" href="boardListView">자유 게시판</a> 
 		</h2>
 	</div>
 	<hr>
@@ -36,6 +35,7 @@
 				<thead>
 					<tr class="table_head">
 						<th class="num">번호</th>
+						<th class="catea">카테</th>
 						<th class="title">제목</th>
 						<th class="writer">작성자</th>
 						<th class="date">작성일</th>

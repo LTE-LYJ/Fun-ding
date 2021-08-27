@@ -1,5 +1,8 @@
 package com.kh.board.model.vo;
 
+import lombok.Data;
+
+@Data
 public class BoardCat {
 	//자유게시판 카테고리
 	

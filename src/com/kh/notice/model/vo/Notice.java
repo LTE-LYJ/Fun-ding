@@ -6,14 +6,88 @@ import lombok.Data;
 
 @Data
 public class Notice {
-	//공지사항
 	
-	private int noticeNo; //공지사항번호
-	private String noticeTitle; //공지사항제목
-	private String noticeContent; //공지사항내용
-	private int noticeWriter; //작성자회원번호
-	private int count; //조회수
-	private Date createDate; //작성일
-	private String status; //상태값(Y/N)
+	private int noticeNo;
+	private String noticeTitle;
+	private String noticeContent;
+	private String noticeWriter;
+	private int count;
+	private Date createDate;
+	private String status;
+	private String files;
+	
+	
+	
+	
+	public Notice() {
+		// TODO Auto-generated constructor stub
+	}
 
+
+	public Notice(String noticeTitle,String noticeWriter, String noticeContent) {
+		super();
+		this.noticeTitle = noticeTitle;
+		this.noticeWriter = noticeWriter;
+		this.noticeContent = noticeContent;
+	}
+
+
+	public Notice(int noticeNo, String noticeTitle, String noticeContent, String noticeWriter, int count,
+			Date createDate, String files) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+		this.noticeWriter = noticeWriter;
+		this.count = count;
+		this.createDate = createDate;
+		this.files = files;
+	}
+
+
+	public Notice(int noticeNo, String noticeTitle, String noticeContent, String noticeWriter, int count,
+			Date createDate, String status, String files) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+		this.noticeWriter = noticeWriter;
+		this.count = count;
+		this.createDate = createDate;
+		this.status = status;
+		this.files = files;
+	}
+
+
+	public Notice(int noticeNo, String noticeTitle, String noticeContent, String noticeWriter, String files) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+		this.noticeWriter = noticeWriter;
+		this.files = files;
+	}
+
+
+	public Notice(String noticeTitle, String noticeContent, String noticeWriter, String files) {
+		super();
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+		this.noticeWriter = noticeWriter;
+		this.files = files;
+	}
+
+
+	
+	
+
+
+	
+
+
+	
+	
+	
+	
+	
 }
