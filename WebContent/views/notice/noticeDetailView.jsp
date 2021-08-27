@@ -75,7 +75,7 @@
 				<div class="cont">${n.noticeContent}</div>
 			</div>
 		</div>
-		<c:if test="${memNo == 1}">
+		<c:if test="${memNo == 100}">
 		<c:set var="contextPath" value="<%=request.getContextPath() %>"></c:set>
 		<div class="bt_wrap">
 			<a href="noticeUpdateForm?noticeNo=${n.noticeNo}">수정</a> <a class="on"
