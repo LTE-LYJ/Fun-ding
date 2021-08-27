@@ -71,7 +71,8 @@ table {
 	border-radius: 15px 15px 0 0;
 	background-image: url("images/korea.jpeg");
 	background-size: 100% 280px;
-	background-repeat: no-repeat;	
+	background-repeat: no-repeat;
+	positon :relative;	
 }
 .card-header-is_closed{
     background-color: #EF5A31 ;
@@ -84,6 +85,8 @@ table {
     font-weight: bold;
     padding: 10px 10px;
     line-height: 20px;
+	position: absolute;
+	right: 0;
 }
 h1 {
     font-size: 22px;
@@ -129,7 +132,7 @@ h1 {
 	float: right;
 }
 .outer {
-	margin-top: 15px;
+	margin-top: 10px;
 }
 </style>
 </head>
@@ -145,7 +148,7 @@ h1 {
 					<h3>조회된 리스트가 없습니다.</h3>
 				<%}else{ %>
 					<%for(Project p : listAll){ %>
-			        <a href="#"> <!-- 클릭 시 링크 설정 -->
+			        <a href="proInfo.list?num=<%= p.getPrjNo() %>"> <!-- 클릭 시 링크 설정 -->
 			
 			            <div class="card">
 			
@@ -158,7 +161,8 @@ h1 {
 			                        	endDate = sdf.parse(p.getPrjEndDate());
 			                        %>
 			                        <div class="card-header-number"><%= (endDate.getTime() - startDate.getTime()) / (24*60*60*1000) %>일 </div> 
-			                    </div >
+			                    </div>
+			                    <img src="resources/upfiles_project/<%= p.getAttachmentName() %>" width="100%" height="100%">
 			                </div>
 			
 			                <!--  카드 바디 -->
@@ -198,7 +202,7 @@ h1 {
 					<h3>조회된 리스트가 없습니다.</h3>
 				<%}else{ %>
 					<%for(Project p : listPopular){ %>
-			        <a href="#"> <!-- 클릭 시 링크 설정 -->
+			        <a href="proInfo.list?num=<%= p.getPrjNo() %>"> <!-- 클릭 시 링크 설정 -->
 			
 			            <div class="card">
 			
@@ -211,7 +215,8 @@ h1 {
 			                        	endDate = sdf.parse(p.getPrjEndDate());
 			                        %>
 			                        <div class="card-header-number"><%= (endDate.getTime() - startDate.getTime()) / (24*60*60*1000) %>일 </div> 
-			                    </div >
+			                    </div>
+			                    <img src="resources/upfiles_project/<%= p.getAttachmentName() %>" width="100%" height="100%">
 			                </div>
 			
 			                <!--  카드 바디 -->
@@ -251,7 +256,7 @@ h1 {
 					<h3>조회된 리스트가 없습니다.</h3>
 				<%}else{ %>
 					<%for(Project p : listNew){ %>
-			        <a href="#"> <!-- 클릭 시 링크 설정 -->
+			        <a href="proInfo.list?num=<%= p.getPrjNo() %>"> <!-- 클릭 시 링크 설정 -->
 			
 			            <div class="card">
 			
@@ -264,7 +269,8 @@ h1 {
 			                        	endDate = sdf.parse(p.getPrjEndDate());
 			                        %>
 			                        <div class="card-header-number"><%= (endDate.getTime() - startDate.getTime()) / (24*60*60*1000) %>일 </div> 
-			                    </div >
+			                    </div>
+			                    <img src="resources/upfiles_project/<%= p.getAttachmentName() %>" width="100%" height="100%">
 			                </div>
 			
 			                <!--  카드 바디 -->
@@ -304,7 +310,7 @@ h1 {
 					<h3>조회된 리스트가 없습니다.</h3>
 				<%}else{ %>
 					<%for(Project p : listClose){ %>
-			        <a href="#"> <!-- 클릭 시 링크 설정 -->
+			        <a href="proInfo.list?num=<%= p.getPrjNo() %>"> <!-- 클릭 시 링크 설정 -->
 			
 			            <div class="card">
 			
@@ -317,7 +323,8 @@ h1 {
 			                        	endDate = sdf.parse(p.getPrjEndDate());
 			                        %>
 			                        <div class="card-header-number"><%= (endDate.getTime() - startDate.getTime()) / (24*60*60*1000) %>일 </div> 
-			                    </div >
+			                    </div>
+			                    <img src="resources/upfiles_project/<%= p.getAttachmentName() %>" width="100%" height="100%">
 			                </div>
 			
 			                <!--  카드 바디 -->
