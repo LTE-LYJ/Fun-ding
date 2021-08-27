@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.head {
+	margin: 30px;
+	margin-left: 15%;
+	margin-right: 15%;
+}
+
+.head .out{
+	color: #C3C3C3;
+}
+
+.head .in:hover ,.head .out:hover {
+	color:#000000;
+	text-decoration: underline;
+}
+.head .list {
+	margin-left: 30px;
+}
+.head .list a {
+	margin-right: 30px;
+}
