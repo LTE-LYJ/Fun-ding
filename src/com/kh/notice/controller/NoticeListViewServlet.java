@@ -72,7 +72,6 @@ public class NoticeListViewServlet extends HttpServlet {
 		request.setAttribute("memNo", memNo);
 		request.getRequestDispatcher("/views/notice/noticeListView.jsp").forward(request, response);
 		
-		
 	}
 
 	/**

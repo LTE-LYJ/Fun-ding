@@ -268,7 +268,7 @@ $(function(){
         
         <li><a href="#" onclick="checkLoginPrj();">프로젝트 올리기</a></li>
         <li><a href="<%=request.getContextPath()%>/views/board/boardListView">커뮤니티</a></li>
-        <li><a href="<%=request.getContextPath()%>/views/notice/noticeListView"">고객지원</a>
+        <li><a href="<%=request.getContextPath()%>/views/notice/noticeListView">고객지원</a>
             <ul>
                 <li><a href="<%=request.getContextPath()%>/views/notice/noticeListView">공지사항</a></li>
                 <li><a href="<%=request.getContextPath()%>/views/project_report/projectReportListView">신고 게시판</a></li>
