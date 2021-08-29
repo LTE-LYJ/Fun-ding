@@ -280,7 +280,7 @@ $(function(){
 		<%} %>
 		
 		<span class="userInfo">
-            <a href="" style="font-size:15px; font-weight:bold;"><%= loginUser.getMemName() %></a><br>
+            <a href="<%=request.getContextPath()%>/info.mp" style="font-size:15px; font-weight:bold;"><%= loginUser.getMemName() %></a><br>
             <a href="<%=request.getContextPath()%>/logout.me" style="font-size:10px; font-weight:bold; color:red;"> 로그아웃</a>
         </span>
     </ul>
