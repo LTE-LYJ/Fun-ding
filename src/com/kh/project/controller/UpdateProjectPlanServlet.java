@@ -1,6 +1,7 @@
 package com.kh.project.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,6 +34,8 @@ public class UpdateProjectPlanServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("UTF-8");
+		
 		// Cookie 선언
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
@@ -52,8 +55,8 @@ public class UpdateProjectPlanServlet extends HttpServlet {
 		System.out.println("ccontent : " + ccontent);
 		System.out.println("--------------------");
 
-		Cookie cnameCookie = new Cookie("cname", cname);
-		Cookie ccontentCookie = new Cookie("ccontent", ccontent);
+		Cookie cnameCookie = new Cookie("cname", URLEncoder.encode(cname, "utf-8").replaceAll("\\+", "%20"));
+		Cookie ccontentCookie = new Cookie("ccontent", URLEncoder.encode(ccontent, "utf-8").replaceAll("\\+", "%20"));
 
 		System.out.println("cnameCookie : " + cnameCookie);
 		System.out.println("ccontentCookie : " + ccontentCookie);

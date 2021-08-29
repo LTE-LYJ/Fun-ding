@@ -9,8 +9,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>프로젝트 수정</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/writeProject.css">
+<style>
+	body{
+		background: white;
+	}
+	main[role="main"] {
+    margin: 20px 0 40px 200px;
+  	}
+</style>
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
@@ -48,7 +56,7 @@
 					<textarea name="allReward" style="display:none" id="hiddenArea"></textarea>
 					<br>
 					<div class="btnsPro" align="center">
-						<button type="submit" class="btnPro" name="next">다음으로</button>
+						<button type="submit" class="btnPro" name="next" onclick="return check()">다음으로</button>
 						<button type="button" class="btnPro" name="previous" onclick="location.href='updateReward.pr'">이전으로</button>
 					</div>
 				</div>				
@@ -80,9 +88,8 @@
 			// 3. <li> 목록 중 index에 해당하는 item 삭제
 			if(items.length > 0)  {
 			  items[index].remove();
-			}
-			
-		};
+			}	
+		}
 		
 		$("#insertForm").on("submit", function(){
 			const ul = document.getElementById("rul");
@@ -95,6 +102,19 @@
 			
 			$("#hiddenArea").val();
 		});
+		
+		function check(){
+			const ul = document.getElementById("rul");
+			const items = ul.getElementsByTagName("li");
+			
+			if(items.length > 0)  {
+				return true;
+			} else {
+				alert("하나 이상의 리워드 정보를 입력해야 합니다.");
+                rname.focus();
+                return false;
+			}
+	    }
 	</script>
 	
 	<%@ include file="../common/footer.jsp" %>

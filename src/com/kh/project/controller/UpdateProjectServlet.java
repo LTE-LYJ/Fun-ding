@@ -2,6 +2,7 @@ package com.kh.project.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -47,6 +48,8 @@ public class UpdateProjectServlet extends HttpServlet {
 		String target = null, startDate = null, endDate = null; // 목표 금액, 펀딩 시작일, 펀딩 종료일
 		int count = 0;
 		String[][] rwList = null;
+		
+		response.setCharacterEncoding("UTF-8");
 
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
@@ -65,43 +68,51 @@ public class UpdateProjectServlet extends HttpServlet {
 				rwList = new String[count][3];
 			}
 
-			for (Cookie c : cookies) {
-
+for (Cookie c : cookies) {
+				
 				if (c.getName().equals("cname")) {
-					cname = c.getValue();
+//					cname = c.getValue();
+					cname = URLDecoder.decode((c.getValue()),"utf-8");
 					System.out.println("cname : " + cname);
-
+					
 				} else if (c.getName().equals("ccontent")) {
-					ccontent = c.getValue();
+//					ccontent = c.getValue();
+					ccontent = URLDecoder.decode((c.getValue()),"utf-8");
 					System.out.println("ccontent : " + ccontent);
-
+					
 				} else if (c.getName().equals("target")) {
-					target = c.getValue();
+//					target = c.getValue();
+					target = URLDecoder.decode((c.getValue()),"utf-8");
 					System.out.println("target : " + target);
-
+					
 				} else if (c.getName().equals("startDate")) {
-					startDate = c.getValue();
+//					startDate = c.getValue();
+					startDate = URLDecoder.decode((c.getValue()),"utf-8");
 					System.out.println("startDate : " + startDate);
-
+					
 				} else if (c.getName().equals("endDate")) {
-					endDate = c.getValue();
+//					endDate = c.getValue();
+					endDate = URLDecoder.decode((c.getValue()),"utf-8");
 					System.out.println("endDate : " + endDate);
-
+					
 				}
-
-				for (int i = 0; i < count; i++) {
-					if (c.getName().equals("rname" + (i + 1))) {
-						rwList[i][0] = c.getValue();
+				
+				for (int i=0; i<count; i++) {
+					if (c.getName().equals("rname" + (i+1))) {
+//						rwList[i][0] = c.getValue();
+						rwList[i][0] = URLDecoder.decode((c.getValue()),"utf-8");
 						System.out.println("rwList[" + i + "][0] : " + rwList[i][0]);
-
-					} else if (c.getName().equals("rcontent" + (i + 1))) {
-						rwList[i][1] = c.getValue();
+						
+					} else if (c.getName().equals("rcontent" + (i+1))) {
+//						rwList[i][1] = c.getValue();
+						rwList[i][1] = URLDecoder.decode((c.getValue()),"utf-8");
 						System.out.println("rwList[" + i + "][1] : " + rwList[i][1]);
-
-					} else if (c.getName().equals("rprice" + (i + 1))) {
-						rwList[i][2] = c.getValue();
+						
+					} else if (c.getName().equals("rprice" + (i+1))) {
+//						rwList[i][2] = c.getValue();
+						rwList[i][2] = URLDecoder.decode((c.getValue()),"utf-8");
 						System.out.println("rwList[" + i + "][2] : " + rwList[i][2]);
-
+						
 					}
 				}
 			}
@@ -178,6 +189,53 @@ public class UpdateProjectServlet extends HttpServlet {
 			int result = new ProjectService().updateProject(p, at, rList, c);
 
 			if (result > 0) {
+				
+				if (cookies != null) {
+					for (int i = 0; i < cookies.length; i++) {
+
+						if (cookies[i].getName().equals("cname")) {
+							// 쿠키의 유효시간을 0으로 설정하여 바로 만료시킨다.
+							cookies[i].setMaxAge(0);
+
+							// 응답에 쿠키 추가
+							response.addCookie(cookies[i]);
+
+						} else if (cookies[i].getName().equals("ccontent")) {
+							cookies[i].setMaxAge(0);
+							response.addCookie(cookies[i]);
+
+						} else if (cookies[i].getName().equals("target")) {
+							cookies[i].setMaxAge(0);
+							response.addCookie(cookies[i]);
+
+						} else if (cookies[i].getName().equals("startDate")) {
+							cookies[i].setMaxAge(0);
+							response.addCookie(cookies[i]);
+
+						} else if (cookies[i].getName().equals("endDate")) {
+							cookies[i].setMaxAge(0);
+							response.addCookie(cookies[i]);
+
+						}
+
+						for (int j = 0; j < count; j++) {
+							if (cookies[i].getName().equals("rname" + (j + 1))) {
+								cookies[i].setMaxAge(0);
+								response.addCookie(cookies[i]);
+
+							} else if (cookies[i].getName().equals("rcontent" + (i + 1))) {
+								cookies[i].setMaxAge(0);
+								response.addCookie(cookies[i]);
+
+							} else if (cookies[i].getName().equals("rprice" + (i + 1))) {
+								cookies[i].setMaxAge(0);
+								response.addCookie(cookies[i]);
+
+							}
+						}
+					}
+				}
+				
 				request.getSession().setAttribute("msg", "프로젝트 업데이트 성공");
 				response.sendRedirect("viewAll.pr");
 			} else {

@@ -6,6 +6,8 @@
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
 	Date startDate, endDate;
+	String todayStr = sdf.format(date);
+	Date today = sdf.parse(todayStr);
 	
 	ArrayList<Project> list = (ArrayList<Project>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
@@ -21,7 +23,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>인기 프로젝트</title>
 <style>
 div, span, applet, object, iframes, h1, h2, h3, h4, h5, h6,
 p, blockquote, pre, a, abbr, acronym, address, big, quotes, code, del,
@@ -171,20 +173,29 @@ h1 {
 			<%if(list.isEmpty()){ %>
 				<h3>조회된 리스트가 없습니다.</h3>
 			<%}else{ %>
-				<%for(Project p : list){ %>
+				<%for(Project p : list){ 
+					startDate = sdf.parse(p.getPrjStartDate());
+		            endDate = sdf.parse(p.getPrjEndDate());
+		            
+		            if(today.getTime() < startDate.getTime()) {
+		        %>
+		        <a href=""> <!-- 클릭 시 링크 설정 -->
+		        <% } else { %>
 		        <a href="proInfo.list?num=<%= p.getPrjNo() %>"> <!-- 클릭 시 링크 설정 -->
+		        <% } %>
 		
 		            <div class="card">
 		
 		                <!-- 카드 헤더 -->
 		                <div class="card-header">
-		                    <div class="card-header-is_closed"> 
+		                    <div class="card-header-is_closed">
+		                        <% if(today.getTime() < startDate.getTime()) { %>
+		                        	<div class="card-header-text">공개 예정</div>
+		                        	<div class="card-header-number">D-<%= (startDate.getTime() - today.getTime()) / (24*60*60*1000) %></div>
+		                        <% } else { %>
 		                        <div class="card-header-text">남은 기간 </div>
-		                        <%
-			                        startDate = sdf.parse(p.getPrjStartDate());
-		                        	endDate = sdf.parse(p.getPrjEndDate());
-		                        %>
-		                        <div class="card-header-number"><%= (endDate.getTime() - startDate.getTime()) / (24*60*60*1000) %>일 </div> 
+		                        <div class="card-header-number"><%= (endDate.getTime() - startDate.getTime()) / (24*60*60*1000) %>일 </div>
+		                        <% } %> 
 		                    </div>
 		                    <img src="resources/upfiles_project/<%= p.getAttachmentName() %>" width="100%" height="100%">
 		                </div>
@@ -205,8 +216,8 @@ h1 {
 		                    <div class="card-body-footer">
 		                        <hr style="margin-bottom: 8px; opacity: 0.5; border-color: #EF5A31">
 		                        <i class="icon icon-count_text"></i>모인 금액
-		                        <i class="icon icon-count_view"></i><%= p.getPrjCurrent() %>원
-		                        <i class="count_rate"><%= p.getPrjCurrent() / p.getPrjTarget() * 100 %>% </i>
+		                        <i class="icon icon-count_view"></i><%= (int) p.getPrjCurrent() %>원
+		                        <i class="count_rate"><%= (int) (p.getPrjCurrent() / p.getPrjTarget() * 100) %>% </i>
 		                    </div>
 		
 		                </div>

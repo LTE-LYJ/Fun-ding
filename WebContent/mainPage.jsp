@@ -6,6 +6,8 @@
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
 	Date startDate, endDate;
+	String todayStr = sdf.format(date);
+	Date today = sdf.parse(todayStr);
 	
 	ArrayList<Project> listAll = (ArrayList<Project>)request.getAttribute("listAll");
 	ArrayList<Project> listPopular = (ArrayList<Project>)request.getAttribute("listPopular");
@@ -16,7 +18,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>메인 페이지</title>
 <style>
 div, span, applet, object, iframes, h1, h2, h3, h4, h5, h6,
 p, blockquote, pre, a, abbr, acronym, address, big, quotes, code, del,
@@ -147,20 +149,29 @@ h1 {
 				<%if(listAll.isEmpty()){ %>
 					<h3>조회된 리스트가 없습니다.</h3>
 				<%}else{ %>
-					<%for(Project p : listAll){ %>
+					<%for(Project p : listAll){ 
+						startDate = sdf.parse(p.getPrjStartDate());
+			            endDate = sdf.parse(p.getPrjEndDate());
+			            
+			            if(today.getTime() < startDate.getTime()) {
+			        %>
+			        <a href=""> <!-- 클릭 시 링크 설정 -->
+			        <% } else { %>
 			        <a href="proInfo.list?num=<%= p.getPrjNo() %>"> <!-- 클릭 시 링크 설정 -->
+			        <% } %>
 			
 			            <div class="card">
 			
 			                <!-- 카드 헤더 -->
 			                <div class="card-header">
-			                    <div class="card-header-is_closed"> 
+			                    <div class="card-header-is_closed">
+			                        <% if(today.getTime() < startDate.getTime()) { %>
+			                        	<div class="card-header-text">공개 예정</div>
+			                        	<div class="card-header-number">D-<%= (startDate.getTime() - today.getTime()) / (24*60*60*1000) %></div>
+			                        <% } else { %>
 			                        <div class="card-header-text">남은 기간 </div>
-			                        <%
-				                        startDate = sdf.parse(p.getPrjStartDate());
-			                        	endDate = sdf.parse(p.getPrjEndDate());
-			                        %>
-			                        <div class="card-header-number"><%= (endDate.getTime() - startDate.getTime()) / (24*60*60*1000) %>일 </div> 
+			                        <div class="card-header-number"><%= (endDate.getTime() - startDate.getTime()) / (24*60*60*1000) %>일 </div>
+			                        <% } %> 
 			                    </div>
 			                    <img src="resources/upfiles_project/<%= p.getAttachmentName() %>" width="100%" height="100%">
 			                </div>
@@ -181,8 +192,8 @@ h1 {
 			                    <div class="card-body-footer">
 			                        <hr style="margin-bottom: 8px; opacity: 0.5; border-color: #EF5A31">
 			                        <i class="icon icon-count_text"></i>모인 금액
-			                        <i class="icon icon-count_view"></i><%= p.getPrjCurrent() %>원
-			                        <i class="count_rate"><%= p.getPrjCurrent() / p.getPrjTarget() * 100 %>% </i>
+			                        <i class="icon icon-count_view"></i><%= (int) p.getPrjCurrent() %>원
+			                        <i class="count_rate"><%= (int) (p.getPrjCurrent() / p.getPrjTarget() * 100) %>% </i>
 			                    </div>
 			
 			                </div>
@@ -198,23 +209,32 @@ h1 {
 	    <div class="inner">
 	        <a href="viewPopular.pr"><h1 style="margin-left:100px">인기 프로젝트 둘러보기 ></h2></a>
 			<div class="listArea" align="center">
-				<%if(listAll.isEmpty()){ %>
+				<%if(listPopular.isEmpty()){ %>
 					<h3>조회된 리스트가 없습니다.</h3>
 				<%}else{ %>
-					<%for(Project p : listPopular){ %>
+					<%for(Project p : listPopular){ 
+						startDate = sdf.parse(p.getPrjStartDate());
+			            endDate = sdf.parse(p.getPrjEndDate());
+			            
+			            if(today.getTime() < startDate.getTime()) {
+			        %>
+			        <a href=""> <!-- 클릭 시 링크 설정 -->
+			        <% } else { %>
 			        <a href="proInfo.list?num=<%= p.getPrjNo() %>"> <!-- 클릭 시 링크 설정 -->
+			        <% } %>
 			
 			            <div class="card">
 			
 			                <!-- 카드 헤더 -->
 			                <div class="card-header">
-			                    <div class="card-header-is_closed"> 
+			                    <div class="card-header-is_closed">
+			                        <% if(today.getTime() < startDate.getTime()) { %>
+			                        	<div class="card-header-text">공개 예정</div>
+			                        	<div class="card-header-number">D-<%= (startDate.getTime() - today.getTime()) / (24*60*60*1000) %></div>
+			                        <% } else { %>
 			                        <div class="card-header-text">남은 기간 </div>
-			                        <%
-				                        startDate = sdf.parse(p.getPrjStartDate());
-			                        	endDate = sdf.parse(p.getPrjEndDate());
-			                        %>
-			                        <div class="card-header-number"><%= (endDate.getTime() - startDate.getTime()) / (24*60*60*1000) %>일 </div> 
+			                        <div class="card-header-number"><%= (endDate.getTime() - startDate.getTime()) / (24*60*60*1000) %>일 </div>
+			                        <% } %> 
 			                    </div>
 			                    <img src="resources/upfiles_project/<%= p.getAttachmentName() %>" width="100%" height="100%">
 			                </div>
@@ -235,8 +255,8 @@ h1 {
 			                    <div class="card-body-footer">
 			                        <hr style="margin-bottom: 8px; opacity: 0.5; border-color: #EF5A31">
 			                        <i class="icon icon-count_text"></i>모인 금액
-			                        <i class="icon icon-count_view"></i><%= p.getPrjCurrent() %>원
-			                        <i class="count_rate"><%= p.getPrjCurrent() / p.getPrjTarget() * 100 %>% </i>
+			                        <i class="icon icon-count_view"></i><%= (int) p.getPrjCurrent() %>원
+			                        <i class="count_rate"><%= (int) (p.getPrjCurrent() / p.getPrjTarget() * 100) %>% </i>
 			                    </div>
 			
 			                </div>
@@ -252,23 +272,32 @@ h1 {
 	    <div class="inner">
 	        <a href="viewNew.pr"><h1 style="margin-left:100px">신규 프로젝트 둘러보기 ></h1></a>
 			<div class="listArea" align="center">
-				<%if(listAll.isEmpty()){ %>
+				<%if(listNew.isEmpty()){ %>
 					<h3>조회된 리스트가 없습니다.</h3>
 				<%}else{ %>
-					<%for(Project p : listNew){ %>
+					<%for(Project p : listNew){ 
+						startDate = sdf.parse(p.getPrjStartDate());
+			            endDate = sdf.parse(p.getPrjEndDate());
+			            
+			            if(today.getTime() < startDate.getTime()) {
+			        %>
+			        <a href=""> <!-- 클릭 시 링크 설정 -->
+			        <% } else { %>
 			        <a href="proInfo.list?num=<%= p.getPrjNo() %>"> <!-- 클릭 시 링크 설정 -->
+			        <% } %>
 			
 			            <div class="card">
 			
 			                <!-- 카드 헤더 -->
 			                <div class="card-header">
-			                    <div class="card-header-is_closed"> 
+			                    <div class="card-header-is_closed">
+			                        <% if(today.getTime() < startDate.getTime()) { %>
+			                        	<div class="card-header-text">공개 예정</div>
+			                        	<div class="card-header-number">D-<%= (startDate.getTime() - today.getTime()) / (24*60*60*1000) %></div>
+			                        <% } else { %>
 			                        <div class="card-header-text">남은 기간 </div>
-			                        <%
-				                        startDate = sdf.parse(p.getPrjStartDate());
-			                        	endDate = sdf.parse(p.getPrjEndDate());
-			                        %>
-			                        <div class="card-header-number"><%= (endDate.getTime() - startDate.getTime()) / (24*60*60*1000) %>일 </div> 
+			                        <div class="card-header-number"><%= (endDate.getTime() - startDate.getTime()) / (24*60*60*1000) %>일 </div>
+			                        <% } %> 
 			                    </div>
 			                    <img src="resources/upfiles_project/<%= p.getAttachmentName() %>" width="100%" height="100%">
 			                </div>
@@ -289,8 +318,8 @@ h1 {
 			                    <div class="card-body-footer">
 			                        <hr style="margin-bottom: 8px; opacity: 0.5; border-color: #EF5A31">
 			                        <i class="icon icon-count_text"></i>모인 금액
-			                        <i class="icon icon-count_view"></i><%= p.getPrjCurrent() %>원
-			                        <i class="count_rate"><%= p.getPrjCurrent() / p.getPrjTarget() * 100 %>% </i>
+			                        <i class="icon icon-count_view"></i><%= (int) p.getPrjCurrent() %>원
+			                        <i class="count_rate"><%= (int) (p.getPrjCurrent() / p.getPrjTarget() * 100) %>% </i>
 			                    </div>
 			
 			                </div>
@@ -306,23 +335,32 @@ h1 {
 	    <div class="inner">
 	        <a href="viewClose.pr"><h1 style="margin-left:100px">마감/실패 프로젝트 둘러보기 ></h1></a>
 			<div class="listArea" align="center">
-				<%if(listAll.isEmpty()){ %>
+				<%if(listClose.isEmpty()){ %>
 					<h3>조회된 리스트가 없습니다.</h3>
 				<%}else{ %>
-					<%for(Project p : listClose){ %>
+					<%for(Project p : listClose){ 
+						startDate = sdf.parse(p.getPrjStartDate());
+			            endDate = sdf.parse(p.getPrjEndDate());
+			            
+			            if(today.getTime() < startDate.getTime()) {
+			        %>
+			        <a href=""> <!-- 클릭 시 링크 설정 -->
+			        <% } else { %>
 			        <a href="proInfo.list?num=<%= p.getPrjNo() %>"> <!-- 클릭 시 링크 설정 -->
+			        <% } %>
 			
 			            <div class="card">
 			
 			                <!-- 카드 헤더 -->
 			                <div class="card-header">
-			                    <div class="card-header-is_closed"> 
+			                    <div class="card-header-is_closed">
+			                        <% if(today.getTime() < startDate.getTime()) { %>
+			                        	<div class="card-header-text">공개 예정</div>
+			                        	<div class="card-header-number">D-<%= (startDate.getTime() - today.getTime()) / (24*60*60*1000) %></div>
+			                        <% } else { %>
 			                        <div class="card-header-text">남은 기간 </div>
-			                        <%
-				                        startDate = sdf.parse(p.getPrjStartDate());
-			                        	endDate = sdf.parse(p.getPrjEndDate());
-			                        %>
-			                        <div class="card-header-number"><%= (endDate.getTime() - startDate.getTime()) / (24*60*60*1000) %>일 </div> 
+			                        <div class="card-header-number"><%= (endDate.getTime() - startDate.getTime()) / (24*60*60*1000) %>일 </div>
+			                        <% } %> 
 			                    </div>
 			                    <img src="resources/upfiles_project/<%= p.getAttachmentName() %>" width="100%" height="100%">
 			                </div>
@@ -343,8 +381,8 @@ h1 {
 			                    <div class="card-body-footer">
 			                        <hr style="margin-bottom: 8px; opacity: 0.5; border-color: #EF5A31">
 			                        <i class="icon icon-count_text"></i>모인 금액
-			                        <i class="icon icon-count_view"></i><%= p.getPrjCurrent() %>원
-			                        <i class="count_rate"><%= p.getPrjCurrent() / p.getPrjTarget() * 100 %>% </i>
+			                        <i class="icon icon-count_view"></i><%= (int) p.getPrjCurrent() %>원
+			                        <i class="count_rate"><%= (int) (p.getPrjCurrent() / p.getPrjTarget() * 100) %>% </i>
 			                    </div>
 			
 			                </div>

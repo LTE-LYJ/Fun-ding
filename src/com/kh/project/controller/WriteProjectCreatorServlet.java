@@ -31,6 +31,8 @@ public class WriteProjectCreatorServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		request.setCharacterEncoding("UTF-8");
+		
 		// Cookie 선언
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {

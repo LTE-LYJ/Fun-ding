@@ -184,14 +184,14 @@ $(function(){
 
         <li><a href="<%=request.getContextPath()%>/">프로젝트 둘러보기</a>
             <ul>
-                <li><a href="">모든 프로젝트</a></li>
-                <li><a href="">인기 프로젝트</a></li>
-                <li><a href="">신규프로젝트</a></li>
-                <li><a href="">마감/실패 프로젝트</a></li>
+                <li><a href="viewAll.pr">모든 프로젝트</a></li>
+                <li><a href="viewPopular.pr">인기 프로젝트</a></li>
+                <li><a href="viewNew.pr">신규 프로젝트</a></li>
+                <li><a href="viewClose.pr">마감/실패 프로젝트</a></li>
             </ul>
         </li>
         
-        <li><a href="<%=request.getContextPath()%>/">프로젝트 올리기</a></li>
+        <li><a href="#" onclick="checkLoginPrjPrj();">프로젝트 올리기</a></li>
         <li><a href="<%=request.getContextPath()%>/">커뮤니티</a></li>
         <li><a href="<%=request.getContextPath()%>/">고객지원</a>
             <ul>
@@ -218,14 +218,14 @@ $(function(){
 
         <li><a href="<%=request.getContextPath()%>/">프로젝트 둘러보기</a>
             <ul>
-                <li><a href="">모든 프로젝트</a></li>
-                <li><a href="">인기 프로젝트</a></li>
-                <li><a href="">신규프로젝트</a></li>
-                <li><a href="">마감/실패 프로젝트</a></li>
+                <li><a href="viewAll.pr">모든 프로젝트</a></li>
+                <li><a href="viewPopular.pr">인기 프로젝트</a></li>
+                <li><a href="viewNew.pr">신규 프로젝트</a></li>
+                <li><a href="viewClose.pr">마감/실패 프로젝트</a></li>
             </ul>
         </li>
         
-        <li><a href="<%=request.getContextPath()%>/">프로젝트 올리기</a></li>
+        <li><a href="#" onclick="checkLoginPrj();">프로젝트 올리기</a></li>
         <li><a href="<%=request.getContextPath()%>/">커뮤니티</a></li>
         <li><a href="<%=request.getContextPath()%>/">고객지원</a>
             <ul>
@@ -254,14 +254,14 @@ $(function(){
 
         <li><a href="<%=request.getContextPath()%>/">프로젝트 둘러보기</a>
             <ul>
-                <li><a href="">모든 프로젝트</a></li>
-                <li><a href="">인기 프로젝트</a></li>
-                <li><a href="">신규프로젝트</a></li>
-                <li><a href="">마감/실패 프로젝트</a></li>
+                <li><a href="viewAll.pr">모든 프로젝트</a></li>
+                <li><a href="viewPopular.pr">인기 프로젝트</a></li>
+                <li><a href="viewNew.pr">신규 프로젝트</a></li>
+                <li><a href="viewClose.pr">마감/실패 프로젝트</a></li>
             </ul>
         </li>
         
-        <li><a href="<%=request.getContextPath()%>/">프로젝트 올리기</a></li>
+        <li><a href="#" onclick="checkLoginPrj();">프로젝트 올리기</a></li>
         <li><a href="<%=request.getContextPath()%>/">커뮤니티</a></li>
         <li><a href="<%=request.getContextPath()%>/">고객지원</a>
             <ul>
@@ -296,7 +296,15 @@ $(function(){
         function enroll(){//회원가입
         	  location.href="<%= request.getContextPath()%>/enrollForm.me";
         }
-
+        
+        function checkLoginPrj(){
+			<%if(loginUser != null){%>
+				location.href="<%=request.getContextPath()%>/writeCreator.pr";
+			<%}else{%>
+				alert("로그인이 필요합니다.");
+				location.href="<%=request.getContextPath()%>/loginform.me";
+			<%}%>
+	    };
     
     </script>
 </body>
