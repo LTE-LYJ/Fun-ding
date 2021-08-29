@@ -323,7 +323,7 @@ public class ProjectDao {
 		
 		String sql = prop.getProperty("selectList");
 		int startRow = 1;
-		int endRow = 4;
+		int endRow = 3;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -366,7 +366,7 @@ public class ProjectDao {
 		
 		String sql = prop.getProperty("selectPopularList");
 		int startRow = 1;
-		int endRow = 4;
+		int endRow = 3;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -409,7 +409,7 @@ public class ProjectDao {
 		
 		String sql = prop.getProperty("selectNewList");
 		int startRow = 1;
-		int endRow = 4;
+		int endRow = 3;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -452,7 +452,7 @@ public class ProjectDao {
 		
 		String sql = prop.getProperty("selectCloseList");
 		int startRow = 1;
-		int endRow = 4;
+		int endRow = 3;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -721,6 +721,7 @@ public class ProjectDao {
 		Reward[] rArr = new Reward[rcount];
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		int index = 0;
 		
 		String sql = prop.getProperty("selectProjectReward");
 		try {
@@ -729,13 +730,11 @@ public class ProjectDao {
 			
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				new Reward();
-				for(int i=0; i<rArr.length; i++) {
-					rArr[i] = new Reward(rset.getInt("PRJ_NO"),
+				rArr[index] = new Reward(rset.getInt("PRJ_NO"),
 										 rset.getString("RW_NAME"),
 										 rset.getString("RW_CONTENT"),
 										 rset.getInt("RW_PRICE"));
-				}
+				index++;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -745,7 +744,9 @@ public class ProjectDao {
 			close(pstmt);
 		}
 		
-		System.out.println(rArr);
+		for(int i=0; i<rArr.length; i++) {
+			System.out.println(rArr[i]);
+		}
 		
 		return rArr;
 	}

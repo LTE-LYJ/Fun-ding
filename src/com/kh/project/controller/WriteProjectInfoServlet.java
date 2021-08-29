@@ -1,6 +1,7 @@
 package com.kh.project.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,6 +29,8 @@ public class WriteProjectInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setCharacterEncoding("UTF-8");
 		
 		// Cookie 선언
 		Cookie[] cookies = request.getCookies();
@@ -62,9 +65,9 @@ public class WriteProjectInfoServlet extends HttpServlet {
 			System.out.println("rprice" + i + " : " + rprice);
 			System.out.println("--------------------");
 			
-			Cookie rnameCookie = new Cookie("rname" + i, rname);
-			Cookie rcontentCookie = new Cookie("rcontent" + i, rcontent);
-			Cookie rpriceCookie = new Cookie("rprice" + i, rprice);
+			Cookie rnameCookie = new Cookie("rname" + i, URLEncoder.encode(rname, "utf-8").replaceAll("\\+", "%20"));
+			Cookie rcontentCookie = new Cookie("rcontent" + i, URLEncoder.encode(rcontent, "utf-8").replaceAll("\\+", "%20"));
+			Cookie rpriceCookie = new Cookie("rprice" + i, URLEncoder.encode(rprice, "utf-8").replaceAll("\\+", "%20"));
 			
 			System.out.println("rnameCookie" + i + " : " + rnameCookie);
 			System.out.println("rcontentCookie" + i + " : " + rcontentCookie);

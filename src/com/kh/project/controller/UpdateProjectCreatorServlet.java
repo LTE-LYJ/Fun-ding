@@ -31,8 +31,10 @@ public class UpdateProjectCreatorServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int pno = Integer.parseInt(request.getParameter("pno"));
 		
+		request.setCharacterEncoding("UTF-8");
+		
+		int pno = Integer.parseInt(request.getParameter("pno"));
 		Creator creator = new ProjectService().selectProjectCreator(pno);
 		
 		if(creator != null) {

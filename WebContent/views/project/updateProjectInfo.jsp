@@ -25,9 +25,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>프로젝트 수정</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/writeProject.css">
 <link rel="stylesheet" href="https://cdn.quilljs.com/1.3.6/quill.snow.css">
+<style>
+	body{
+		background: white;
+	}
+	main[role="main"] {
+    margin: 20px 0 40px 200px;
+  	}
+</style>
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
@@ -40,7 +48,7 @@
 				<div class="twothirds">
 					<input type="hidden" name="pno" value="<%= pno %>">
 					프로젝트 카테고리:<br>
-					<select name="category" size="1" width="50%">
+					<select name="category" id="category" size="1" width="50%">
 						<option value="10" <%= selected[0] %>>게임</option>
 						<option value="20" <%= selected[1] %>>디자인</option>
 						<option value="30" <%= selected[2] %>>공예</option>
@@ -49,9 +57,10 @@
 						<option value="60" <%= selected[5] %>>출판</option>
 						<option value="70" <%= selected[6] %>>패션</option>
 						<option value="80" <%= selected[7] %>>기타</option>
+						<option>---</option>
 					</select><br>
 					프로젝트 제목:<br>
-					<input type="text" name="title" size="40" placeholder="프로젝트 제목을 입력해주세요." value="<%= project.getPrjTitle() %>"/><br>
+					<input type="text" name="title" id="title" size="40" placeholder="프로젝트 제목을 입력해주세요." value="<%= project.getPrjTitle() %>"/><br>
 					프로젝트 소개:<br>
 					<div id="editor-container"></div>
 					<textarea name="content" style="display:none" id="hiddenArea"></textarea>
@@ -64,7 +73,7 @@
 					<% }%>
 					<input type="file" name="upFile">
 					<div class="btnsPro" align="center">
-						<button type="submit" class="btnPro" name="submit">등록하기</button>
+						<button type="submit" class="btnPro" name="submit" onclick="return check()">등록하기</button>
 						<button type="button" class="btnPro" name="previous" onclick="location.href='updateReward.pr'">이전으로</button>
 					</div>
 				</div>				
@@ -96,6 +105,23 @@
 		$("#insertForm").on("submit", function(){
 			$("#hiddenArea").val($("#editor-container .ql-editor").html());
 		});
+		
+		function check(){
+			const category = document.getElementById("category");
+			const title = document.getElementById("title");
+
+	        if(category.value == "---"){
+                alert("프로젝트 카테고리는 필수 항목입니다.");
+                category.focus();
+                return false;
+            } else if(title.value == "" || title.value.length == 0){
+                alert("프로젝트 제목은 필수 항목입니다.");
+                title.focus();
+                return false;
+            } else{
+            	return true;
+            }
+	    }
 	</script>
 
 	<%@ include file="../common/footer.jsp" %>
