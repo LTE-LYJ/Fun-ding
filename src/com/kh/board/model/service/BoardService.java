@@ -10,25 +10,27 @@ import java.util.List;
 
 import com.kh.board.model.dao.BoardDao;
 import com.kh.board.model.vo.Board;
+import com.kh.board.model.vo.BoardReply;
+import com.kh.board.model.vo.BoardView;
 import com.kh.notice.model.dao.NoticeDao;
 import com.kh.notice.model.vo.Notice;
 
 public class BoardService {
 
-	public List<Board> getBoardList() {
+	public List<BoardView> getBoardList() {
 
-		return getBoardList("BOARD_TITLE", "", 1);
+		return getBoardList("BOARD_TITLE", "", 1,"");
 	}
 
-	public List<Board> getBoardList(int page) {
+	public List<BoardView> getBoardList(int page) {
 
-		return getBoardList("BOARD_TITLE", "", page);
+		return getBoardList("BOARD_TITLE", "", page,"");
 	}
 
-	public List<Board> getBoardList(String field, String query, int page) {
+	public List<BoardView> getBoardList(String field, String query, int page, String cate) {
 		Connection con = getConnection();
 
-		List<Board> list = new BoardDao().getBoardList(con, field, query, page);
+		List<BoardView> list = new BoardDao().getBoardList(con, field, query, page, cate);
 
 		return list;
 	}
@@ -36,45 +38,45 @@ public class BoardService {
 	
 	public int getBoardCount() {
 
-		return getNoticeCount("BOARD_TITLE", "");
+		return getBoardCount("BOARD_TITLE", "");
 	}
 
 	
 	
-	public int getNoticeCount(String field, String query) {
+	public int getBoardCount(String field, String query) {
 		Connection con = getConnection();
 
-		int count = new NoticeDao().getNoticeCount(con, field, query);
+		int count = new BoardDao().getBoardCount(con, field, query);
 
 		return count;
 	}
 
-	public Notice getNotice(int noticeNo) {
+	public Board getBoard(int boardNo) {
 		Connection con = getConnection();
 
-		Notice notice = new NoticeDao().getNotice(con, noticeNo);
+		Board board = new BoardDao().getBoard(con, boardNo);
 
-		return notice;
+		return board;
 	}
 
-	public Notice getNextNotice(int id) {
+	public Board getNextBoard(int id) {
 		Connection con = getConnection();
 
-		Notice notice = new NoticeDao().getNextNotice(con, id);
+		Board board = new BoardDao().getNextBoard(con, id);
 
-		return notice;
+		return board;
 	}
 
-	public Notice getPrevNotice(int id) {
+	public Board getPrevBoard(int id) {
 		Connection con = getConnection();
-		Notice notice = new NoticeDao().getPrevNotice(con, id);
+		Board board = new BoardDao().getPrevBoard(con, id);
 
-		return notice;
+		return board;
 	}
 
-	public int insertNotice(Notice n) {
+	public int insertBoard(Board n) {
 		Connection con = getConnection();
-		int result = new NoticeDao().insertNotice(con, n);
+		int result = new BoardDao().insertBoard(con, n);
 		if (result > 0) {
 			commit(con);
 		} else {
@@ -117,9 +119,9 @@ public class BoardService {
 		return result;
 	}
 
-	public int uodateCount(int noticeNo) {
+	public int updateCount(int boardNo) {
 		Connection con = getConnection();
-		int result = new NoticeDao().uodateCount(con, noticeNo);
+		int result = new BoardDao().updateCount(con, boardNo);
 		if (result > 0) {
 			commit(con);
 		} else {
@@ -128,5 +130,42 @@ public class BoardService {
 		close(con);
 		return result;
 	}
+
+	public int insertReply(BoardReply reply) {
+		Connection con = getConnection();
+		int result = new BoardDao().insertBoard(con, reply);
+		if (result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		close(con);
+		return result;
+	}
+
+	public List<BoardReply> getReplyList(int boardNo) {
+		Connection con = getConnection();
+
+		List<BoardReply> list = new BoardDao().getReplyList(con, boardNo);
+
+		return list;
+	}
+
+	public int replyDelete(int boardReplyNo) {
+		Connection con = getConnection();
+		int result = new BoardDao().replyDelete(con, boardReplyNo);
+
+		if (result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		close(con);
+
+		return result;
+	}
+
+
+	
 
 }

@@ -1,7 +1,5 @@
 @charset "UTF-8";
 
-
-
 *{
 	margin: 0;
 	padding: 0;
@@ -84,7 +82,7 @@ a {
 	text-decoration: underline;
 }
 
- .num{
+.num{
   font-weight: 600;
 }
 
@@ -109,12 +107,13 @@ a {
 }
 
 .board_list .num {
-	width: 60px;
+	width: 40px;
 }
 
 .board_list .cate {
-	width: 20px;
+	width: 70px;
 }
+
 .board_list .title {
 	text-align: left;
 	width: 100%;
@@ -129,8 +128,12 @@ a {
 }
 
 .board_list .count {
-	width: 60px;
+	width: 50px;
 }
 .board_list .table_head .title  {
 	text-align: center;
+}
+
+.board_list .rep {
+	color: red;
 }

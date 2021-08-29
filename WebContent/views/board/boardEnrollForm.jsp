@@ -6,8 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
-<script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/board/head.css" />
 <link rel="stylesheet"
@@ -21,23 +23,37 @@
 	<br>
 	<div class="head">
 		<h2 class="list">
-			<a class="in" href="noticeListView">공지사항</a> <a class="out"
-				href="../project_report/projectReportListView">신고게시판</a>
+			<a class="in" href="boardListView">커뮤니티</a>
 		</h2>
 	</div>
 	<hr>
 	<!-- 개시글 작성 -->
 	<main class="main">
-		<form method="post" action="noticeEnrollForm" enctype="multipart/form-data">
+		<form method="post" action="boardEnrollForm"
+			enctype="multipart/form-data">
 			<div class="board_write_wrap">
 				<div class="board_write">
 					<div class="btitle">
 						<dl>
 							<dt>제목</dt>
 							<dd>
-								<input id="title" type="text" name="title" placeholder="제목을 입력하세요" required/>
+								<input id="title" type="text" name="title"
+									placeholder="제목을 입력하세요" required />
 							</dd>
 						</dl>
+					</div>
+					<div class="btitle">
+						<dl>
+							<dt>카테고리</dt>
+							<dd>
+								<select name="cate" class="cate">
+									<c:forEach var="b" items="${cat}" begin="0" end="3">
+										<option value="${index*10+10}">${b.boardCatName}</option>
+									</c:forEach>
+								</select>
+							</dd>
+						</dl>
+
 					</div>
 					<div class="btitle" id="filearea">
 						<dl>
@@ -47,7 +63,7 @@
 							</dd>
 						</dl>
 					</div>
-					
+
 					<div class="binfo">
 						<dl>
 							<dt></dt>
@@ -55,7 +71,7 @@
 						</dl>
 					</div>
 					<div class="cont">
-						<textarea id="editor" name="content" placeholder="내용을 입력하세요" ></textarea>
+						<textarea id="editor" name="content" placeholder="내용을 입력하세요"></textarea>
 					</div>
 					<script>
 						ClassicEditor
@@ -80,7 +96,7 @@
 				</script>
 			</div>
 		</form>
-		
+
 	</main>
 </body>
 </html>

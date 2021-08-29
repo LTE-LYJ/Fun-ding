@@ -114,9 +114,9 @@ public class NoticeService {
 		return result;
 	}
 
-	public int uodateCount(int noticeNo) {
+	public int updateCount(int noticeNo) {
 		Connection con = getConnection();
-		int result = new NoticeDao().uodateCount(con, noticeNo);
+		int result = new NoticeDao().updateCount(con, noticeNo);
 		if(result > 0) {
 			commit(con);
 		}else {
@@ -125,5 +125,7 @@ public class NoticeService {
 		close(con);
 		return result;
 	}
+
+	
 
 }

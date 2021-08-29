@@ -68,3 +68,65 @@
 	line-height: 160%;
 	font-size: 1.4rem;
 }
+.reply_view {
+	width: 100%;
+	font-size: 0;
+}
+.reply_view dl {
+	font-size: 1rem;
+	width:100%;
+	display: inline-block;
+}
+.reply_view .ref_btn{
+	text-align: right;
+	margin-right: 9.5%;
+}
+
+.reply_view dt {
+	margin-left: 3%;
+	margin-bottom: 5px;
+	font-weight: 600;
+}
+.reply_view .content {
+	display: block;
+	border: 2px solid black;
+	width: 90%;
+	height: 100px;
+	padding: 15px;
+	box-sizing: border-box;
+	resize: none;
+}
+.reply_view .on {
+	background: black;
+	color: white;
+	width: 80px;
+	height: 40px;
+	font-size: 17px;
+}
+.reply_view .reply_list {
+	width: 87%;
+	margin-left: 3%;
+	border: 1px solid black;
+	display: inline-block;
+}
+
+
+.reply_view .reply_info {
+	display:inline;
+	text-align: right;
+}
+.reply_view .reply_info dd
+, .reply_view .reply_info a{
+	color: #c0c0c0;
+	display:inline;
+	text-align: right;
+}
+.reply_cont {
+	display: block;
+	border: 2px solid black;
+	width: 87%;
+	height: 100px;
+	padding: 15px;
+	box-sizing: border-box;
+	resize: none;
+}

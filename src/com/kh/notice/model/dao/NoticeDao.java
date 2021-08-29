@@ -87,12 +87,11 @@ public class NoticeDao {
 	public int getNoticeCount(Connection con, String field, String query) {
 		int count = 0;
 		String sql = "SELECT COUNT(NOTICE_NO) COUNT FROM ("
-				+ "SELECT ROWNUM NUM, N.* "
-				+ " FROM (SELECT * FROM NOTICE A "
-				+ "	 INNER JOIN MEMBER B ON MEM_NO = NOTICE_WRITER"
+				+ "SELECT ROWNUM NUM, P.* "
+				+ " FROM (SELECT * FROM NOTICE  "
 				+ " WHERE "+ field +" LIKE  ? "
-				+ " AND A.STATUS = 'Y' "
-				+ "ORDER BY CREATE_DATE DESC) N "
+				+ " AND STATUS = 'Y' "
+				+ "ORDER BY CREATE_DATE DESC) P "
 				+ ") ";
 		PreparedStatement st =null;
 		ResultSet rs = null;
@@ -175,14 +174,12 @@ public class NoticeDao {
 	public Notice getNextNotice(Connection con, int id) {
 		Notice notice = null;
 		
-		String sql = "SELECT * FROM NOTICE A"
-				+ "	 INNER JOIN MEMBER B ON MEM_NO = NOTICE_WRITER "
-				+ "WHERE NOTICE_NO = ("
-				+ "    SELECT NOTICE_NO FROM NOTICE "
-				+ "WHERE CREATE_DATE > (SELECT CREATE_DATE FROM NOTICE WHERE NOTICE_NO=?  ) "
-				+ "AND STATUS = 'Y' "
-				+ "AND ROWNUM =1"
-				+ ")";
+		String sql = "SELECT NOTICE_NO, NOTICE_TITLE FROM NOTICE "
+				+ "				WHERE NOTICE_NO = ( "
+				+ "				SELECT NOTICE_NO FROM NOTICE "
+				+ "				WHERE CREATE_DATE > (SELECT CREATE_DATE FROM NOTICE WHERE NOTICE_NO= ? ) "
+				+ "				AND STATUS = 'Y' "
+				+ "				AND ROWNUM = 1) ";
 			
 		
 		PreparedStatement st =null;
@@ -199,22 +196,10 @@ public class NoticeDao {
 			if (rs.next()) {
 				int noticeNo = rs.getInt("NOTICE_NO");
 				String noticeTitle = rs.getString("NOTICE_TITLE");
-				String noticeContent = rs.getString("NOTICE_CONTENT");
-				String noticeWriter = rs.getString("MEM_NAME");
-				int count = rs.getInt("COUNT");
-				Date createDate = rs.getDate("CREATE_DATE");
-				String status = rs.getString("STATUS");
-				String files = rs.getString("FILES");
 				
 				notice = new Notice(
 						noticeNo,
-						noticeTitle,
-						noticeContent,
-						noticeWriter,
-						count,
-						createDate,
-						status,
-						files
+						noticeTitle
 						);
 				
 				
@@ -234,11 +219,10 @@ public class NoticeDao {
 	public Notice getPrevNotice(Connection con, int id) {
 		Notice notice = null;
 		
-		String sql = "SELECT * FROM (SELECT * FROM NOTICE A"
-				+ " INNER JOIN MEMBER B ON MEM_NO = NOTICE_WRITER"
-				+ " ORDER BY CREATE_DATE DESC) "
-				+ "WHERE CREATE_DATE < (SELECT CREATE_DATE FROM NOTICE WHERE NOTICE_NO=? AND STATUS = 'Y' ) "
-				+ "AND ROWNUM = 1";
+		String sql = "SELECT NOTICE_NO, NOTICE_TITLE FROM (SELECT * FROM NOTICE A\r\n"
+				+ "				ORDER BY CREATE_DATE DESC) \r\n"
+				+ "				WHERE CREATE_DATE < (SELECT CREATE_DATE FROM NOTICE WHERE NOTICE_NO=? AND STATUS = 'Y' ) \r\n"
+				+ "				AND ROWNUM = 1";
 		
 		PreparedStatement st =null;
 		ResultSet rs = null;
@@ -254,22 +238,11 @@ public class NoticeDao {
 			if (rs.next()) {
 				int noticeNo = rs.getInt("NOTICE_NO");
 				String noticeTitle = rs.getString("NOTICE_TITLE");
-				String noticeContent = rs.getString("NOTICE_CONTENT");
-				String noticeWriter = rs.getString("MEM_NAME");
-				int count = rs.getInt("COUNT");
-				Date createDate = rs.getDate("CREATE_DATE");
-				String status = rs.getString("STATUS");
-				String files = rs.getString("FILES");
+				
 				
 				notice = new Notice(
 						noticeNo,
-						noticeTitle,
-						noticeContent,
-						noticeWriter,
-						count,
-						createDate,
-						status,
-						files
+						noticeTitle
 						);
 				
 				
@@ -392,7 +365,7 @@ public class NoticeDao {
 		return result;
 	}
 
-	public int uodateCount(Connection con, int noticeNo) {
+	public int updateCount(Connection con, int noticeNo) {
 		int result = 0;
 		PreparedStatement st = null;
 		
@@ -412,6 +385,7 @@ public class NoticeDao {
 		return result;
 	}
 
+	
 	
 	
 }
