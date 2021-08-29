@@ -449,7 +449,7 @@ public class BoardDao {
 
 	public int replyDelete(Connection con, int boardReplyNo) {
 		int result = 0;
-		String sql = "UPDATE BOARD_REPLY SET STATUS='N' WHERE BOARD_REPLY_NO=?";
+		String sql = "DELETE BOARD_REPLY  WHERE BOARD_REPLY_NO=?";
 		PreparedStatement st = null;
 
 		try {
@@ -466,6 +466,8 @@ public class BoardDao {
 
 		return result;
 	}
+
+	
 
 	
 
