@@ -288,11 +288,11 @@ public class BoardDao {
 
 	public Board selectBoard(Connection con, int boardNo) {
 		Board b = null;
-		String sql = "SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT, COUNT, CREATE_DATE, BOARD_CAT_NAME , MEM_NAME,FILES  "
-				+ "				 FROM BOARD BOARD_WRITER"
+		String sql = "SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT, COUNT, CREATE_DATE, BOARD_CAT_NAME , MEM_NAME,FILES, BOARD_WRITER  "
+				+ "					FROM BOARD "
 				+ "                 INNER JOIN MEMBER ON MEM_NO = BOARD_WRITER"
 				+ "                 INNER JOIN BOARD_CAT  ON BOARD_CAT_NO = CATEGORY_NO"
-				+ "                 WHERE BOARD_NO=3";
+				+ "                 WHERE BOARD_NO=? ";
 
 		PreparedStatement st = null;
 		ResultSet rs = null;
@@ -329,7 +329,7 @@ public class BoardDao {
 		int result = 0;
 		PreparedStatement st = null;
 
-		String sql = "UPDATE BOARD SET BOARD_TITLE=?, BOARD_CONTENT=?, CATEGORY_NO=? FILES=? WHERE BOARD_NO=?";
+		String sql = "UPDATE BOARD SET BOARD_TITLE=?, BOARD_CONTENT=?, CATEGORY_NO=?, FILES=? WHERE BOARD_NO=?";
 
 		try {
 			st = con.prepareStatement(sql);

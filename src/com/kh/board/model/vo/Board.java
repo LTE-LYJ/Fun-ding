@@ -115,10 +115,34 @@ public class Board {
 	}
 
 
+	public Board(int boardNo, String boardTitle, String boardContent, String category, String files,
+			int boardWriterNo) {
+		super();
+		this.boardNo = boardNo;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.category = category;
+		this.files = files;
+		this.boardWriterNo = boardWriterNo;
+	}
+
+
+	public Board(int boardNo, String boardTitle, String boardContent, String category, String boardWriter,
+			String files) {
+		super();
+		this.boardNo = boardNo;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.category = category;
+		this.boardWriter = boardWriter;
+		this.files = files;
+	}
+
+
 
 
 	
-
+	
 	
 	
 	

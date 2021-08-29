@@ -12,8 +12,6 @@ import com.kh.board.model.dao.BoardDao;
 import com.kh.board.model.vo.Board;
 import com.kh.board.model.vo.BoardReply;
 import com.kh.board.model.vo.BoardView;
-import com.kh.notice.model.dao.NoticeDao;
-import com.kh.notice.model.vo.Notice;
 
 public class BoardService {
 
@@ -100,16 +98,16 @@ public class BoardService {
 		return result;
 	}
 
-	public Notice selectUpdateNotice(int noticeNo) {
+	public Board selectUpdateBoard(int boardNo) {
 		Connection con = getConnection();
-		Notice n = new NoticeDao().selectNotice(con, noticeNo);
+		Board b = new BoardDao().selectBoard(con, boardNo);
 
-		return n;
+		return b;
 	}
 
-	public int updateNotice(Notice n) {
+	public int updateBoard(Board b) {
 		Connection con = getConnection();
-		int result = new NoticeDao().UpdateNotice(con, n);
+		int result = new BoardDao().UpdateBoard(con, b);
 		if (result > 0) {
 			commit(con);
 		} else {
