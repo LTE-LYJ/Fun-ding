@@ -60,7 +60,7 @@ Date date = new Date();
 	                                    <%}%>
 	                                </div>
 	                                <div>
-	                                    <input type="button" id="btn_po" value="창작자 신고하기" onclick="location.href=''" ></input>
+	                                    <input type="button" id="btn_po" value="창작자 신고하기" onclick="location.href='<%=request.getContextPath()%>/views/notice/noticeEnrollForm'" ></input>
 	                                </div>
 	                            </aside>
 	                        </div>
