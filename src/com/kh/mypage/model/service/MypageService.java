@@ -8,13 +8,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.attachment.model.vo.ProfileAttachment;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
 import com.kh.mypage.model.dao.MypageDao;
 import com.kh.mypage.model.vo.Board;
 import com.kh.mypage.model.vo.PageInfo;
-import com.kh.project.model.vo.Project;
-import com.kh.member.model.vo.Member;
+import com.kh.mypage.model.vo.Project_ask;
+import com.kh.mypage.model.vo.Project_report;
+//import com.kh.project.model.vo.Project;
+import com.kh.mypage.model.vo.Project;
 
 public class MypageService {
 	
@@ -24,7 +27,7 @@ public class MypageService {
 		
 		Connection conn = getConnection();
 		Member updateMem = null;
-		int result = new MypageDao().updateMember(conn, m); //Member
+		int result = new MypageDao().updateMember(conn, m);
 		if(result > 0) {
 			commit(conn);
 			updateMem = new MemberDao().selectMember(conn, m.getMemId());
@@ -38,22 +41,59 @@ public class MypageService {
 		return updateMem;
 	}
 
-	public int getListCount() {
+	
+	public int getMainListCount() {
 		Connection conn = getConnection();
 		
-		int listCount = new MypageDao().getListCount(conn);
+		int listCount = new MypageDao().getMainListCount(conn);
 		close(conn);
 		return listCount;
 	}
 
-	public ArrayList<Board> selectList(PageInfo pi) {
+	public ArrayList<Board> selectMainList(PageInfo pi) {
 		Connection conn = getConnection();
 		
-		ArrayList<Board> list = new MypageDao().selectList(conn, pi);
+		ArrayList<Board> list = new MypageDao().selectMainList(conn, pi);
+		close(conn);
+		return list;
+	}
+	
+	
+	public int getAskListCount() {
+		Connection conn = getConnection();
+		
+		int listCount = new MypageDao().getAskListCount(conn);
+		close(conn);
+		return listCount;
+	}
+
+	public ArrayList<Project_ask> selectAskList(PageInfo pi) {
+		Connection conn = getConnection();
+		
+		ArrayList<Project_ask> list = new MypageDao().selectAskList(conn, pi);
 		close(conn);
 		return list;
 	}
 
+	
+	public int getReportListCount() {
+		Connection conn = getConnection();
+		
+		int listCount = new MypageDao().getReportListCount(conn);
+		close(conn);
+		return listCount;
+	}
+	
+	public ArrayList<Project_report> selectReportList(PageInfo pi) {
+		Connection conn = getConnection();
+		
+		ArrayList<Project_report> list = new MypageDao().selectReportList(conn, pi);
+		close(conn);
+		return list;
+	}
+	
+	
+	
 	public int deleteMember(String memId) {
 		
 		Connection conn = getConnection();
@@ -85,12 +125,57 @@ public class MypageService {
 		return updateMem;
 	}
 
-	public ArrayList<Project> selectPrj(PageInfo pi) {
+
+	public int getPrjListCount() {
 		Connection conn = getConnection();
 		
-		ArrayList<Project> list = new MypageDao().selectPrj(conn, pi);
+		int listCount = new MypageDao().getPrjListCount(conn);
+		close(conn);
+		return listCount;
+	}
+
+
+	public ArrayList<Project> selectPrjList(PageInfo pi) {
+		Connection conn = getConnection();
+		
+		ArrayList<Project> list = new MypageDao().selectPrjList(conn, pi);
 		close(conn);
 		return list;
 	}
+
+
+	public Member updateMem(Member m, ProfileAttachment at) {
+		
+		Connection conn = getConnection();
+		Member updateMem = null;
+		int result = new MypageDao().updateMember(conn, m, at); //Member
+		if(result > 0) {
+			commit(conn);
+			//updateMem = new MemberDao().selectMember(conn, m.getMemId(), at);
+			
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		//System.out.println(m);
+		return updateMem;
+	}
+
+
+	
+
+
+	
+
+
+	
+
+
+
+	
+
+
+	
 
 }

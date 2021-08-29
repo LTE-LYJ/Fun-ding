@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"   %>
     
 <%
+	//request.setCharacterEncoding("UTF-8");
 
 	Member m = (Member)request.getAttribute("loginUser");
 
@@ -67,7 +68,8 @@
 
 	<div class="mypageinfo">
 
-
+	<form action="views/mypage/mypageInfoUpdateFix.jsp" method="post" id="infoForm" name="infoForm">
+    
         <table class="mpInfotb">
             <caption>
                 <div id="profileImg"></div>
@@ -95,14 +97,17 @@
         </table>
 
 		<button type="button" id="updateInfoBtn" onclick="updateInfo();">회원정보 수정</button>
+		&nbsp;
         <button type="button" id="updatePwdBtn" onclick="updateBtn();">비밀번호 변경</button>
+	
+	</form>
 		
     </div>
     
     <script>
     	function updateInfo(){
-    		//location.href="mypageInfoUpdate.jsp";
-    		location.href="views/mypage/mypageInfoUpdate.jsp";
+    		
+    		location.href="<%=request.getContextPath() %>/updateInfo.mp";
     		
     	}
     	function updateBtn(){

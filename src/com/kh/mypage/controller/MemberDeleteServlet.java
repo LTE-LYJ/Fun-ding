@@ -34,6 +34,7 @@ public class MemberDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String memId = request.getParameter("memId");
+		String memPwd = request.getParameter("memPwd");
 		
 		int result = new MypageService().deleteMember(memId);
 		

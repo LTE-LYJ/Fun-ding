@@ -17,6 +17,7 @@
    <a href="#" onclick="goupdate()">프로젝트 업데이트 확인용 링크-prjNum=2로 설정</a><br>
    <a href="#" onclick="go()">상세페이지 확인용 링크-prjNum=1로 설정</a>
 <a href="#" onclick="gofinish()">상세페이지 확인용 링크-prjNum=2로 설정</a>
+<br><a href="<%=request.getContextPath()%>/info.mp">마이페이지 확인</a>
 
  <%@ include file ="views/common/footer.jsp" %>
  <script type="text/javascript">
