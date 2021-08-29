@@ -184,15 +184,15 @@ $(function(){
 
         <li><a href="<%=request.getContextPath()%>/">프로젝트 둘러보기</a>
             <ul>
-                <li><a href="viewAll.pr">모든 프로젝트</a></li>
-                <li><a href="viewPopular.pr">인기 프로젝트</a></li>
-                <li><a href="viewNew.pr">신규 프로젝트</a></li>
-                <li><a href="viewClose.pr">마감/실패 프로젝트</a></li>
+                <li><a href="<%=request.getContextPath()%>/viewAll.pr">모든 프로젝트</a></li>
+                <li><a href="<%=request.getContextPath()%>/viewPopular.pr">인기 프로젝트</a></li>
+                <li><a href="<%=request.getContextPath()%>/viewNew.pr">신규 프로젝트</a></li>
+                <li><a href="<%=request.getContextPath()%>/viewClose.pr">마감/실패 프로젝트</a></li>
             </ul>
         </li>
         
 
-        <li><a href="#" onclick="checkLoginPrjPrj();">프로젝트 올리기</a></li>
+        <li><a href="#" onclick="checkLoginPrj();">프로젝트 올리기</a></li>
         <li><a href="<%=request.getContextPath()%>/views/board/boardListView">커뮤니티</a></li>
 
 
@@ -221,10 +221,10 @@ $(function(){
 
         <li><a href="<%=request.getContextPath()%>/">프로젝트 둘러보기</a>
             <ul>
-                <li><a href="viewAll.pr">모든 프로젝트</a></li>
-                <li><a href="viewPopular.pr">인기 프로젝트</a></li>
-                <li><a href="viewNew.pr">신규 프로젝트</a></li>
-                <li><a href="viewClose.pr">마감/실패 프로젝트</a></li>
+                <li><a href="<%=request.getContextPath()%>/viewAll.pr">모든 프로젝트</a></li>
+                <li><a href="<%=request.getContextPath()%>/viewPopular.pr">인기 프로젝트</a></li>
+                <li><a href="<%=request.getContextPath()%>/viewNew.pr">신규 프로젝트</a></li>
+                <li><a href="<%=request.getContextPath()%>/viewClose.pr">마감/실패 프로젝트</a></li>
             </ul>
         </li>
         
@@ -257,10 +257,10 @@ $(function(){
 
         <li><a href="<%=request.getContextPath()%>/">프로젝트 둘러보기</a>
             <ul>
-                <li><a href="viewAll.pr">모든 프로젝트</a></li>
-                <li><a href="viewPopular.pr">인기 프로젝트</a></li>
-                <li><a href="viewNew.pr">신규 프로젝트</a></li>
-                <li><a href="viewClose.pr">마감/실패 프로젝트</a></li>
+                <li><a href="<%=request.getContextPath()%>/viewAll.pr">모든 프로젝트</a></li>
+                <li><a href="<%=request.getContextPath()%>/viewPopular.pr">인기 프로젝트</a></li>
+                <li><a href="<%=request.getContextPath()%>/viewNew.pr">신규 프로젝트</a></li>
+                <li><a href="<%=request.getContextPath()%>/viewClose.pr">마감/실패 프로젝트</a></li>
             </ul>
         </li>
         
@@ -280,7 +280,7 @@ $(function(){
 		<%} %>
 		
 		<span class="userInfo">
-            <a href="<%=request.getContextPath()%>/info.mp" style="font-size:15px; font-weight:bold;"><%= loginUser.getMemName() %></a><br>
+            <a href="" style="font-size:15px; font-weight:bold;"><%= loginUser.getMemName() %></a><br>
             <a href="<%=request.getContextPath()%>/logout.me" style="font-size:10px; font-weight:bold; color:red;"> 로그아웃</a>
         </span>
     </ul>
