@@ -29,7 +29,7 @@
 	<!-- 개시글 작성 -->
 	<main class="main">
 	<c:set var="contextPath" value="<%=request.getContextPath() %>"></c:set>
-		<form method="post" action="${contextPath}/insert.pr?prjReportNo=${pr.prjReportNo}" enctype="multipart/form-data">
+		<form method="post" action="${contextPath}/pinsert.pr?prjReportNo=${pr.prjReportNo}" enctype="multipart/form-data">
 			<div class="board_write_wrap">
 				<div class="board_write">
 					<div class="btitle">
