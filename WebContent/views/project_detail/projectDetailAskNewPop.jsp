@@ -30,8 +30,8 @@ $(function() {
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/projectDetailNewPop.css">
 </head>
 <body>
-		<div class="outer">
-		<div id="box_1">
+		<div class="outer" style="padding-top: 20px; padding-bottom: 20px">
+		<div id="box_1" style="min-height: 310px">
         <h3 id="Ask_creater">창작자에게 문의하기</h3>
         <br>
         <form id="AskForm" action="<%=request.getContextPath()%>/insert.ask" method="post">
@@ -50,7 +50,7 @@ $(function() {
             </tr>
             <tr>
                 <th><input type="hidden" name="num" value="<%=num%>"></th>
-                <th> <input type="text" placeholder="글자 수" id="textLengthCheck" style=" float: right; border: none; text-align:right;"/><th>
+                <th> <input type="text" placeholder="글자 수" id="textLengthCheck" style=" float: right; border: none; text-align:right;" disabled/><th>
             </tr>
         </table>
 		<button id="AskBtn" onclick="checktrim()" style="clear: both; margin-top: 5px">뮨의하기</button>

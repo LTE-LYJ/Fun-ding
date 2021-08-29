@@ -180,7 +180,7 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
                     <div id="pro">
                         <img id="proimage" src="resources/upfiles_project/<%=prjAttList.get(0).getChangeName()%>" style="width: 236px; height: 145px;">
                             <div id="pro_ab">
-                                <p id="pro_sub" style="height:69px; width:810px; overflow: hidden; text-overflow: ellipsis;"><%=project.getPrjContent() %></p>
+                                <p id="pro_sub" style="height:73px; width:810px; max-height:73px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3;-webkit-box-orient: vertical; word-wrap:break-word; line-height: 1.5em; height: 4.5em;"><%=project.getPrjContent() %></p>
                                 <h3 id="percent"><fmt:formatNumber value="<%=(float)project.getPrjCurrent()/project.getPrjTarget()%>" type="percent"/> 달성</h3>
                                     <div id="much">
                                         <h4>총 금액 : <fmt:formatNumber value="<%=project.getPrjCurrent()%>" groupingUsed="true"/> 원</h4>
@@ -271,7 +271,7 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
                         <tr>
                         <th><h3>배송지</h3></th>
                             <td id="userAddr"><%=loginUser.getAddress() %></td>
-                        <td><button type="button" class="paybt"onclick="goToMyPage();">수정하기</button></td>
+                        <td></td>
                         </tr>
                     </table>
                 </form>
@@ -286,23 +286,23 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
                     	</tr>
                         <tr>
                             <th><h3>구매자</h3></th>
-                            <td colspan="2"><textarea cols="50" rows="1" id="userNameNew" name="userNameNew"></textarea></td>
+                            <td colspan="2"><textarea cols="50" rows="1" id="userNameNew" name="userNameNew" placeholder="ex)홍길동" onKeyPress="hangul();"></textarea></td>
                         </tr>
                         <tr>
                             <th><h3>연락처</h3></th>
-                            <td colspan="2"><textarea cols="50" rows="1" id="userPhoneNew" name="userPhoneNew"></textarea></td>
+                            <td colspan="2"><textarea cols="50" rows="1" id="userPhoneNew" name="userPhoneNew" placeholder="ex)010-1111-2222"></textarea></td>
                         </tr>
                         <tr>
                             <th><h3>받는 사람</h3></th>
-                            <td colspan="2"><textarea cols="50" rows="1" id="receiver" name="receiver"></textarea></td>
+                            <td colspan="2"><textarea cols="50" rows="1" id="receiver" name="receiver" placeholder="ex)홍길동" onKeyPress="hangul();"></textarea></td>
                         </tr>
                         <tr>
                         <th><h3>배송지</h3></th>
-                           <td> <input type="text" style="width: 415px; height: 21px" id="userAddrNew" name="address1" class="form-control postcodify_address" value="${ address1 }"></input></td>
+                           <td> <input type="text" style="width: 415px; height: 21px" id="userAddrNew" name="address1" class="form-control postcodify_address" value="${ address1 }"  placeholder="ex) 서울시 강남구 역삼동"></input></td>
                         </tr>
                         <tr>
                             <th><h3>상세주소</h3></th>
-                            <td><textarea cols="50" rows="1" id="userAddrsub"></textarea></td>
+                            <td><textarea cols="50" rows="1" id="userAddrsub" placeholder="ex)301호"></textarea></td>
                             <td><input type="hidden" id="deliAddr" name="deliAddr" value=""></td>
                             <td><button type="button" id="search_button" class="paybt">주소검색</button></td>
                             <td style="margin-left: 10px; width: 110px"><button type="button" class="btn_di"onclick="takeMy();">내정보 등록</button></td>
@@ -341,7 +341,7 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
                         </tr>
                         <tr>
                         <th><h3>코인 충전하기</h3></th>
-                            <td colspan="2"><textarea cols="50" rows="1" placeholder="충전할 금액을 입력해주세요" id="getHowCoin"></textarea></td>
+                            <td colspan="2"><textarea cols="50" rows="1" placeholder="충전할 금액을 숫자로 입력해주세요" id="getHowCoin" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></textarea></td>
                             <td><button type="button" class="paybt"onclick="checkCoin();">충전하기</button></td>
                         </tr>
                         <tr>
@@ -405,11 +405,11 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
 	             <tr>
 	             <th colspan="14">카드 비밀번호</th>
 	             </tr><tr>
-	             <th colspan="14"><textarea name="cardPwdCheck" id="cardPwdCheck" rows="1" cols="50" placeholder="비밀번호를 입력해주세요"></textarea></th>
+	             <th colspan="14"><textarea name="cardPwdCheck" id="cardPwdCheck" rows="1" cols="50" placeholder="비밀번호 숫자 4자리 입력해주세요" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></textarea></th>
 	             </tr> <tr>
 	              <th colspan="14">카드 유효기간</th>
 	             </tr><tr>
-	               <td colspan="14"><textarea  name="cardBirthCheck" id="cardBirthCheck" rows="10" cols="50" style="margin-bottom: 15px" placeholder="예시 ) 202105"></textarea></td>
+	               <td colspan="14"><textarea  name="cardBirthCheck" id="cardBirthCheck" rows="10" cols="50" style="margin-bottom: 15px" placeholder="ex)202105" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></textarea></td>
 	             </tr>
         </table>
        <button class="AskBtn" onclick="deletePlus()">취소하기</button>
@@ -438,13 +438,13 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
 	             </tr><tr>
 	             <th colspan="8" title="-를 제외한 총 16자리의 숫자를 입력해주세요">카드번호</th>
 	             </tr><tr >
-	              <td style="width: 55px; "><textarea  name="cardN1" id="cardN1" rows="1" cols="7" title="-를 제외한 총 16자리의 숫자를 입력해주세요" placeholder=" 0 0 0 0"></textarea></td>
+	              <td style="width: 55px; "><textarea  name="cardN1" id="cardN1" rows="1" cols="7" title="-를 제외한 총 16자리의 숫자를 입력해주세요" placeholder=" 0 0 0 0" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></textarea></td>
 	              <td style="width: 7px; padding-bottom: 25px">-</td>
-	              <td style="width: 55px"><textarea  name="cardN2" id="cardN2" rows="1" cols="7" placeholder=" 0 0 0 0"></textarea></td>
+	              <td style="width: 55px"><textarea  name="cardN2" id="cardN2" rows="1" cols="7" placeholder=" 0 0 0 0" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></textarea></td>
 	               <td style="width: 7px; padding-bottom: 25px"">-</td>
-	              <td style="width: 55px"><textarea  name="cardN3" id="cardN3" rows="1" cols="7" placeholder=" 0 0 0 0"></textarea></td>
+	              <td style="width: 55px"><textarea  name="cardN3" id="cardN3" rows="1" cols="7" placeholder=" 0 0 0 0" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></textarea></td>
 	               <td style="width: 7px;padding-bottom: 25px"">-</td>
-	              <td style="width: 55px"><textarea  name="cardN4" id="cardN4" rows="1" cols="7" placeholder=" 0 0 0 0"></textarea></td>
+	              <td style="width: 55px"><textarea  name="cardN4" id="cardN4" rows="1" cols="7" placeholder=" 0 0 0 0" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></textarea></td>
 	              <td style="width: 100px"></td>
 	             </tr><tr>
 	             <th colspan="8">카드 유효기간</th>
@@ -454,11 +454,11 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
 	             </tr><tr>
 	             <th colspan="8">결제 비밀번호</th>
 	             </tr><tr>
-	             <td colspan="8"><textarea name="cardPwd" id="cardPwd" rows="10" cols="50" style="margin-bottom: 15px" placeholder="카드 비밀번호를 입력해주세요"></textarea></td>
+	             <td colspan="8"><textarea name="cardPwd" id="cardPwd" rows="10" cols="50" style="margin-bottom: 15px" placeholder="비밀번호 숫자 4자리 입력해주세요" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></textarea></td>
 	             </tr><tr>
 	              <th colspan="8">생년월일</th>
 	             </tr><tr>
-	               <td colspan="8"><textarea  name="cardBirth" id="cardBirth" rows="10" cols="50" style="margin-bottom: 15px" placeholder="예시 ) 19920101"></textarea></td>
+	               <td colspan="8"><textarea  name="cardBirth" id="cardBirth" rows="10" cols="50" style="margin-bottom: 15px" placeholder="ex)19920101" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></textarea></td>
 	             </tr>   
 	             <tr>
 	             <td colspan="8"><input type="checkbox" id="cardAgree"></input><label for="cardAgree">결제시 정보 제공 동의</label></td>
@@ -756,25 +756,26 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
 			$(".outer4").hide();
 		});
 	    
-	    
           $(document).on('click', ".plusPayMeth1", function(){
-        	  var cardName = $("#cardName").val();
-        	  var cardN1 = $("#cardN1").val()
-        	  var cardN2 = $("#cardN2").val()
-        	  var cardN3 = $("#cardN3").val()
-        	  var cardN4 = $("#cardN4").val()
-        	  var cardMo = $("#cardMo").val()
-        	  var cardYe = $("#cardYe").val()
-        	  var cardPwd = $("#cardPwd").val()
-        	  var cardBirth = $("#cardBirth").val()
-        	  
+        	  var cardName = $("#cardName").val().trim();
+        	  var cardN1 = $("#cardN1").val().trim();
+        	  var cardN2 = $("#cardN2").val().trim();
+        	  var cardN3 = $("#cardN3").val().trim();
+        	  var cardN4 = $("#cardN4").val().trim();
+        	  var cardMo = $("#cardMo").val().trim();
+        	  var cardYe = $("#cardYe").val().trim();
+        	  var cardPwd = $("#cardPwd").val().trim();
+        	  var cardBirth = $("#cardBirth").val().trim();
+        	  var birthA= /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
+
         	  if(cardN1.trim().length!=4||cardN2.trim().length!=4||cardN3.trim().length!=4||cardN4.trim().length!=4){
         		  alert("잘못된 카드번호를 입력하였습니다.");
         		  return false;
-        	  } else if(cardPwd.trim().length==0){
-        		  alert("비밀번호를 입력해주세요");
+        	  } else if(cardPwd.trim().length!=4){
+        		  alert("비밀번호를 확인해주세요");
+        		  cardPwd.focus();
         		  return false;
-        	  } else if(cardBirth.trim().length!=8){
+        	  } else if(cardBirth.trim().length!=8||!birthA.test($("#cardBirth").val())){
         		  alert("생년월일을 확인해주세요");
         		  return false;
         	  }else if($("#cardAgree").is(":checked") == false){
@@ -818,6 +819,12 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
             			   }
             			$("#payMthList").append('<table id="putPayM"></table>');
     	               	$("#putPayM").html(valueTwo);
+    	                  $("#cardN1").val("")
+	    	          	  $("#cardN2").val("")
+	    	          	  $("#cardN3").val("")
+	    	          	  $("#cardN4").val("")
+	    	          	  $("#cardPwd").val("")
+	        	  		  $("#cardBirth").val("")
 	            },
                error:function(){
                   console.log("ajax 통신 실패 - 댓글 등록");
@@ -831,8 +838,8 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
         </script>
         <script type="text/javascript">
         function checkcardPwdnDate() {
-	    	var cardP = $("#cardPwdCheck").val();
-	    	var cardD = $("#cardBirthCheck").val();
+	    	var cardP = $("#cardPwdCheck").val().trim();
+	    	var cardD = $("#cardBirthCheck").val().trim();
 
 	    	$.ajax({
 	               url:"checkPwdnDate.pay",
@@ -915,21 +922,41 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
     	$('.normal').prop('checked');
 	})
     
+	$(document).on("keyup", "#userPhoneNew", function() { 
+		$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
+	});
+	
+	var phonerules= /^(0(2|3[1-3]|4[1-4]|5[1-5]|6[1-4]))-(\d{3,4})-(\d{4})$/;
+	var phonerules2 =/^(?:(010-\d{4})|(01[1|6|7|8|9]-\d{3,4}))-(\d{4})$/;
+	
 	function payFinish() {
     	if($('#userNameNew').val().trim().length==0||$('#userPhoneNew').val().trim().length==0||$('#receiver').
-    			val().trim().length==0||$('#userAddrNew').val().trim().length==0||$('#userAddrsub').val().trim().length==0){
+    			val().trim().length==0||$('#userAddrNew').val().trim().length==0){
     		alert("모두 입력해주세요");
     	}else if($("#check_all").is(":checked") == false||$("#check_1").is(":checked") == false||$("#check_2").is(":checked") == false){
     		alert("약관 동의를 체크해 주세요");
+    	}else if(!phonerules.test($("#userPhoneNew").val())&&!phonerules2.test($("#userPhoneNew").val())){
+    		alert("배송지 연락처를 확인해주세요");
     	}else if(gogo<<%=re.getRwPrice()/100 %>){
     		alert("결제 가능한 금액이 부족합니다.");
+    	}else if($('#userNameNew').val().length>10||$('#receiver').val().length>10){
+    		alert("배송지 이름으로 가능한 글자수를 초과했습니다.");
     	}else{
+    		
     		$("#deliAddr").val($("#userAddrNew").val()+" "+$("#userAddrsub").val())
     		
     		$("#finishform").submit();
      	}
     	
 	}
+	
+	function hangul(){ 
+		if((event.keyCode < 12592) || (event.keyCode > 12687)){ 
+			alert("한글만 입력이 가능합니다."); 
+			event.returnValue = false 
+			} 
+		}
+
     
     function takeMy() {
 		$("#userNameNew").val($('#userName').text());
