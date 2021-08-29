@@ -20,4 +20,16 @@ public class Member {
 	private int coin; //보유코인
 	private int prjNo; //프로젝트 번호	
 	
+	///
+	public Member() {}
+
+	public Member(String memId, String memName, String phone, String email, String address) {
+		super();
+		this.memId = memId;
+		this.memName = memName;
+		this.phone = phone;
+		this.email = email;
+		this.address = address;
+	}
+	
 }
