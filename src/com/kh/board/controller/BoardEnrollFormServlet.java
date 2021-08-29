@@ -101,7 +101,11 @@ public class BoardEnrollFormServlet extends HttpServlet {
 		}
 		Board board = new Board(title, content.replaceAll("\n", "<br>"), category, writer, builder.toString());
 		int result = new BoardService().insertBoard(board);
-		response.sendRedirect("boardListView");
+		if(result>0){
+			response.sendRedirect("boardListView");
+		}else {
+			System.out.println("에러");
+		}
 	}
 
 }
