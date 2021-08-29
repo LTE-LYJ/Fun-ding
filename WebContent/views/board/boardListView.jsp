@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유게시판</title>
+<title>커뮤니티</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/board/board.css" />
 <link rel="stylesheet"
@@ -22,7 +22,7 @@
 	<br>
 	<div class="head">
 		<h2 class="list">
-			<a class="in" href="boardListView">자유 게시판</a> 
+			<a class="in" href="boardListView">커뮤니티</a>
 		</h2>
 	</div>
 	<hr>
@@ -30,12 +30,12 @@
 
 		<!-- 게시판 리스트 -->
 		<div class="board_list_wrap">
-			
+
 			<table class="board_list">
 				<thead>
 					<tr class="table_head">
 						<th class="num">번호</th>
-						<th class="catea">카테</th>
+						<th class="cate">카테고리</th>
 						<th class="title">제목</th>
 						<th class="writer">작성자</th>
 						<th class="date">작성일</th>
@@ -43,16 +43,18 @@
 					</tr>
 				</thead>
 				<tbody>
-
-
-					<c:forEach var="n" items="${list}" begin="0" end="10">
+					<c:forEach var="b" items="${list}" begin="0" end="10">
 						<tr>
-							<td class="num">${n.noticeNo}</td>
-							<td class="title"><a href="noticeDetailView?noticeNo=${n.noticeNo}">${n.noticeTitle}</a></td>
-							<td class="writer">${n.noticeWriter}</td>
+							<td class="num">${b.boardNo}</td>
+							<td class="cate">${b.category}</td>
+							<td class="title"><a
+								href="boardDetailView?boardNo=${b.boardNo}">${b.boardTitle}</a>
+								<span class="rep">[${b.repCount}]</span>
+								</td>
+							<td class="writer">${b.boardWriter}</td>
 							<td class="date"><fmt:formatDate pattern="yyyy-MM-dd"
-									value="${n.createDate}" /></td>
-							<td class="count">${n.count}</td>
+									value="${b.createDate}" /></td>
+							<td class="count">${b.count}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -92,9 +94,9 @@
 
 
 			</div>
-			<c:if test="${memNo == 1}">
+			<c:if test="${memNo != 0}">
 				<div class="bt_wrap right">
-					<a class="on" href="noticeEnrollForm">작성하기</a>
+					<a class="on" href="boardEnrollForm">작성하기</a>
 				</div>
 			</c:if>
 		</div>
@@ -103,8 +105,14 @@
 		<!-- 검색 -->
 		<div class="search">
 			<form>
-				<select name="f">
-					<option ${(param.f == "notice_title")?"selected":""} value="notice_title">제목</option>
+				<select name="c"> 
+					<option value="">전체</option>
+					<c:forEach var="c" items="${cat}" begin="0" end="3" >
+						<option value="${c.boardCatNo}">${c.boardCatName}</option>
+					</c:forEach>
+				</select> <select name="f">
+					<option ${(param.f == "board_title")?"selected":""}
+						value="board_title">제목</option>
 					<option ${(param.f == "mem_name")?"selected":""} value="mem_name">작성자</option>
 				</select> <input type="text" name="q" value="${param.q}" /> <input
 					class="btn-search" type="submit" value="검색" />

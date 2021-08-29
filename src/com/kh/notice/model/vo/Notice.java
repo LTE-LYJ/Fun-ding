@@ -78,6 +78,13 @@ public class Notice {
 	}
 
 
+	public Notice(int noticeNo, String noticeTitle) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+	}
+
+
 	
 	
 
