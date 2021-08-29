@@ -39,7 +39,7 @@ public class projectDetailAskPageServlet extends HttpServlet {
 			request.setAttribute("project", project);
 			view ="views/project_detail/projectDetailAskNewPop.jsp";
 		}else {
-			request.setAttribute("msg", "공지사항 조회에 실패했습니다.");
+			request.setAttribute("msg", "문의사항 조회에 실패했습니다.");
 			view ="views/common/errorPage.jsp";
 		}
 		request.getRequestDispatcher(view).forward(request, response);

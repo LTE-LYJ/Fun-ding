@@ -74,6 +74,7 @@ Date date = new Date();
 	        	               data:{num : <%=num%>},
 	        	               success:function(status){
 	        	            	   if(status=="success"){
+	        	            		   alert('재펀딩 요청이 완료되었습니다.');
 	        	            		   selectList();
 	        	            	   }
 		        	            },

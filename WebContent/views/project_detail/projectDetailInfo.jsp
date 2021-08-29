@@ -55,7 +55,7 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
 	                                    <%}%>
 	                                </div>
 	                                <div>
-	                                    <input type="button" id="btn_po" value="창작자 신고하기" onclick="location.href=''" ></input>
+	                                    <input type="button" id="btn_po" value="창작자 신고하기" onclick="location.href='<%=request.getContextPath()%>/views/notice/noticeDetailView'" ></input>
 	                                </div>
 	                            </aside>
 	                        </div>
@@ -178,7 +178,7 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
 				<%} %>
 				
 	                <div id="creator_content">
-	                 <%if(at == null){ %>
+	                 <%if(createrPro.getChangeName() == null){ %>
 	                 <div><img class="profile" src="<%=request.getContextPath()%>/resources/images/default.PNG" style="width: 40px; height: 40px; border-radius: 70%; vertical-align: middle; float:none; margin-bottom:10px; clear: both;">
 							<%} else { %>
 							<div><img class="profile" src="resources/upfiles_profile/<%=createrPro.getChangeName() %>" style="width: 40px; height: 40px; border-radius: 70%; vertical-align: middle; float:none; margin-bottom:10px; clear: both;">
