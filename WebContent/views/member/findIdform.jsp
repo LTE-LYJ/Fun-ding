@@ -113,5 +113,12 @@
 			}
 		})
 	}
+	
+	  // 엔터 클릭이벤트 연결
+    $("#email").keydown(function(keyNum){
+    	if(keyNum.keyCode == 13) {
+    		$("#confirmBtn").click();
+    	}
+    });
 </script>
 </html>

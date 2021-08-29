@@ -237,7 +237,7 @@ $(function(){
        <img id="profile" src="<%=request.getContextPath()%>/resources/images/default.PNG" style="width:40px; height:40px"> 
 		
 		<span class="userInfo">
-          <a href="<%=request.getContextPath()%>/memberList.bo" style="font-size:15px; font-weight:bold;">회원 리스트</a>
+          <a href="<%=request.getContextPath()%>/memberList.bo" style="font-size:15px; font-weight:bold;">회원 리스트</a><br>
           <a href="<%=request.getContextPath()%>/logout.me" style="font-size:10px; font-weight:bold; color:red;"> 로그아웃</a>
         </span>
     </ul>

@@ -94,7 +94,7 @@
                 </table>
                 <script>
                 
-                var popHeight = 430;     // 띄울 팝업창 높이                                    
+                var popHeight = 430;    // 띄울 팝업창 높이                                    
                 var popWidth = 600;     // 띄울 팝업창 너비                                  
 
                 var winHeight = document.body.clientHeight;	  // 현재창의 높이
@@ -113,6 +113,13 @@
                 	function findPwd() {
                 		window.open("<%=request.getContextPath()%>/findPwdForm.me", "비밀번호 찾기", "top="+popY+", left="+popX+",width="+popWidth+",height="+popHeight+", scrollbars=yes,resizable=yes");
                 	}
+               
+                // 엔터 클릭이벤트 연결
+                $("#userPwd").keydown(function(keyNum){
+                	if(keyNum.keyCode == 13) {
+                		$("#loginBtn").click();
+                	}
+                });
                 	
                 </script>
             </form> 
