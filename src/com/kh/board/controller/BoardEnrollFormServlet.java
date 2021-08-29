@@ -57,11 +57,8 @@ public class BoardEnrollFormServlet extends HttpServlet {
 		String content = request.getParameter("content");
 		String category = request.getParameter("cate");
 		String writer = String.valueOf(((Member) request.getSession().getAttribute("loginUser")).getMemNo());
-		System.out.println("title : " + title);
-		System.out.println("content : " + content);
-		System.out.println("category : " + category);
-		System.out.println("writer : " + writer);
 		Collection<Part> parts = request.getParts();
+		
 		StringBuilder builder = new StringBuilder();
 		for (Part p : parts) {
 			if (!p.getName().equals("file"))

@@ -21,8 +21,7 @@
 	<br>
 	<div class="head">
 		<h2 class="list">
-			<a class="in" href="noticeListView">공지사항</a> <a class="out"
-				href="../project_report/projectReportListView">신고게시판</a>
+			<a class="in" href="boardListView">커뮤니티</a> 
 		</h2>
 	</div>
 	<hr>
@@ -31,22 +30,32 @@
 	<!-- 개시글 작성 -->
 	<main class="main">
 	<c:set var="contextPath" value="<%=request.getContextPath() %>"></c:set>
-		<form method="post" action="${contextPath}/update.no?noticeNo=${n.noticeNo}" enctype="multipart/form-data" >
-			<div class="board_write_wrap">
+		<form method="post" action="${contextPath}/bUpdate.bo?boardNo=${b.boardNo}" enctype="multipart/form-data" >
 				<div class="board_write">
 					<div class="btitle">
 						<dl>
 							<dt>제목</dt>
 							<dd>
-								<input id="title" type="text" name="title" value="${n.noticeTitle}" placeholder="제목을 입력하세요" required/>
+								<input id="title" type="text" name="title" value="${b.boardTitle}" placeholder="제목을 입력하세요" required/>
 							</dd>
 						</dl>
 					</div>
+					<div class="btitle">
+						<dl>
+							<dt>카테고리</dt>
+							<dd>
+								<select name="cate" class="cate">
+									<c:forEach var="b" items="${cat}" begin="0" end="3">
+										<option value="${index*10+10}">${b.boardCatName}</option>
+									</c:forEach>
+								</select>
+							</dd>
+						</dl>
 					<div class="btitle" id="filearea">
 						<dl>
 							<dt>첨부파일</dt>
 							<dd>
-								<input type="file" name="file" value="${n.files}" />
+								<input type="file" name="file" value="${b.files}" />
 							</dd>
 						</dl>
 					</div>
@@ -58,7 +67,7 @@
 						</dl>
 					</div>
 					<div class="cont">
-						<textarea id="editor" name="content"  placeholder="내용을 입력하세요" >${n.noticeContent}</textarea>
+						<textarea id="editor" name="content"  placeholder="내용을 입력하세요" >${b.boardContent}</textarea>
 					</div>
 					<script>
 						ClassicEditor
@@ -72,7 +81,7 @@
 				</div>
 				<div class="bt_wrap">
 					<input class="on" type="submit" value="수정" onclick="check()" /> <a
-						href="noticeListView">취소</a>
+						href="boardListView">취소</a>
 				</div>
 				<script>
 				 	function check() {

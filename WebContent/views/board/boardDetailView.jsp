@@ -77,7 +77,7 @@
 		<c:if test="${writerNo == memNo || memNo==100}">
 		<c:set var="contextPath" value="<%=request.getContextPath() %>"></c:set>
 		<div class="bt_wrap">
-			<a href="noticeUpdateForm?noticeNo=${b.boardNo}">수정</a> <a class="on"
+			<a href="boardUpdateForm?boardNo=${b.boardNo}">수정</a> <a class="on"
 				href="${contextPath}/bDelete.bo?boardNo=${b.boardNo}">삭제</a>
 		</div>
 		</c:if>
