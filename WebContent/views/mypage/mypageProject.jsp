@@ -10,17 +10,29 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>	
-    .prj1{
-        overflow: auto;
+	.prjOuter{
+		margin-top: 200px;
+		margin-left: 350px;
+	}
+	.prjwrap1{
+		margin-bottom: 100px;
+		overflow: auto;
         height: 300px;
         width: 700px;
+	}
+	.prjwrap2{
+		height: 300px;
+        width: 700px;
         border: 1px lightgray;
+	}
+    .prj1{
+        
+        border: 1px lightgray;
+        
     }
     .prj2{
         overflow: auto;
-        height: 300px;
-        width: 700px;
-        border: 1px lightgray;
+        
     }
 </style>
 </head>
@@ -28,10 +40,13 @@
 <%@ include file = "../common/menubar.jsp" %>
 <%@ include file="../mypage/mypageMenubar.jsp" %>
 
-	<div class="prjwrap">
+<div class="prjOuter">
+	<div class="prjwrap1">
         <h3>진행 중인 프로젝트</h3>
         
         <table class="prjtb1" align="center">
+        		
+        	
 				<%if(list.isEmpty()){ %>
 				<tr>
 					<td colspan="2">조회된 리스트가 없습니다.</td>
@@ -39,19 +54,19 @@
 				<%}else{ %>
 					<% for(Project p : list){ %>
 					<tr>
-						<td></td>
-						<td><%= p.getPrjTitle() %></td>
+						<td><input type="image" id="pri"></td>
 						<td>
+							<%= p.getPrjTitle() %><br>
 							<input type="button" value="수정" onclick="goPrj();">
-							
 						</td>
+						
 					</tr>
 					<%} %>
 				<%} %>
 		</table>
 	</div>
 
-	<div class="prjwrap">
+	<div class="prjwrap2">
         <h3>종료된 펀딩</h3>
         
         <table class="prjtb2" align="center">
@@ -62,21 +77,33 @@
 				<%}else{ %>
 					<% for(Project p : list){ %>
 					<tr>
-						
-						<td><%= p.getPrjTitle() %></td>
-						<td><input type="text" id="stausPrj" readonly></td>
+						<td><input type="image"></td>
+						<td>
+							<%= p.getPrjTitle() %><br>
+							<input type="button" value="수정" onclick="goPrj();">
+						</td>
 						
 					</tr>
 					<%} %>
 				<%} %>
 		</table>
     </div>
-    
+</div>
+
+	<div class="ft" style="margin-top: 200px;">
+		<%@ include file="../common/footer.jsp" %>
+	</div>
 <script>
-	function goPrj(){
-		
-	}
-</script>    
+	<%if(!list.isEmpty()){%>
+	$(function(){
+		$(".bmtb>tbody>tr").click(function(){
+			var bno = $(this).children().eq(0).text();
+			location.href="<%= contextPath%>/prjDetailView.mp?bno="+bno;
+		})
+	})
+	<%}%>
+
+</script>   
     
 </body>
 </html>

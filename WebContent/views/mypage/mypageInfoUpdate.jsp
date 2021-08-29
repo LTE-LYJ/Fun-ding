@@ -1,30 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"   %>
+    
 <%
 
-	
-	
-	String memId = (String)request.getAttribute("memId");
-	String memName = (String)request.getAttribute("memName");
-	String phone = (String)request.getAttribute("phone");
-	String email = (String)request.getAttribute("email");
-	String address = (String)request.getAttribute("address");
-	
-	//Member m = (Member)request.getAttribute("loginUser");
+    //request.setCharacterEncoding("UTF-8"); /////////
 
-	//String memId = m.getMemId();
-	//String memName = m.getMemName();
-	//String phone = m.getPhone();
-	//String email = m.getEmail();
-	//String address = m.getAddress();
+	Member m = (Member)request.getAttribute("loginUser");
+
+	String memId = m.getMemId();
+	String memName = m.getMemName();
+	String phone = m.getPhone();
+	String email = m.getEmail();
+	String address = m.getAddress();
 	
-%>
+%>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<style>
+<style>
         .mpInfotb{
             /*text-align: center;*/
             position: relative;
@@ -58,25 +53,27 @@
         }
         button:hover{
         	background-color: blue;
+        	cursor: pointer;
         }
-        #uiBtn{
-            margin-left: 360px;
+        #updateInfoBtn{
+            
             margin-top: 230px;
         }
-        
+
     </style>
 </head>
 <body>
 <%@ include file = "../common/menubar.jsp" %>
-<%@ include file="../mypage/mypageMenubar.jsp" %>
+<%@ include file = "../mypage/mypageMenubar.jsp" %>
 
 	<div class="mypageinfo">
-	
-<form id="updateForm" action="<%=request.getContextPath() %>/updateInfo.mp" method="post">
+
+	<form action="<%=request.getContextPath() %>/updateInfoOk.mp" method="post" id="infoForm" name="infoForm">
+    
         <table class="mpInfotb">
             <tr>
-            	<td><div id="profileImg"></div></td>
-            	<td><input type="file" name="fileName" style="float: bottom;"></td>               
+                <td id="profileImg" name="proImg"></td>
+                <td><input type="file" name="fileName" style="float: bottom;"></td>
             </tr>
             <tr>
                 <td>아이디</td>
@@ -99,21 +96,18 @@
                 <td><input type="text" class="mpi" id="mpAddress" name="address" value = "<%= address %>" required></td>
             </tr>
         </table>
-
-		<button type="submit" id="uiBtn">확인</button>
-</form>		
+		<div class="btns" align="center">
+			<button type="submit" id="updateInfoBtn">회원정보 수정</button>
+		</div>
+	</form>
+		
     </div>
+    
+    
 
 	<div class="ft" style="margin-top: 200px;">
 		<%@ include file="../common/footer.jsp" %>
 	</div>
-		
-	<script>
-		function uiBtn(){
-			alert("회원정보가 수정되었습니다.");
-			
-		}
-	</script>
-	
+
 </body>
 </html>

@@ -191,8 +191,13 @@ $(function(){
             </ul>
         </li>
         
+
         <li><a href="#" onclick="checkLoginPrjPrj();">프로젝트 올리기</a></li>
         <li><a href="<%=request.getContextPath()%>/views/board/boardListView"">커뮤니티</a></li>
+
+        <li><a href="#" onclick="checkLoginPrj();">프로젝트 올리기</a></li>
+        <li><a href="<%=request.getContextPath()%>/">커뮤니티</a></li>
+
         <li><a href="<%=request.getContextPath()%>/">고객지원</a>
             <ul>
                 <li><a href="<%=request.getContextPath()%>/">공지사항</a></li>
