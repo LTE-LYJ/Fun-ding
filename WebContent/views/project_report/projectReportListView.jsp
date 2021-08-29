@@ -22,7 +22,7 @@
 	<br>
 	<div class="head">
 		<h2 class="list">
-			<a class="in" href="noticeListView">공지사항</a> <a class="out"
+			<a class="out" href="../notice/noticeListView">공지사항</a> <a class="in"
 				href="../project_report/projectReportListView">신고게시판</a>
 		</h2>
 	</div>
@@ -40,19 +40,21 @@
 						<th class="writer">작성자</th>
 						<th class="date">작성일</th>
 						<th class="count">조회수</th>
+						<th class="ask">답변</th>
 					</tr>
 				</thead>
 				<tbody>
 
 
-					<c:forEach var="n" items="${list}" begin="0" end="10">
+					<c:forEach var="pr" items="${list}" begin="0" end="10">
 						<tr>
-							<td class="num">${n.noticeNo}</td>
-							<td class="title"><a href="noticeDetailView?noticeNo=${n.noticeNo}">${n.noticeTitle}</a></td>
-							<td class="writer">${n.noticeWriter}</td>
+							<td class="num">${pr.prjReportNo}</td>
+							<td class="title"><a href="projectReportDetailView?prjReportNo=${pr.prjReportNo}">${pr.prjReportTitle}</a></td>
+							<td class="writer">${pr.writerName}</td>
 							<td class="date"><fmt:formatDate pattern="yyyy-MM-dd"
-									value="${n.createDate}" /></td>
-							<td class="count">${n.count}</td>
+									value="${pr.createDate}" /></td>
+							<td class="count">${pr.count}</td>
+							<td class="ask">미답변</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -92,9 +94,9 @@
 
 
 			</div>
-			<c:if test="${memNo == 1}">
+			<c:if test="${memNo != 0}">
 				<div class="bt_wrap right">
-					<a class="on" href="noticeEnrollForm">작성하기</a>
+					<a class="on" href="projectReportEnrollForm">작성하기</a>
 				</div>
 			</c:if>
 		</div>
@@ -104,7 +106,7 @@
 		<div class="search">
 			<form>
 				<select name="f">
-					<option ${(param.f == "notice_title")?"selected":""} value="notice_title">제목</option>
+					<option ${(param.f == "PRJ_REPORT_TITLE")?"selected":""} value="notice_title">제목</option>
 					<option ${(param.f == "mem_name")?"selected":""} value="mem_name">작성자</option>
 				</select> <input type="text" name="q" value="${param.q}" /> <input
 					class="btn-search" type="submit" value="검색" />
