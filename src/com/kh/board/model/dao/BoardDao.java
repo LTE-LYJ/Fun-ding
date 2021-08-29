@@ -13,7 +13,6 @@ import java.util.List;
 import com.kh.board.model.vo.Board;
 import com.kh.board.model.vo.BoardReply;
 import com.kh.board.model.vo.BoardView;
-import com.kh.notice.model.vo.Notice;
 
 public class BoardDao {
 
