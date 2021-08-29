@@ -86,9 +86,9 @@ public class BoardService {
 		return result;
 	}
 
-	public int deleteNotice(int noticeNo) {
+	public int deleteBoard(int boardNo) {
 		Connection con = getConnection();
-		int result = new NoticeDao().deleteNotice(con, noticeNo);
+		int result = new BoardDao().deleteBoard(con, boardNo);
 
 		if (result > 0) {
 			commit(con);
