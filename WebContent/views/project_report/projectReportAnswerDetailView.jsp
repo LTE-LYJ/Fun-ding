@@ -75,44 +75,19 @@
 				<div class="cont">${p.prjReportContent}</div>
 			</div>
 		</div>
-		<c:if test="${ memNo==writerNo || memNo==100}">
+		<c:if test="${memNo==100}">
 		<c:set var="contextPath" value="<%=request.getContextPath() %>"></c:set>
 		<div class="bt_wrap">
-			<a href="projectReportUpdateForm?prjReportNo=${p.prjReportNo}">수정</a> 
 			<a class="on"
-				href="${contextPath}/pdelete.pr?prjReportNo=${p.prjReportNo}">삭제</a>
+				href="${contextPath}/answerDelete.pr?prjReportNo=${p.prjReportNo}">삭제</a>
 		</div>
 		</c:if>
 
-		<c:if test="${memNo ==100 && answer eq 'N'}">
-			<div class="bt_wrap">
-			<a class="on" href="projectReportAnswer?prjReportNo=${p.prjReportNo}">답글작성</a> 
-		</div>
-		</c:if>
+		
 
 
 
-		<div class="margin-top">
-			<table class="table border-top-default">
-				<tbody>
-
-					<tr>
-						<th>다음글</th>
-						<td><a id="next"
-							href="projectReportDetailView?prjReportNo=${next.prjReportNo}">${next.prjReportTitle}</a>
-							<c:if test="${next.prjReportNo == null}">다음글이 없습니다.</c:if></td>
-					</tr>
-
-					<tr>
-						<th>이전글</th>
-						<td><a id="prev"
-							href="projectReportDetailView?prjReportNo=${prev.prjReportNo }">${prev.prjReportTitle}</a>
-							<c:if test="${prev.prjReportNo == null}">다음글이 없습니다.</c:if></td>
-					</tr>
-
-				</tbody>
-			</table>
-		</div>
+		
 	</main>
 
 </body>

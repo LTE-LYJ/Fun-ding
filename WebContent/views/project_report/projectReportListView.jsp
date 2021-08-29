@@ -54,7 +54,15 @@
 							<td class="date"><fmt:formatDate pattern="yyyy-MM-dd"
 									value="${pr.createDate}" /></td>
 							<td class="count">${pr.count}</td>
+							<c:choose>
+							<c:when test="${pr.answer eq 'Y'}">
+							<td class="ask"><a href="projectReportAnswerDetailView?prjReportNo=${pr.prjReportNo}">답변완료</a></td>
+							</c:when>
+							<c:when test="${pr.answer eq 'N'}">
 							<td class="ask">미답변</td>
+							</c:when>
+							
+							</c:choose>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -100,7 +108,7 @@
 				</div>
 			</c:if>
 		</div>
-
+		<input type="file">
 
 		<!-- 검색 -->
 		<div class="search">
