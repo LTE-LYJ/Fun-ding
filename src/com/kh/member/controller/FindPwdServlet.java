@@ -7,10 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.member.model.service.MemberService;
+
 /**
  * Servlet implementation class FindPwdServlet
  */
-@WebServlet("/findPwdForm.me")
+@WebServlet("/findPwd.me")
 public class FindPwdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,7 +28,17 @@ public class FindPwdServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/member/findPwdform.jsp").forward(request, response);
+		String userId = request.getParameter("userId");
+		String userName = request.getParameter("userName");
+		
+		String userPwd = new MemberService().findPwd(userId, userName);
+		
+		if(userPwd==null) {
+			userPwd = "";
+		}
+	
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().print(userPwd);
 	}
 
 	/**

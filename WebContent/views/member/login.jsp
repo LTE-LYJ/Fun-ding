@@ -12,7 +12,7 @@
     #title{
         margin: 100px;
         text-align: center;
-       	font-size: 70px;
+       	font-size: 40px;
         font-weight:bold;
         color:rgba(156, 228, 228);
         margin-bottom: 0px;
@@ -88,10 +88,40 @@
                     </tr>
                     
                     <tr>
-                        <td style="height:60px"><a href="<%=request.getContextPath()%>/findIdForm.me">아이디 찾기</a> | <a href="<%=request.getContextPath()%>/findPwdForm.me">비밀번호 찾기</a></td>
+                        <td style="height:60px"><a href="#" onclick="findId();">아이디 찾기</a> | <a href="#" onclick="findPwd();">비밀번호 찾기</a></td>
                         <th></th>
                      </tr>
                 </table>
+                <script>
+                
+                var popHeight = 430;    // 띄울 팝업창 높이                                    
+                var popWidth = 600;     // 띄울 팝업창 너비                                  
+
+                var winHeight = document.body.clientHeight;	  // 현재창의 높이
+                var winWidth = document.body.clientWidth;	  // 현재창의 너비
+
+                var winX = window.screenLeft;	// 현재창의 x좌표
+                var winY = window.screenTop;	// 현재창의 y좌표
+                	
+                var popX = winX + (winWidth - popWidth)/2;
+                var popY = winY + (winHeight - popHeight)/2;
+                
+                	function findId(){
+                		window.open("<%=request.getContextPath()%>/findIdForm.me", "아이디 찾기",  "top="+popY+", left="+popX+",width="+popWidth+",height="+popHeight+", scrollbars=yes,resizable=yes");
+                	}
+                	
+                	function findPwd() {
+                		window.open("<%=request.getContextPath()%>/findPwdForm.me", "비밀번호 찾기", "top="+popY+", left="+popX+",width="+popWidth+",height="+popHeight+", scrollbars=yes,resizable=yes");
+                	}
+               
+                // 엔터 클릭이벤트 연결
+                $("#userPwd").keydown(function(keyNum){
+                	if(keyNum.keyCode == 13) {
+                		$("#loginBtn").click();
+                	}
+                });
+                	
+                </script>
             </form> 
             </div>      
         </div>

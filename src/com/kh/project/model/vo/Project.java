@@ -1,29 +1,31 @@
 package com.kh.project.model.vo;
 
-import java.util.Date;
-
 public class Project {
 	//프로젝트
 	
 	private int prjNo; //프로젝트 번호
 	private String prjTitle; //프로젝트 제목
 	private String prjContent; //프로젝트 소개
-	private int prjTarget; //목표 금액
-	private int prjCurrent; //현재 후원 금액
-	private Date prjStartDate; //펀딩 시작일
-	private Date prjEndDate; //펀딩 종료일
+	private double prjTarget; //목표 금액
+	private double prjCurrent; //현재 후원 금액
+	private String prjStartDate; //펀딩 시작일
+	private String prjEndDate; //펀딩 종료일
 	private int prjRecount; //재펀딩 요청 회수
-	private int creNo; //창작자 번호
+	private int creNo; //회원 번호
 	private int prjCatNo; //프로젝트 카테고리 번호
+	private String creName; //창작자 이름
+	private String prjCatName; //프로젝트 카테고리 이름
 	private int attachmentNo; //첨부 이미지 번호
+	private String attachmentName; //첨부 이미지 이름
 	private String status; //상태값(Y/N)
 	
 	public Project() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Project(int prjNo, String prjTitle, String prjContent, int prjTarget, int prjCurrent, Date prjStartDate,
-			Date prjEndDate, int prjRecount, int creNo, int prjCatNo, int attachmentNo, String status) {
+	public Project(int prjNo, String prjTitle, String prjContent, double prjTarget, double prjCurrent,
+			String prjStartDate, String prjEndDate, int prjRecount, int creNo, int prjCatNo, String creName,
+			String prjCatName, int attachmentNo, String attachmentName, String status) {
 		super();
 		this.prjNo = prjNo;
 		this.prjTitle = prjTitle;
@@ -35,10 +37,57 @@ public class Project {
 		this.prjRecount = prjRecount;
 		this.creNo = creNo;
 		this.prjCatNo = prjCatNo;
+		this.creName = creName;
+		this.prjCatName = prjCatName;
 		this.attachmentNo = attachmentNo;
+		this.attachmentName = attachmentName;
 		this.status = status;
 	}
 
+	public Project(int prjNo, String prjTitle, String creName, String prjCatName, double prjTarget, double prjCurrent, String prjStartDate, String prjEndDate) {
+		super();
+		this.prjNo = prjNo;
+		this.prjTitle = prjTitle;
+		this.prjTarget = prjTarget;
+		this.prjCurrent = prjCurrent;
+		this.prjStartDate = prjStartDate;
+		this.prjEndDate = prjEndDate;
+		this.creName = creName;
+		this.prjCatName = prjCatName;
+	}
+
+	public Project(int prjNo, double prjTarget, String prjStartDate, String prjEndDate) {
+		super();
+		this.prjNo = prjNo;
+		this.prjTarget = prjTarget;
+		this.prjStartDate = prjStartDate;
+		this.prjEndDate = prjEndDate;
+	}
+
+	public Project(int prjNo, String prjTitle, String prjContent, String prjCatName) {
+		super();
+		this.prjNo = prjNo;
+		this.prjTitle = prjTitle;
+		this.prjContent = prjContent;
+		this.prjCatName = prjCatName;
+	}
+
+	public int getCreNo() {
+		return creNo;
+	}
+	
+	public void setCreNo(int creNo) {
+		this.creNo = creNo;
+	}
+	
+	public int getPrjCatNo() {
+		return prjCatNo;
+	}
+	
+	public void setPrjCatNo(int prjCatNo) {
+		this.prjCatNo = prjCatNo;
+	}
+	
 	public int getPrjNo() {
 		return prjNo;
 	}
@@ -63,35 +112,35 @@ public class Project {
 		this.prjContent = prjContent;
 	}
 
-	public int getPrjTarget() {
+	public double getPrjTarget() {
 		return prjTarget;
 	}
 
-	public void setPrjTarget(int prjTarget) {
+	public void setPrjTarget(double prjTarget) {
 		this.prjTarget = prjTarget;
 	}
 
-	public int getPrjCurrent() {
+	public double getPrjCurrent() {
 		return prjCurrent;
 	}
 
-	public void setPrjCurrent(int prjCurrent) {
+	public void setPrjCurrent(double prjCurrent) {
 		this.prjCurrent = prjCurrent;
 	}
 
-	public Date getPrjStartDate() {
+	public String getPrjStartDate() {
 		return prjStartDate;
 	}
 
-	public void setPrjStartDate(Date prjStartDate) {
+	public void setPrjStartDate(String prjStartDate) {
 		this.prjStartDate = prjStartDate;
 	}
 
-	public Date getPrjEndDate() {
+	public String getPrjEndDate() {
 		return prjEndDate;
 	}
 
-	public void setPrjEndDate(Date prjEndDate) {
+	public void setPrjEndDate(String prjEndDate) {
 		this.prjEndDate = prjEndDate;
 	}
 
@@ -103,20 +152,20 @@ public class Project {
 		this.prjRecount = prjRecount;
 	}
 
-	public int getCreNo() {
-		return creNo;
+	public String getCreName() {
+		return creName;
 	}
 
-	public void setCreNo(int creNo) {
-		this.creNo = creNo;
+	public void setCreName(String creName) {
+		this.creName = creName;
 	}
 
-	public int getPrjCatNo() {
-		return prjCatNo;
+	public String getPrjCatName() {
+		return prjCatName;
 	}
 
-	public void setPrjCatNo(int prjCatNo) {
-		this.prjCatNo = prjCatNo;
+	public void setPrjCatName(String prjCatName) {
+		this.prjCatName = prjCatName;
 	}
 
 	public int getAttachmentNo() {
@@ -135,14 +184,22 @@ public class Project {
 		this.status = status;
 	}
 
+	public String getAttachmentName() {
+		return attachmentName;
+	}
+
+	public void setAttachmentName(String attachmentName) {
+		this.attachmentName = attachmentName;
+	}
+
 	@Override
 	public String toString() {
 		return "Project [prjNo=" + prjNo + ", prjTitle=" + prjTitle + ", prjContent=" + prjContent + ", prjTarget="
 				+ prjTarget + ", prjCurrent=" + prjCurrent + ", prjStartDate=" + prjStartDate + ", prjEndDate="
 				+ prjEndDate + ", prjRecount=" + prjRecount + ", creNo=" + creNo + ", prjCatNo=" + prjCatNo
-				+ ", attachmentNo=" + attachmentNo + ", status=" + status + "]";
+				+ ", creName=" + creName + ", prjCatName=" + prjCatName + ", attachmentNo=" + attachmentNo
+				+ ", attachmentName=" + attachmentName + ", status=" + status + "]";
 	}
 	
 	
-
 }

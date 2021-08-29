@@ -14,7 +14,7 @@
         margin: 100px;;
         color:rgba(156, 228, 228);
         text-align: center;
-       	font-size: 45px;
+       	font-size: 38px;
         font-weight:bold;
         margin-bottom: 0px;
     }
@@ -34,12 +34,13 @@
         justify-content: center;
         align-items: center;
        	background-color: rgba(156, 228, 228, 0.253);
-       	width:700px;
+       	width:800px;
         height:500px;
     }
 
     table {
         font-size: 12pt;
+        border-collapse:collapse;
     }
 
     input {       
@@ -53,8 +54,10 @@
 
     #enrollForm th:nth-child(2){
         width:150px;
-    }
-
+     
+    }  
+		
+		
     #enrollForm th:nth-child(3){
         width:150px;
         text-align:left;
@@ -64,6 +67,7 @@
     	float: right;
     	margin-right: 40px;
     	margin-top: 5px;
+    	border-radius: 70%;
 	}
    
     button{
@@ -88,64 +92,58 @@
 <body>
  <%@ include file ="../common/menubar.jsp" %>
         <div id="title">
-            <h1 style="line-height: 80px;">Welcome to Fund-ing</h1>
+            <h1 style="line-height: 80px;">Welcome to fund-ing</h1>
         </div>
         <div id="wrap">
             <div id="enroll">
                 <form id="enrollForm" action="<%=request.getContextPath()%>/insert.me" method="post" onsubmit="return joinValidate();" enctype="multipart/form-data">
-                <table>
+                <table border=3px >
                     <tr>
                         <th rowspan="5"><img id="profilImg" width= "120" height= "120"></th>
                         <th><input type="text" maxlength="13" name="userId" placeholder="ID" required></th>
-                        <th>
+                        <th style= "border-top: none; border-bottom: none; border-left: none; border-right: none;">
                             &nbsp; <button type="button" id="idCheckBtn" onclick="checkId();">중복확인</button>
                         </th>
                     </tr>
                     <tr>
                         <!--<td></td>-->
                         <th><input type="password" maxlength="15" name="userPwd" placeholder="PWD" required></th>
-                        <th></th>
+                        <th style= "border-top: none; border-bottom: none; border-left: none; border-right: none;"></th>
                     </tr>
                     <tr>
                          <!--<td></td>-->
-                        <th style= "border-right: 0;"><input type="password" maxlength="15" name="checkPwd" required placeholder="PWD Check"></th>
-                        <th><label id = "pwdResult"></label></th>
+                        <th><input type="password" maxlength="15" name="checkPwd" required placeholder="PWD Check"></th>
+                        <th style= "border-top: none; border-bottom: none; border-left: none; border-right: none;"><label id = "pwdResult"></label></th>
                     </tr>	
                     <tr>
                          <!--<td></td>-->
-                        <th style= "border-right: none;"><input type="text" maxlength="5" name="userName" required placeholder="Name"></th>
-                        <th></th>
+                        <th><input type="text" maxlength="5" name="userName" required placeholder="Name"></th>
+                        <th style= "border-top: none; border-bottom: none; border-left: none; border-right: none;"></th>
                     </tr>
                     <tr>
                          <!--<td></td>-->
-                        <th style= "border-right: none;"><input type="tel" maxlength="11" name="phone" placeholder="Phone(-없이)" required></th>
-                        <th></th>
+                        <th><input type="tel" maxlength="13" name="phone" placeholder="Phone" required></th>
+                        <th style= "border-top: none; border-bottom: none; border-left: none; border-right: none;"></th>
                     </tr>
                     <tr>
                         <th rowspan="2"> 프로필 사진</th>
-                        <th style= "border-right: none;"><input type="email" name="email" required placeholder="Email"></th>
-                        <th></th>
+                        <th><input type="email" name="email" required placeholder="Email"></th>
+                        <th style= "border-top: none; border-bottom: none; border-left: none; border-right: none;"></th>
                     </tr>
                     <tr>
                         <!--<td></td>-->
                         
                     <c:forTokens var="addr" items="${ loginUser.address }" delims="/" varStatus="status">
-						<c:if test="${ status.index eq 0 && addr >= '0' && addr <= '99999' }">
-							<c:set var="post" value="${ addr }"/>
-						</c:if>
-						<c:if test="${ status.index eq 0 && !(addr >= '0' && addr <= '99999') }">
-							<c:set var="address1" value="${ addr }"/>
-						</c:if>
 						<c:if test="${ status.index eq 1 }">
 							<c:set var="address1" value="${ addr }"/>
 						</c:if>
 					</c:forTokens>
 					
                         <th>
-							<input type="text" name="address1" class="form-control postcodify_address" value="${ address1 }"  placeholder="Address">   
+							<input type="text" id='address'  name="address1" class="form-control postcodify_address" value="${ address1 }"  placeholder="Address">   
 						</th>  
 						                   
-                        <th style="text-align:left;"> 
+                        <th style="text-align:left; border-top: none; border-bottom: none; border-left: none; border-right: none;"> 
                              &nbsp;<button type="button" class="btn btn-primary" id="postcodify_search_button" style=" width:50px;">검색</button>
                         </th>
                     </tr>
@@ -161,11 +159,12 @@
 				
 				<!-- 프로필 이미지 -->
                 <div id="imgArea">
-                    <input type="file" name="file1" id ="file1" onchange="loadImg(this,1)">
+                    <input type="file" name="file1" id ="file1" onchange="loadImg(this)">
                 </div>
                 <br><br>
                 <div class="btns" align="center">
-                    <button type="button" id="goMain" onclick="history.go(-1)">취소</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" id="goMain" onclick="main()">취소</button>&nbsp;&nbsp;&nbsp;&nbsp;
+
                     <button type="submit" id="joinBtn" disabled>가입</button>
                 </div>
                 </form>
@@ -183,21 +182,21 @@
 		})
 	})
 
-	function loadImg(inputFile, num) {
+	function loadImg(inputFile) {
 		if (inputFile.files.length == 1) {
 			var reader = new FileReader();
 			reader.readAsDataURL(inputFile.files[0]);
 
 			reader.onload = function(e) {
-				switch (num) {
-				case 1:
 					$("#profilImg").attr("src", e.target.result);
-					break;
-				}
-
 			}
 		}
 	}
+	
+	function main() { //취소버튼 클릭시 메인페이지 이동
+		  location.href="<%=request.getContextPath()%>";
+	}
+	
 	
 	//비밀번호, 비밀번호 확인이 일치하는지 확인
 	function joinValidate(){
@@ -208,11 +207,17 @@
 		}
 	}
 	
+	// 전화번호 자동 (-) 추가
+	$("#enrollForm input[name=phone]").on("keyup", function() { 
+	      $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
+	 });
+	
+	
 	//id 중복검사
 	function checkId() {
 		var userId = $("#enrollForm input[name=userId]")
 		if (userId.val() == "") {
-			alert("id를 입력해주세요");
+			alert("ID를 입력해주세요");
 			return false;
 		}
 
@@ -224,16 +229,16 @@
 			},
 			success : function(result) {
 				if (result == "fail") {
-					alert("사용할 수 없는 아이디 입니다.");
-					userId.focus();
+					alert("사용할 수 없는 아이디입니다.");
+					 $("#enrollForm input[name=userId]").focus();
 
 				} else {
 					if (confirm("사용가능한 아이디입니다. 사용하시겠습니까?")) {
 						userId.attr("readonly", "true");
 						$("#joinBtn").removeAttr("disabled");
+						
 					} else {
-						userId.focus();
-
+						 $("#enrollForm input[name=userId]").focus();
 					}
 				}
 			},
@@ -242,5 +247,11 @@
 			}
 		})
 	}
+	  // 엔터 클릭이벤트 연결
+	  $("#address").keydown(function(keyNum){
+	    	if(keyNum.keyCode == 13) {
+	    		$("#joinBtn").click();
+	    	}
+	  });
 </script>
 </html>

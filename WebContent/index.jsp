@@ -10,7 +10,33 @@
  <%@ include file ="views/common/menubar.jsp" %>
  
  <br><div>메인메뉴</div><br>
-   <a href="<%=request.getContextPath()%>/proInfo.list">상세페이지 확인용 링크</a>
+   <a href="<%=request.getContextPath()%>/viewAll.pr">프로젝트 모아보기 확인용 링크</a><br>
+   <a href="<%=request.getContextPath()%>/writeCreator.pr">프로젝트 업로드 페이지 확인용 링크</a><br>
+   <a href="<%=request.getContextPath()%>/mainPage">메인 페이지 확인용 링크</a><br>
+   <a href="#" onclick="godelete()">프로젝트 삭제 확인용 링크-prjNum=1로 설정</a><br>
+   <a href="#" onclick="goupdate()">프로젝트 업데이트 확인용 링크-prjNum=2로 설정</a><br>
+   <a href="#" onclick="go()">상세페이지 확인용 링크-prjNum=1로 설정</a>
+<a href="#" onclick="gofinish()">상세페이지 확인용 링크-prjNum=2로 설정</a>
+
  <%@ include file ="views/common/footer.jsp" %>
+ <script type="text/javascript">
+function go() {
+	var num=1;
+	location.href="<%=request.getContextPath()%>/proInfo.list?num="+num;
+}
+function gofinish() {
+	var num=2;
+	location.href="<%=request.getContextPath()%>/proInfo.list?num="+num;
+}
+function godelete() {
+	var pno=1;
+	location.href="<%=request.getContextPath()%>/delete.pr?pno="+pno;
+}
+function goupdate() {
+	var pno=2;
+	location.href="<%=request.getContextPath()%>/updateCreator.pr?pno="+pno;
+}
+	
+</script>
 </body>
 </html>

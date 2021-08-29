@@ -1,8 +1,10 @@
+<%@page import="com.kh.project_detail.controller.projectDetailAskPageServlet"%>
+<%@page import="com.kh.project.model.vo.Project"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.project_detail.model.vo.ProjectAsk"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.project.model.vo.Project"%>
 <%
-ArrayList<ProjectAsk> askList = (ArrayList<ProjectAsk>)request.getAttribute("askList");
-
+Project project = (Project)request.getAttribute("project");
+int num= project.getPrjNo();
 %>
 <!DOCTYPE html>
 <html>
@@ -15,23 +17,26 @@ ArrayList<ProjectAsk> askList = (ArrayList<ProjectAsk>)request.getAttribute("ask
 <body>
 <%@ include file="../common/menubar.jsp" %>
 	        <div id="body_content1"> 
-	            <h1 id="title">얼마나 생생하며 그들의 눈에 CD</h1>
+	            <h1 id="title"><%=project.getPrjTitle() %></h1>
 	                <h3 id="category">음악</h3>
 	                <div id="top_content">
 	                    <div id="top_left_img"><img src=""></div>
 	                    <div id="top_right_bar">
 	                        <aside id="aside1">
 	                                <div><h4 style="margin-bottom: 10px; margin-top: 00px;">모은금액</h4></div>
-	                                <div style="margin-bottom: 20pxd"><h1  class="textFiled" style="display: inline;">14,686,000</h1>
-	                                    <span style="display: inline-flex;"></span><h4 style="display: inline;">원</h4>
+	                                <div style="margin-bottom: 20px"><h1  class="textFiled" style="display: inline;">14,686,000</h1>
+	                                    <h4 style="display: inline;">원</h4>
 	                                        <span style="width: 100px;"></span>
-	                                    <span><h4 style="color: red; display: inline">144% 달성</h4></span></div>
-	                                <div style=" margin-bottom: 10px;"><h4 style="display: inline;">마감일</h4></div>
+	                                    <span><h4 style="color: red; display: inline; float: right;">144% 달성</h4></span></div>
+	                                    <p style="clear: both;"></p>
+	                                <div style=" margin-bottom: 10px;"><h4 style="display: inline;">펀딩시작일</h4></div>
 	                                <div><h2  class="textFiled">7월14일</h2><span style="display: inline-flex;"><h4>( 24일 남음 )</h4></span></div>
-	                                <div><h4 style="margin-bottom: 10px; margin-top: 0px;">예상배송일</h4></div>
+	                                <div><h4 style="margin-bottom: 10px; margin-top: 0px;">펀딩종료일</h4></div>
 	                                <div><h2  class="textFiled" >8월20일</h2></div>
 	                                <div style="margin-top: 30px; margin-bottom: 20px;">
 	                                    <input type="button" id="btn_fd" value="펀딩하기" onclick="checkLogin();"></input>
+	                                   <!-- <%-- status='n'일때 
+	                                    <input type="button" id="btn_fd" value="재펀딩요청하기<%=PRJ_RECOUNT부분++%>" onclick="checkLogin();"></input> --%> --> 
 	                                </div>
 	                                <div>
 	                                    <input type="button" id="btn_po" value="창작자 신고하기" onclick="location.href=''" ></input>
@@ -54,10 +59,15 @@ ArrayList<ProjectAsk> askList = (ArrayList<ProjectAsk>)request.getAttribute("ask
 	                </div>
 	            </div>
 	            
+	            
 	            <script>
 				function checkLogin(){
+					<%if(loginUser!=null){%>
+						location.href="<%=request.getContextPath()%>/paylist.pa?num='7'";
+					<%}else{%>
 						alert("로그인이 필요합니다.");
-						location.href="<%=request.getContextPath()%>/paylist.pa";
+					<%}%>
+					
 			    };
 	            </script>
 	           

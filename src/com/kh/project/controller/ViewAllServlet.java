@@ -52,7 +52,7 @@ public class ViewAllServlet extends HttpServlet {
 
 		pageLimit = 10;
 		
-		boardLimit = 10;
+		boardLimit = 6;
 		
 		maxPage = (int) Math.ceil((double) listCount / boardLimit);
 		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
@@ -68,8 +68,9 @@ public class ViewAllServlet extends HttpServlet {
 
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
+		request.setAttribute("allListCount", listCount);
 
-		request.getRequestDispatcher("views/project_detail/projectDetailView.jsp").forward(request, response);
+		request.getRequestDispatcher("views/project/viewAllProject.jsp").forward(request, response);
 	}
 
 	/**

@@ -31,15 +31,17 @@ public class IdCheckServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId = request.getParameter("userId");
+		System.out.println(userId);
 		
 		int result  = new MemberService().idCheck(userId);
-		
+	
 		PrintWriter out = response.getWriter();
+		System.out.println(result);
 		
 		if(result > 0) {
-			out.println("fail");
+			out.print("fail");
 		} else {
-			out.println("success");
+			out.print("success");
 		}
 	}
 

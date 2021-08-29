@@ -13,54 +13,104 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Fund-ing</title>
 </head>
-    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
 <style>
 body {
 	min-width: 1200px;
 }
 
-.navWrap {
-	width: 100%;
-	height: 50px
-}
-
-.navWrap>.nav {
-	width: 1200px;
-	margin: auto;
-}
-
-.navWrap>.logo {
-	width: 700px;
-	margin: auto;
-}
-
 .logo {
+    width: 700px;
+	margin: auto;
 	text-align: center;
 	color: rgb(31, 80, 126);
 	font-weight: bold;
 	width: 150px;
-	height: 50px;
 	display: table-cell;
 	font-size: 30px;
 	vertical-align: middle;
 	font-family: 'Black Han Sans';
 }
 
-.menu {
-	text-align: center;
-	color: black;
-	font-weight: bold;
-	width: 160px;
-	height: 50px;
-	display: table-cell;
-	font-size: 15px;
-	vertical-align: middle;
-	font-family: sans-serif;
+header> ul {
+    clear: both;
+    list-style:none;
 }
 
-.menu:hover {
-	color: blue;
+header>ul>li{
+     display: inline-block;
 }
+
+.navi{
+    list-style-type: none;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+
+}
+.navi li {
+    float: left;
+    margin-right: 5%;
+    position: relative;
+    line-height: 40px;
+}
+
+.navi li a{
+    clear: both;
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    color: rgb(31, 80, 126);
+    text-decoration: none;
+}
+
+.navi li a:hover{
+    color: rgb(31, 80, 126);
+}
+
+.navi li ul{
+    opacity: 0; 
+    position: absolute;
+    left:0;
+    width: 180px;
+    background-color: rgb(31, 80, 126);
+    list-style-type: none;
+    padding:0;
+    margin: 0;
+    width:150px;
+}
+
+.navi li:hover ul{
+    opacity: 1; 
+}
+
+.navi li ul li {
+    float: none; 
+    height: 0;
+    line-height:0;
+    background: none;
+}
+
+.navi li:hover ul li {
+    height: 30px;
+    line-height: 30px;
+    padding: 5px 0;
+    margin-left: 10px;
+}
+
+.navi li ul li a{
+    background-color: rgb(31, 80, 126);
+    font-weight: 600;
+    font-size: 12px;
+    color: white;
+}
+
+.navi li ul li a:hover{
+    color: white;
+    background-color: rgba(60, 115, 167, 0.644);
+}
+
 
 .btn {
 	background-color: white;
@@ -78,17 +128,17 @@ body {
 
 .info {
 	float: right;
-	margin-top: 10px;
+	margin-top: 3px;
 	margin-right: 20px;
 }
 
 .userInfo {
 	float: right;
-	margin-top: 10px;
+	margin-top: 5px;
 	margin-right: 10px;
 	text-align: right;
 	width: 150px;
-	height: 40px;
+	height: 35px;
 }
 
 a:link {
@@ -102,111 +152,143 @@ a:visited {
 }
 
 a:hover {
-	color: rgb(31, 80, 126);;
+	color: rgb(31, 80, 126);
 	text-decoration: none;
 }
 
-img {
+#profile {
 	float: right;
 	margin-right: 20px;
-	margin-top: 5px;
+	border-radius: 70%;
 }
 </style>
 
+<script>
+$(function(){
+    var msg = "<%=message%>";
+    
+    if(msg != "null"){
+       alert(msg);	
+       
+       <%session.removeAttribute("msg");%>
+    }
+ 	});
+</script>
+
 <body>
 	<% if(loginUser == null){ %>
-	<div class="navWrap">
-		<span class="nav">
-			<div class="logo">fund-ing</div>
-			<div class="menu" style="width: 100px;" onclick="goMain();">홈</div>
-			<div class="menu" onclick="goProject();">프로젝트 둘러보기</div>
-			<div class="menu" onclick="goProjectUp();">프로젝트 올리기</div>
-			<div class="menu" style="width: 100px;" onclick="goCommunity();">커뮤니티</div>
-			<div class="menu" style="width: 100px;" onclick="goConsumer();">고객지원</div>
+	<header>
+    <ul class="navi">
+        <li class="logo">fund-ing</li>
+        <li><a href="<%=request.getContextPath()%>">홈</a></li>
 
-		</span> 
-		<span class="info">
+        <li><a href="<%=request.getContextPath()%>/">프로젝트 둘러보기</a>
+            <ul>
+                <li><a href="viewAll.pr">모든 프로젝트</a></li>
+                <li><a href="viewPopular.pr">인기 프로젝트</a></li>
+                <li><a href="viewNew.pr">신규 프로젝트</a></li>
+                <li><a href="viewClose.pr">마감/실패 프로젝트</a></li>
+            </ul>
+        </li>
+        
+        <li><a href="#" onclick="checkLoginPrjPrj();">프로젝트 올리기</a></li>
+        <li><a href="<%=request.getContextPath()%>/">커뮤니티</a></li>
+        <li><a href="<%=request.getContextPath()%>/">고객지원</a>
+            <ul>
+                <li><a href="<%=request.getContextPath()%>/">공지사항</a></li>
+                <li><a href="<%=request.getContextPath()%>/">신고 게시판</a></li>
+            </ul>
+        </li>
+
+        <span class="info">
 			<button class="btn" onclick="login()">로그인</button>&nbsp;
 			<button class="btn" onclick="enroll()">회원가입</button>
 		</span>
-		<hr style="height: 1px; background-color: black;">
-	</div>
+    </ul>
+    </header>
+    
+    <hr  style="height: 1px; background-color: black;">
 	<% }else{%>
 	
 		<%if(loginUser.getMemNo() == 100) { %> <!-- 관리자 로그인상태라면 -->
-		<div class="navWrap">
-		<span class="nav">
-			<div class="logo">fund-ing</div>
-			<div class="menu" style="width: 100px;" onclick="goMain();">홈</div>
-			<div class="menu" onclick="goProject();">프로젝트 둘러보기</div>
-			<div class="menu" onclick="goProjectUp();">프로젝트 올리기</div>
-			<div class="menu" style="width: 100px;" onclick="goCommunity();">커뮤니티</div>
-			<div class="menu" style="width: 100px;" onclick="goConsumer();">고객지원</div>
+	<header>
+    <ul class="navi">
+        <li class="logo">fund-ing</li>
+        <li><a href="<%=request.getContextPath()%>">홈</a></li>
 
-		</span> 
-		
-		<img src="<%=request.getContextPath()%>/resources/images/default.PNG" style="width:50px; height:50px"> 
+        <li><a href="<%=request.getContextPath()%>/">프로젝트 둘러보기</a>
+            <ul>
+                <li><a href="viewAll.pr">모든 프로젝트</a></li>
+                <li><a href="viewPopular.pr">인기 프로젝트</a></li>
+                <li><a href="viewNew.pr">신규 프로젝트</a></li>
+                <li><a href="viewClose.pr">마감/실패 프로젝트</a></li>
+            </ul>
+        </li>
+        
+        <li><a href="#" onclick="checkLoginPrj();">프로젝트 올리기</a></li>
+        <li><a href="<%=request.getContextPath()%>/">커뮤니티</a></li>
+        <li><a href="<%=request.getContextPath()%>/">고객지원</a>
+            <ul>
+                <li><a href="<%=request.getContextPath()%>/">공지사항</a></li>
+                <li><a href="<%=request.getContextPath()%>/">신고 게시판</a></li>
+            </ul>
+        </li>
+
+       <img id="profile" src="<%=request.getContextPath()%>/resources/images/default.PNG" style="width:40px; height:40px"> 
 		
 		<span class="userInfo">
-            <a href="<%=request.getContextPath()%>/memberList.bo" style="font-size:15px; font-weight:bold;">회원관리리스트</a><br>
-            <a href="<%=request.getContextPath()%>/logout.me" style="font-size:10px; font-weight:bold;"> 로그아웃</a>
+          <a href="<%=request.getContextPath()%>/memberList.bo" style="font-size:15px; font-weight:bold;">회원 리스트</a><br>
+          <a href="<%=request.getContextPath()%>/logout.me" style="font-size:10px; font-weight:bold; color:red;"> 로그아웃</a>
         </span>
-		<hr style="height: 1px; background-color: black;">
-		</div>
+    </ul>
+    </header>
+	
+	<hr style="height: 1px; background-color: black;">
 		
 		<%} else {%>
 		
-		<div class="navWrap">
-		<span class="nav">
-			<div class="logo">fund-ing</div>
-			<div class="menu" style="width: 100px;" onclick="goMain();">홈</div>
-			<div class="menu" onclick="goProject();">프로젝트 둘러보기</div>
-			<div class="menu" onclick="goProjectUp();">프로젝트 올리기</div>
-			<div class="menu" style="width: 100px;" onclick="goCommunity();">커뮤니티</div>
-			<div class="menu" style="width: 100px;" onclick="goConsumer();">고객지원</div>
+	<header>
+    <ul class="navi">
+        <li class="logo">fund-ing</li>
+        <li><a href="<%=request.getContextPath()%>">홈</a></li>
 
-		</span> 
-		
-		<%if(at == null){ %>
-		<img src="<%=request.getContextPath()%>/resources/images/default.PNG" style="width:50px; height:50px"> 
+        <li><a href="<%=request.getContextPath()%>/">프로젝트 둘러보기</a>
+            <ul>
+                <li><a href="viewAll.pr">모든 프로젝트</a></li>
+                <li><a href="viewPopular.pr">인기 프로젝트</a></li>
+                <li><a href="viewNew.pr">신규 프로젝트</a></li>
+                <li><a href="viewClose.pr">마감/실패 프로젝트</a></li>
+            </ul>
+        </li>
+        
+        <li><a href="#" onclick="checkLoginPrj();">프로젝트 올리기</a></li>
+        <li><a href="<%=request.getContextPath()%>/">커뮤니티</a></li>
+        <li><a href="<%=request.getContextPath()%>/">고객지원</a>
+            <ul>
+                <li><a href="<%=request.getContextPath()%>/">공지사항</a></li>
+                <li><a href="<%=request.getContextPath()%>/">신고 게시판</a></li>
+            </ul>
+        </li>
+
+       	<%if(at == null){ %>
+		<img id="profile" src="<%=request.getContextPath()%>/resources/images/default.PNG" style="width:40px; height:40px"> 
 		<%} else { %>
-		<img src="<%=request.getContextPath() %>/resources/images/<%= at.getChangeName() %>" style="width:50px; height:50px"> 
+		<img id="profile"  src="<%=request.getContextPath() %>/resources/upfiles_profile/<%= at.getChangeName()%>" style="width:40px; height:40px"> 
 		<%} %>
 		
-		 
 		<span class="userInfo">
             <a href="" style="font-size:15px; font-weight:bold;"><%= loginUser.getMemName() %></a><br>
-            <a href="<%=request.getContextPath()%>/logout.me" style="font-size:10px; font-weight:bold;"> 로그아웃</a>
+            <a href="<%=request.getContextPath()%>/logout.me" style="font-size:10px; font-weight:bold; color:red;"> 로그아웃</a>
         </span>
-		<hr style="height: 1px; background-color: black;">
-		</div>
+    </ul>
+    </header>
 	
+	<hr style="height: 1px; background-color: black;">
+
 	<% } %>
 	<%} %>
 	
 	<script>
-        function goMain(){ 
-            location.href="<%=request.getContextPath()%>";
-        }
-    
-        function goProject(){ //프로젝트 둘러보기
-            location.href="<%=request.getContextPath()%>/";
-		
-		}
-
-		function goProjectUp() { //프로젝트 올리기
-			location.href = "<%=request.getContextPath()%>/";
-
-        }
-        
-        function goCommunity(){ // 커뮤니티
-            location.href="<%=request.getContextPath()%>/";
-        }
-
-        function goConsumer(){ //고객지원
-            location.href="<%=request.getContextPath()%>/";
-        }
-    
         function login(){ //로그인
         		 location.href="<%=request.getContextPath()%>/loginform.me"
         }
@@ -214,7 +296,15 @@ img {
         function enroll(){//회원가입
         	  location.href="<%= request.getContextPath()%>/enrollForm.me";
         }
-
+        
+        function checkLoginPrj(){
+			<%if(loginUser != null){%>
+				location.href="<%=request.getContextPath()%>/writeCreator.pr";
+			<%}else{%>
+				alert("로그인이 필요합니다.");
+				location.href="<%=request.getContextPath()%>/loginform.me";
+			<%}%>
+	    };
     
     </script>
 </body>

@@ -34,7 +34,7 @@
    
     <div id="footer-content">
         <div id="footer-1">
-            skyline
+          fund-ing
         </div><br>
 
         <div id="footer-2">
