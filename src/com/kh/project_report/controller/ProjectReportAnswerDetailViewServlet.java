@@ -1,7 +1,6 @@
 package com.kh.project_report.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,21 +9,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.kh.member.model.vo.Member;
-import com.kh.notice.model.vo.Notice;
 import com.kh.project_report.model.service.ProjectReportService;
+import com.kh.project_report.model.vo.PrAnswer;
 import com.kh.project_report.model.vo.ProjectReport;
 
 /**
- * Servlet implementation class ProjectDetailViewServlet
+ * Servlet implementation class ProjectReportAnswerDetailViewServlet
  */
-@WebServlet("/views/project_report/projectReportDetailView")
-public class ProjectReportDetailViewServlet extends HttpServlet {
+@WebServlet("/views/project_report/projectReportAnswerDetailView")
+public class ProjectReportAnswerDetailViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProjectReportDetailViewServlet() {
+    public ProjectReportAnswerDetailViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,19 +40,14 @@ public class ProjectReportDetailViewServlet extends HttpServlet {
 			memNo = ((Member)session.getAttribute("loginUser")).getMemNo();
 			}
 		ProjectReportService service = new ProjectReportService();
-		int result = service.updateCount(prjReportNo);
-		ProjectReport prjReport = service.getProjectReport(prjReportNo);
-		ProjectReport prevNo = service.getPrevProjectReport(prjReportNo);
-		ProjectReport nextNo = service.getNextProjectReport(prjReportNo);
+		int result = service.updateAnswerCount(prjReportNo);
+		PrAnswer prAnswer = service.getPrAnswer(prjReportNo);
 		
-		request.setAttribute("writerNo", prjReport.getPrjReportWriter());
-		request.setAttribute("p", prjReport);
-		request.setAttribute("prev", prevNo);
-		request.setAttribute("next", nextNo);
+		request.setAttribute("writerNo", prAnswer.getPrjReportWriter());
+		request.setAttribute("p", prAnswer);
 		request.setAttribute("memNo", memNo);
-		request.setAttribute("answer", prjReport.getAnswer());
 		
-		request.getRequestDispatcher("/views/project_report/projectReportDetailView").forward(request, response);
+		request.getRequestDispatcher("/views/project_report/projectReportAnswerDetailView.jsp").forward(request, response);
 	}
 
 	/**

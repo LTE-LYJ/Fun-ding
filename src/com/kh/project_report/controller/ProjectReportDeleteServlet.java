@@ -36,7 +36,7 @@ public class ProjectReportDeleteServlet extends HttpServlet {
 		int result = new ProjectReportService().deleteProjectReport(prjReportNo);
 
 		if (result > 0) {
-			response.sendRedirect("views/project_report/projectReportListView.jsp");
+			response.sendRedirect("views/project_report/projectReportListView");
 		}
 
 	}

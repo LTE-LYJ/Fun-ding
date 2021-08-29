@@ -15,13 +15,13 @@ public class ProjectReport {
 	private String writerName; // 작성자 이름
 	private int count; //조회수
 	private Date createDate; //작성일
-	private int prjReportLevel; //게시글레벨 신고글:1/신고글답변:2
 	private String status; //상태값(Y/N)
 	private String files; //파일
 	private int prjNo; // 프로젝트 번호
+	private String answer; // 답변여부
 	
 	public ProjectReport(int prjReportNo, String prjReportTitle, String prjReportContent, int prjReportWriter,
-			int count, Date createDate, int prjReportLevel, String status, String files) {
+			int count, Date createDate, String status, String files, String answer) {
 		super();
 		this.prjReportNo = prjReportNo;
 		this.prjReportTitle = prjReportTitle;
@@ -29,10 +29,9 @@ public class ProjectReport {
 		this.prjReportWriter = prjReportWriter;
 		this.count = count;
 		this.createDate = createDate;
-		this.prjReportLevel = prjReportLevel;
 		this.status = status;
 		this.files = files;
-	}
+		this.answer = answer;	}
 	
 	
 	public ProjectReport() {
@@ -41,7 +40,7 @@ public class ProjectReport {
 
 
 	public ProjectReport(int prjReportNo, String prjReportTitle, String prjReportContent, int prjReportWriter,
-			String writerName, int count, Date createDate, int prjReportLevel, String status, String files) {
+			String writerName, int count, Date createDate, String status, String files, String answer) {
 		super();
 		this.prjReportNo = prjReportNo;
 		this.prjReportTitle = prjReportTitle;
@@ -50,9 +49,9 @@ public class ProjectReport {
 		this.writerName = writerName;
 		this.count = count;
 		this.createDate = createDate;
-		this.prjReportLevel = prjReportLevel;
 		this.status = status;
 		this.files = files;
+		this.answer = answer;
 	}
 
 
@@ -81,8 +80,8 @@ public class ProjectReport {
 
 
 	public ProjectReport(int prjReportNo, String prjReportTitle, String prjReportContent, int prjReportWriter,
-			String writerName, int count, Date createDate, int prjReportLevel, String status, String files,
-			int prjNo) {
+			String writerName, int count, Date createDate, String status, String files,
+			int prjNo, String answer ) {
 		super();
 		this.prjReportNo = prjReportNo;
 		this.prjReportTitle = prjReportTitle;
@@ -91,10 +90,10 @@ public class ProjectReport {
 		this.writerName = writerName;
 		this.count = count;
 		this.createDate = createDate;
-		this.prjReportLevel = prjReportLevel;
 		this.status = status;
 		this.files = files;
 		this.prjNo = prjNo;
+		this.answer = answer;
 	}
 
 
