@@ -75,7 +75,7 @@
         
         <div id="login">
             <div id="loginBox">
-            <form id="loginForm" action="<%=request.getContextPath()%>/login.me" method="post" onsubmit="return loginValidate();">
+            <form id="loginForm" action="<%=request.getContextPath()%>/login.me" method="post"  onsubmit="return loginValidate();">
                 <table>
                     <tr>
                         <th><input id="userId" type="text" name="userId" placeholder="ID"></th>
@@ -120,7 +120,21 @@
                 		$("#loginBtn").click();
                 	}
                 });
-                	
+                
+                function loginValidate() {
+                    if($("#userId").val().trim().length == 0){
+                       alert("아이디를 입력하세요");
+                       $("#userId").focus();
+                       return false;
+                    }
+                    if($("#userPwd").val().trim().length == 0){
+                       alert("비밀번호를 입력하세요");
+                       $("#userPwd").focus();
+                       return false;
+                    }
+                    return true;
+                 }
+               
                 </script>
             </form> 
             </div>      
