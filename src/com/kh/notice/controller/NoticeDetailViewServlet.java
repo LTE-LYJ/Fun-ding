@@ -40,7 +40,7 @@ public class NoticeDetailViewServlet extends HttpServlet {
 			memNo = ((Member)session.getAttribute("loginUser")).getMemNo();
 			}
 		NoticeService service = new NoticeService();
-		int result = service.uodateCount(noticeNo);
+		int result = service.updateCount(noticeNo);
 		Notice notice = service.getNotice(noticeNo);
 		Notice prevNo = service.getPrevNotice(noticeNo);
 		Notice nextNo = service.getNextNotice(noticeNo);

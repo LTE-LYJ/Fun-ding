@@ -23,8 +23,7 @@
 	<br>
 	<div class="head">
 		<h2 class="list">
-			<a class="in" href="noticeListView">공지사항</a> <a class="out"
-				href="../project_report/projectReportListView">신고게시판</a>
+			<a class="in" href="boardListView">커뮤니티</a> 
 		</h2>
 	</div>
 	<hr>
@@ -35,32 +34,32 @@
 
 		<div class="board_view_wrap">
 			<div class="board_view">
-				<div class="btitle">${n.noticeTitle}</div>
+				<div class="btitle">${b.boardTitle}</div>
 				<div class="binfo">
 					<dl>
 						<dt>번호</dt>
-						<dd>${n.noticeNo}</dd>
+						<dd>${b.boardNo}</dd>
 					</dl>
 					<dl>
 						<dt>글쓴이</dt>
-						<dd>${n.noticeWriter}</dd>
+						<dd>${b.boardWriter}</dd>
 					</dl>
 					<dl>
 						<dt>작성일</dt>
-						<dd>${n.createDate}</dd>
+						<dd>${b.createDate}</dd>
 					</dl>
 					<dl>
 						<dt>조회수</dt>
 						<dd>
 							<fmt:formatNumber type="number" pattern="##,####"
-								value="${n.count}" />
+								value="${b.count}" />
 						</dd>
 					</dl>
 				</div>
 				<div class="binfo">
 					<dl>
 						<dt>첨부파일</dt>
-						<c:forTokens var="fileName" items="${n.files}" delims=","
+						<c:forTokens var="fileName" items="${b.files}" delims=","
 							varStatus="st">
 							<c:if test="${fn:endsWith(fileName, '.zip') }">
 								<c:set var="style" value="font-weight: blod;;"></c:set>
@@ -72,17 +71,52 @@
 						</c:forTokens>
 					</dl>
 				</div>
-				<div class="cont">${n.noticeContent}</div>
+				<div class="cont">${b.boardContent}</div>
 			</div>
 		</div>
-		<c:if test="${memNo == 1}">
+		<c:if test="${writerNo == memNo || memNo==100}">
 		<c:set var="contextPath" value="<%=request.getContextPath() %>"></c:set>
 		<div class="bt_wrap">
-			<a href="noticeUpdateForm?noticeNo=${n.noticeNo}">수정</a> <a class="on"
-				href="${contextPath}/delete.no?noticeNo=${n.noticeNo}">삭제</a>
+			<a href="noticeUpdateForm?noticeNo=${b.boardNo}">수정</a> <a class="on"
+				href="${contextPath}/delete.bo?noticeNo=${b.boardNo}">삭제</a>
 		</div>
 		</c:if>
-
+		
+		<div class="reply_view">
+			<c:forEach var="r" items="${reply}" >
+					<div class="reply_view">
+				<dl>
+					<dt class="reply">${r.memName}</dt>
+					<dd class="reply_cont">${r.boardReplyContent}</dd>
+				</dl>
+				<dl class="reply_info">
+					<dd>${r.createDate} ${r.memName}</dd>
+					<c:if test="${writerNo == memNo || memNo==100}">
+					<dd><a href="${contextPath}/replyDelete.bo?boardReplyNo=${r.boardReplyNo}&boardNo=${b.boardNo}">삭제</a></dd>
+					</c:if>
+				</dl>
+					</div>
+			
+			</c:forEach>
+			
+			
+			<form action="boardDetailView" method="post">
+				<dl>
+					<dt>${memName}</dt>
+					<dd><textarea class="content" id="content" name="content" placeholder="댓글을 남겨보세요" required></textarea></dd>
+					<dd class="ref_btn"><input class="on" type="submit" value="등록" onclick="check()"></dd>
+				</dl>
+				<input type="hidden" name="boardNo" value="${b.boardNo}">
+				
+				<script>
+				function check() {
+					if($("#content").val() == "")
+						alert("내용을 입력하세요")
+					
+				}
+				</script>
+			</form>
+		</div>
 
 
 
@@ -94,15 +128,15 @@
 					<tr>
 						<th>다음글</th>
 						<td><a id="next"
-							href="noticeDetailView?noticeNo=${next.noticeNo}">${next.noticeTitle}</a>
-							<c:if test="${next.noticeNo == null}">다음글이 없습니다.</c:if></td>
+							href="boardDetailView?boardNo=${next.boardNo}">${next.boardTitle}</a>
+							<c:if test="${next.boardNo == null}">다음글이 없습니다.</c:if></td>
 					</tr>
 
 					<tr>
 						<th>이전글</th>
 						<td><a id="prev"
-							href="noticeDetailView?noticeNo=${prev.noticeNo }">${prev.noticeTitle}</a>
-							<c:if test="${prev.noticeNo == null}">다음글이 없습니다.</c:if></td>
+							href="boardDetailView?boardNo=${prev.boardNo}">${prev.boardTitle}</a>
+							<c:if test="${prev.boardNo == null}">다음글이 없습니다.</c:if></td>
 					</tr>
 
 				</tbody>
