@@ -122,7 +122,7 @@
                     </tr>
                     <tr>
                          <!--<td></td>-->
-                        <th><input type="tel" maxlength="11" name="phone" placeholder="Phone(-없이)" required></th>
+                        <th><input type="tel" maxlength="13" name="phone" placeholder="Phone" required></th>
                         <th style= "border-top: none; border-bottom: none; border-left: none; border-right: none;"></th>
                     </tr>
                     <tr>
@@ -140,7 +140,7 @@
 					</c:forTokens>
 					
                         <th>
-							<input type="text" name="address1" class="form-control postcodify_address" value="${ address1 }"  placeholder="Address">   
+							<input type="text" id='address'  name="address1" class="form-control postcodify_address" value="${ address1 }"  placeholder="Address">   
 						</th>  
 						                   
                         <th style="text-align:left; border-top: none; border-bottom: none; border-left: none; border-right: none;"> 
@@ -159,7 +159,7 @@
 				
 				<!-- 프로필 이미지 -->
                 <div id="imgArea">
-                    <input type="file" name="file1" id ="file1" onchange="loadImg(this,1)">
+                    <input type="file" name="file1" id ="file1" onchange="loadImg(this)">
                 </div>
                 <br><br>
                 <div class="btns" align="center">
@@ -182,18 +182,13 @@
 		})
 	})
 
-	function loadImg(inputFile, num) {
+	function loadImg(inputFile) {
 		if (inputFile.files.length == 1) {
 			var reader = new FileReader();
 			reader.readAsDataURL(inputFile.files[0]);
 
 			reader.onload = function(e) {
-				switch (num) {
-				case 1:
 					$("#profilImg").attr("src", e.target.result);
-					break;
-				}
-
 			}
 		}
 	}
@@ -211,6 +206,12 @@
 			return false;			
 		}
 	}
+	
+	// 전화번호 자동 (-) 추가
+	$("#enrollForm input[name=phone]").on("keyup", function() { 
+	      $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
+	 });
+	
 	
 	//id 중복검사
 	function checkId() {
@@ -246,5 +247,11 @@
 			}
 		})
 	}
+	  // 엔터 클릭이벤트 연결
+	  $("#address").keydown(function(keyNum){
+	    	if(keyNum.keyCode == 13) {
+	    		$("#joinBtn").click();
+	    	}
+	  });
 </script>
 </html>

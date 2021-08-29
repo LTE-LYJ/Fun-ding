@@ -267,7 +267,7 @@
              						
              						var str = '<tbody><tr>'+
              						'<td colspan="4" style="width:500px; padding:30px;">'
-             						+ "조회된 회원 리스트가 없습니다. 이름을 정확히 입력해주세요." + '</td>' 
+             						+ "조회된 회원 리스트가 없습니다. 정확히 입력해주세요." + '</td>' 
              						+ '</tr></<tbody>'
              						
              						$("#memberTable").append(str); 
@@ -277,6 +277,16 @@
              				},
              				error:function(){
     							console.log("Ajax 통신 실패");
+    							
+    							$("#memberTable > tbody").empty();
+         						$(".pagingArea").empty();
+         						
+         						var str = '<tbody><tr>'+
+         						'<td colspan="4" style="width:500px; padding:30px;">'
+         						+ "조회된 회원 리스트가 없습니다. 정확히 입력해주세요." + '</td>' 
+         						+ '</tr></<tbody>'
+         						
+         						$("#memberTable").append(str); 
     						}
              			
              			})
@@ -310,6 +320,12 @@
                  			}
                  		}
              		}
+             		
+             		$("#mem").keydown(function(keyNum){
+             	    	if(keyNum.keyCode == 13) {
+             	    		$("#searchBtn").click();
+             	    	}
+             	    });
              </script>
   <%@ include file ="../common/footer.jsp" %>
 </body>
