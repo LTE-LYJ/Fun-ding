@@ -198,13 +198,28 @@
 	}
 	
 	
-	//비밀번호, 비밀번호 확인이 일치하는지 확인
+	
 	function joinValidate(){
+		
+		//아이디가 영어로 시작하고 4~11자리수인지 확인
+		if(!(/^[a-z][a-z\d]{3,11}$/i.test($("#enrollForm input[name=userId]").val()))){
+			$("#enrollForm input[name=userId]").focus();
+	        return false;
+		}
+		
+		//비밀번호, 비밀번호 확인이 일치하는지 확인
 		if($("#enrollForm input[name=userPwd]").val() != $("#enrollForm input[name=checkPwd]").val()){
 			$("#pwdResult").text("비밀번호 불일치").css("color", "red");
 			$("#pwdResult").focus();
 			return false;			
 		}
+		//이름이 한글로 2글자 이상인지 확인 
+		 if(!(/^[가-힣]{2,}$/.test($("#enrollForm input[name=userName]").val()))){
+			 $("#enrollForm input[name=userName]").focus();
+	        return false;
+		 }
+		 
+		 return true;
 	}
 	
 	// 전화번호 자동 (-) 추가
