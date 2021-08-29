@@ -40,7 +40,7 @@ public class getCoinServlet extends HttpServlet {
 	       if(m!= null) {
 	          out.print(getCoin);
 	       } else {
-	          out.print("fail");;
+	          out.print("fail");
 	       }
 	       out.flush();
 	       out.close();

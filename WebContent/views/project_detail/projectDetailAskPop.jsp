@@ -32,8 +32,8 @@ $(function() {
 </script>
 </head>
 <body>
-		<div class="outer">
-		<div id="box_1" style="heigth: 75%">
+		<div class="outer" style="padding-top: 20px; padding-bottom: 20px">
+		<div id="box_1" style="min-height: 310px">
         <h3 id="Ask_creater">창작자에게 문의하기</h3>
         <br>
         <form id="AskDetail"  action="<%=request.getContextPath() %>/delete.ask" method="post">

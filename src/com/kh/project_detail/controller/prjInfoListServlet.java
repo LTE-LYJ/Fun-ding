@@ -3,6 +3,7 @@ package com.kh.project_detail.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,9 +44,8 @@ public class prjInfoListServlet extends HttpServlet {
 		Creator creator = new PrjDeService().selectCreList(num, project.getCreNo());// 창작자 정보 
 		ArrayList<Reward> rewordList  = new PrjDeService().selectRewordList(num); // 리워드 정보
 		ProfileAttachment createrPro = new PrjDeService().selectCreatorProfile(num);// 크리에이터 이미지
-
 		String view ="";
-		if(project != null) {
+		if(project.getPrjTitle() != null) {
 			request.setAttribute("project", project);
 			request.setAttribute("projectCat", projectCat);
 			request.setAttribute("prjAttList", prjAttList);
@@ -53,12 +53,11 @@ public class prjInfoListServlet extends HttpServlet {
 			request.setAttribute("rewordList", rewordList);
 			request.setAttribute("createrPro", createrPro);
 			view ="views/project_detail/projectDetailInfo.jsp";
-		}else {
-			request.setAttribute("msg", "프로젝트 조회에 실패했습니다.");
+		}else{
+			request.setAttribute("msg", "프로젝트를 불러오는데 실패했습니다.");
 			view ="views/common/errorPage.jsp";
 		}
 		request.getRequestDispatcher(view).forward(request, response);
-		
 	}
 
 	/**

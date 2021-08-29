@@ -65,6 +65,7 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
 	        	               data:{num : <%=num%>},
 	        	               success:function(status){
 	        	            	   if(status=="success"){
+	        	            		   alert('재펀딩 요청이 완료되었습니다.');
 	        	            		   selectList();
 	        	            	   }
 		        	            },
@@ -115,7 +116,7 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
 	  <div id="body_content2">
         <div id="body">
                 <div id="box">
-                        <div id="creator">
+                        <div id="creator" style="margin-bottom: 5px">
                         <%if(at == null){ %>
 							<img id="rev_Img" src="<%=request.getContextPath()%>/resources/images/default.PNG"> 
 							<%} else { %>
@@ -123,13 +124,14 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
 							<%} %>
                         <% if(loginUser != null){ %>
                             <span id="name_area"><h4 id="rev_Name"><%=loginUser.getMemId() %></h4></span>
-                            <textarea id="replyContent" name="contentarea" cols="107" rows="8" style="resize:none;" placeholder="--자 이내로 입력해주세요."></textarea>
+                            <textarea id="replyContent" name="contentarea" cols="103" rows="8" style="resize:none;" placeholder="300자 이내로 입력해주세요."></textarea>
                         <% }else{ %>
                         <span id="name_area"><h4 id="rev_Name">비회원</h4></span>
                         <textarea  id="replyContent" name="contentarea" readonly cols="107" rows="8" style="resize:none;" placeholder="로그인한 사용자만 가능한 서비스입니다. 로그인 후 이용해주세요"></textarea>
                         <% } %>
                         </div>
-                        <input type="button" id="btn_con" value="댓글작성"></input><br><br><br><br>
+                        <input type="text" placeholder="글자 수" id="textLengthCheck" style=" float: right; border: none; text-align:right; width: 100%; background-color: white"disabled/><br>
+                        <input type="button" id="btn_con" value="댓글작성" style="margin-top: 5px; display: block"></input><br><br><br>
                         <hr>
 
                  <table id="reviewArea">
@@ -324,6 +326,18 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
                 }
 			})
 		});
+        
+        
+        $("#replyContent").keyup(function(e) {
+    		var content = $(this).val();
+    		$("#textLengthCheck").val("(" + content.length + "/ 300)"); // 카운팅
+    		if(content.length > 300) {
+    			alert("최대 300자까지 입력 가능합니다.");
+    			$(this).val(content.substring(0, 300)); // 넘친 글자 지우기
+    			$('#textLengthCheck').val("(300 / 최대 300자)");
+    			$("#replyContent").focus();
+    		}
+    	});
         </script>
 </body>
 </html>
