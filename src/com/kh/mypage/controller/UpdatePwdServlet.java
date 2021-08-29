@@ -40,11 +40,12 @@ public class UpdatePwdServlet extends HttpServlet {
 		
 		Member updateMem = new MypageService().updatePwd(memId, memPwd, changePwd);
 		
-		RequestDispatcher view  = request.getRequestDispatcher("views/mypage/mypageInfo.jsp");
+		RequestDispatcher view  = request.getRequestDispatcher("views/mypage/mypageInfoUpdate.jsp");
+		
 		if(updateMem != null) {
-			//request.setAttribute("sTag", "Y");
+			request.setAttribute("sTag", "Y");
 			request.setAttribute("msg", "비밀번호가 변경되었습니다.");
-			request.getSession().setAttribute("loginMember", updateMem);
+			request.getSession().setAttribute("loginUser", updateMem);
 		}else {
 			
 			request.setAttribute("msg", "비밀번호 변경 실패");

@@ -12,7 +12,22 @@
 %>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>	
+<style>
+	.fdOuter{
+		margin-top: 200px;
+		margin-left: 350px;
+	}
+	.fd1{
+		margin-bottom: 100px;
+		border: 1px lightgray;
+        height: 300px;
+        width: 700px;
+	}
+	.fd2{
+		height: 300px;
+        width: 700px;
+        border: 1px lightgray;
+	}	
     .fd1{
         overflow: auto;
         height: 300px;
@@ -31,6 +46,7 @@
 <%@ include file = "../common/menubar.jsp" %>
 <%@ include file="../mypage/mypageMenubar.jsp" %>
 
+<div class="fdOuter">
 	<div class="fdwrap">
         <h3>진행 중인 펀딩</h3>
         
@@ -59,9 +75,10 @@
 			</table>
         </div>
 
-        <h3>종료된 펀딩</h3>
+        
         
         <div class="fd2">
+        	<h3>종료된 펀딩</h3>
             
             <!-- <div id="temp4">
             	<div class="fdp" style="background-color: gray; width:50px; height: 50px;"></div>
@@ -85,6 +102,20 @@
 			</table>
         </div>
     </div>
+    
+</div>
+
+<script>
+	<%if(!list.isEmpty()){%>
+	$(function(){
+		$(".bmtb>tbody>tr").click(function(){
+			var bno = $(this).children().eq(0).text();
+			location.href="<%= contextPath%>/fdDetailView.mp?bno="+bno;
+		})
+	})
+	<%}%>
+
+</script>
     
     <div class="ft" style="margin-top: 200px;">
 		<%@ include file="../common/footer.jsp" %>

@@ -9,24 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.mypage.model.service.MypageService;
 import com.kh.mypage.model.vo.Board;
 import com.kh.mypage.model.vo.PageInfo;
-import com.kh.member.model.service.MemberService;
-import com.kh.member.model.vo.Member;
-import com.kh.mypage.model.service.MypageService;
-import com.kh.mypage.model.vo.Project;
+import com.kh.mypage.model.vo.Project_report;
 
 /**
- * Servlet implementation class ProjectServlet
+ * Servlet implementation class BoardReportListServlet
  */
-@WebServlet("/project.mp")
-public class ProjectServlet extends HttpServlet {
+@WebServlet("/boardReportList.mp")
+public class BoardReportListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProjectServlet() {
+    public BoardReportListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,7 +33,7 @@ public class ProjectServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		//페이징
 		int listCount;			// 총 게시글 갯수
 		int currentPage;		// 현재 페이지 (즉, 요청한 페이지)
@@ -46,7 +44,7 @@ public class ProjectServlet extends HttpServlet {
 		int pageLimit;			// 한 페이지 하단에 보여질 페이지 최대 갯수
 		int boardLimit;			// 한 페이지에 보여질 게시글 최대 갯수
 		 
-		listCount = new MypageService().getPrjListCount();
+		listCount = new MypageService().getReportListCount();
 		
 		currentPage = 1;
 		
@@ -67,14 +65,12 @@ public class ProjectServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, startPage, endPage, maxPage, pageLimit, boardLimit);
 		
-		ArrayList<Project> list = new MypageService().selectPrjList(pi);
+		ArrayList<Project_report> list = new MypageService().selectReportList(pi);
 		
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
 		
-		request.getRequestDispatcher("views/mypage/mypageProject.jsp").forward(request, response);
-		
-				
+		request.getRequestDispatcher("views/mypage/mypageBoardReportList.jsp").forward(request, response);
 	}
 
 	/**
