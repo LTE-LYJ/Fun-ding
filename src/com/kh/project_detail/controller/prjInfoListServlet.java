@@ -44,6 +44,9 @@ public class prjInfoListServlet extends HttpServlet {
 		Creator creator = new PrjDeService().selectCreList(num, project.getCreNo());// 창작자 정보 
 		ArrayList<Reward> rewordList  = new PrjDeService().selectRewordList(num); // 리워드 정보
 		ProfileAttachment createrPro = new PrjDeService().selectCreatorProfile(num);// 크리에이터 이미지
+
+		System.out.println(createrPro);
+
 		String view ="";
 		if(project.getPrjTitle() != null) {
 			request.setAttribute("project", project);
@@ -51,7 +54,15 @@ public class prjInfoListServlet extends HttpServlet {
 			request.setAttribute("prjAttList", prjAttList);
 			request.setAttribute("creator", creator);
 			request.setAttribute("rewordList", rewordList);
-			request.setAttribute("createrPro", createrPro);
+			if(createrPro==null) {
+				ProfileAttachment createrfail = new ProfileAttachment();
+				createrfail.setFileNo(0);
+				System.out.println(createrfail);
+				request.setAttribute("createrPro", createrfail);
+			}else {
+				request.setAttribute("createrPro", createrPro);
+			}
+			
 			view ="views/project_detail/projectDetailInfo.jsp";
 		}else{
 			request.setAttribute("msg", "프로젝트를 불러오는데 실패했습니다.");
