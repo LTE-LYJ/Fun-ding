@@ -178,7 +178,7 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
 				<%} %>
 				
 	                <div id="creator_content">
-	                 <%if(createrPro.getChangeName() == null){ %>
+	                 <%if(createrPro.getFileNo()==0){ %>
 	                 <div><img class="profile" src="<%=request.getContextPath()%>/resources/images/default.PNG" style="width: 40px; height: 40px; border-radius: 70%; vertical-align: middle; float:none; margin-bottom:10px; clear: both;">
 							<%} else { %>
 							<div><img class="profile" src="resources/upfiles_profile/<%=createrPro.getChangeName() %>" style="width: 40px; height: 40px; border-radius: 70%; vertical-align: middle; float:none; margin-bottom:10px; clear: both;">
