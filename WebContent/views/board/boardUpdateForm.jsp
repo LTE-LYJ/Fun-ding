@@ -45,8 +45,8 @@
 							<dt>카테고리</dt>
 							<dd>
 								<select name="cate" class="cate">
-									<c:forEach var="b" items="${cat}" begin="0" end="3">
-										<option value="${index*10+10}">${b.boardCatName}</option>
+									<c:forEach var="b" items="${cat}" begin="0" end="3" varStatus="index">
+										<option value="${index.count*10}">${b.boardCatName}</option>
 									</c:forEach>
 								</select>
 							</dd>
