@@ -53,17 +53,13 @@ public class BoardListServlet extends HttpServlet {
 			field = field_;
 		}
 		String query = "";
-
 		if (query_ != null && !query_.equals("")) {
 			query = query_;
 		}
-
 		int page = 1;
-
 		if (page_ != null && !page_.equals("")) {
 			page = Integer.parseInt(page_);
 		}
-		
 		String  cate = "";
 		if(cate_ != null && !cate_.equals("")) {
 			cate = cate_;
