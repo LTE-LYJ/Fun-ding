@@ -183,7 +183,7 @@ $(function(){
         <li><a href="<%=request.getContextPath()%>">홈</a></li>
 
         <li><a href="<%=request.getContextPath()%>/">프로젝트 둘러보기</a>
-            <ul>
+            <ul style="z-index:2;">
                 <li><a href="<%=request.getContextPath()%>/viewAll.pr">모든 프로젝트</a></li>
                 <li><a href="<%=request.getContextPath()%>/viewPopular.pr">인기 프로젝트</a></li>
                 <li><a href="<%=request.getContextPath()%>/viewNew.pr">신규 프로젝트</a></li>
@@ -197,7 +197,7 @@ $(function(){
 
 
         <li><a href="<%=request.getContextPath()%>/">고객지원</a>
-            <ul>
+            <ul style="z-index:2;">
                 <li><a href="<%=request.getContextPath()%>/views/notice/noticeListView">공지사항</a></li>
                 <li><a href="<%=request.getContextPath()%>/views/project_report/projectReportListView">신고 게시판</a></li>
             </ul>
@@ -220,7 +220,7 @@ $(function(){
         <li><a href="<%=request.getContextPath()%>">홈</a></li>
 
         <li><a href="<%=request.getContextPath()%>/">프로젝트 둘러보기</a>
-            <ul>
+            <ul style="z-index:2;">
                 <li><a href="<%=request.getContextPath()%>/viewAll.pr">모든 프로젝트</a></li>
                 <li><a href="<%=request.getContextPath()%>/viewPopular.pr">인기 프로젝트</a></li>
                 <li><a href="<%=request.getContextPath()%>/viewNew.pr">신규 프로젝트</a></li>
@@ -231,7 +231,7 @@ $(function(){
         <li><a href="#" onclick="checkLoginPrj();">프로젝트 올리기</a></li>
         <li><a href="<%=request.getContextPath()%>/views/board/boardListView">커뮤니티</a></li>
         <li><a href="<%=request.getContextPath()%>/views/notice/noticeListView">고객지원</a>
-            <ul>
+            <ul style="z-index:2;">
                 <li><a href="<%=request.getContextPath()%>/views/notice/noticeListView">공지사항</a></li>
                 <li><a href="<%=request.getContextPath()%>/views/project_report/projectReportListView">신고 게시판</a></li>
             </ul>
@@ -256,7 +256,7 @@ $(function(){
         <li><a href="<%=request.getContextPath()%>">홈</a></li>
 
         <li><a href="<%=request.getContextPath()%>/">프로젝트 둘러보기</a>
-            <ul>
+            <ul style="z-index:2;">
                 <li><a href="<%=request.getContextPath()%>/viewAll.pr">모든 프로젝트</a></li>
                 <li><a href="<%=request.getContextPath()%>/viewPopular.pr">인기 프로젝트</a></li>
                 <li><a href="<%=request.getContextPath()%>/viewNew.pr">신규 프로젝트</a></li>
@@ -267,7 +267,7 @@ $(function(){
         <li><a href="#" onclick="checkLoginPrj();">프로젝트 올리기</a></li>
         <li><a href="<%=request.getContextPath()%>/views/board/boardListView">커뮤니티</a></li>
         <li><a href="<%=request.getContextPath()%>/views/notice/noticeListView">고객지원</a>
-            <ul>
+            <ul style="z-index:2;">
                 <li><a href="<%=request.getContextPath()%>/views/notice/noticeListView">공지사항</a></li>
                 <li><a href="<%=request.getContextPath()%>/views/project_report/projectReportListView">신고 게시판</a></li>
             </ul>
