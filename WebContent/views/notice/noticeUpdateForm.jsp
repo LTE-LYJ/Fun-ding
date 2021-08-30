@@ -48,6 +48,10 @@
 							<dd>
 								<input type="file" name="file" value="${n.files}" />
 							</dd>
+							<dt></dt>
+							<dd>
+								<input type="file" name="file" />
+							</dd>
 						</dl>
 					</div>
 					

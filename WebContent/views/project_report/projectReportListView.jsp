@@ -40,7 +40,7 @@
 						<th class="writer">작성자</th>
 						<th class="date">작성일</th>
 						<th class="count">조회수</th>
-						<th class="ask">답변</th>
+						<th class="answer">답변</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -56,10 +56,10 @@
 							<td class="count">${pr.count}</td>
 							<c:choose>
 							<c:when test="${pr.answer eq 'Y'}">
-							<td class="ask"><a href="projectReportAnswerDetailView?prjReportNo=${pr.prjReportNo}">답변완료</a></td>
+							<td class="answer"><a href="projectReportAnswerDetailView?prjReportNo=${pr.prjReportNo}">답변완료</a></td>
 							</c:when>
 							<c:when test="${pr.answer eq 'N'}">
-							<td class="ask">미답변</td>
+							<td class="answer">미답변</td>
 							</c:when>
 							
 							</c:choose>
@@ -108,7 +108,6 @@
 				</div>
 			</c:if>
 		</div>
-		<input type="file">
 
 		<!-- 검색 -->
 		<div class="search">

@@ -127,6 +127,10 @@ a {
 .board_list .count {
 	width: 50px;
 }
+.board_list .answer{
+	width: 70px;
+	font-weight: 600;
+}
 .board_list .table_head .title  {
 	text-align: center;
 }
