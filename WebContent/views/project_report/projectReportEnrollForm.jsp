@@ -45,13 +45,18 @@
 							<dd>
 								<input type="file" name="file" />
 							</dd>
+							<dt></dt>
+							<dd>
+								<input type="file" name="file" />
+							</dd>
 						</dl>
+						
 					</div>
 					<div class="btitle" >
 						<dl>
 							<dt>프로젝트번호</dt>
 							<dd>
-								<input type="text" name="prjNo" />
+								<input type="number" name="prjNo" />
 							</dd>
 						</dl>
 					</div>

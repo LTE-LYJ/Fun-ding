@@ -46,6 +46,10 @@
 							<dd>
 								<input type="file" name="file" value=""/>
 							</dd>
+							<dt></dt>
+							<dd>
+								<input type="file" name="file" />
+							</dd>
 						</dl>
 					</div>
 					<div class="btitle" >

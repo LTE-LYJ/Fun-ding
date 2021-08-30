@@ -23,7 +23,7 @@
 	<br>
 	<div class="head">
 		<h2 class="list">
-			<a class="in" href="boardListView">커뮤니티</a> 
+			<a class="in" href="boardListView">커뮤니티</a>
 		</h2>
 	</div>
 	<hr>
@@ -65,7 +65,8 @@
 								<c:set var="style" value="font-weight: blod;;"></c:set>
 							</c:if>
 							<dd>
-							<a download href="/FundingPro/upload/${fileName}" style="${style}">${fn:toUpperCase(fileName)}</a>
+								<a download href="/FundingPro/upload/${fileName}"
+									style="${style}">${fn:toUpperCase(fileName)}</a>
 							</dd>
 							<c:if test="${not st.last}">/</c:if>
 						</c:forTokens>
@@ -75,47 +76,56 @@
 			</div>
 		</div>
 		<c:if test="${writerNo == memNo || memNo==100}">
-		<c:set var="contextPath" value="<%=request.getContextPath() %>"></c:set>
-		<div class="bt_wrap">
-			<a href="boardUpdateForm?boardNo=${b.boardNo}">수정</a> <a class="on"
-				href="${contextPath}/bDelete.bo?boardNo=${b.boardNo}">삭제</a>
-		</div>
+			<c:set var="contextPath" value="<%=request.getContextPath()%>"></c:set>
+			<div class="bt_wrap">
+				<a href="boardUpdateForm?boardNo=${b.boardNo}">수정</a> <a class="on"
+					href="${contextPath}/bDelete.bo?boardNo=${b.boardNo}">삭제</a>
+			</div>
 		</c:if>
-		
+
 		<div class="reply_view">
-			<c:forEach var="r" items="${reply}" >
-					<div class="reply_view">
-				<dl>
-					<dt class="reply">${r.memName}</dt>
-					<dd class="reply_cont">${r.boardReplyContent}</dd>
-				</dl>
-				<dl class="reply_info">
-					<dd>${r.createDate} ${r.memName}</dd>
-					<c:if test="${writerNo == memNo || memNo==100}">
-					<dd><a href="${contextPath}/replyDelete.bo?boardReplyNo=${r.boardReplyNo}&boardNo=${b.boardNo}">삭제</a></dd>
-					</c:if>
-				</dl>
-					</div>
-			
+			<c:forEach var="r" items="${reply}">
+				<div class="reply_view">
+					<dl>
+						<dt class="reply">${r.memName}</dt>
+						<dd class="reply_cont">${r.boardReplyContent}</dd>
+					</dl>
+					<dl class="reply_info">
+						<dd>${r.createDate}${r.memName}</dd>
+						<c:if test="${writerNo == memNo || memNo==100}">
+							<dd>
+								<a
+									href="${contextPath}/replyDelete.bo?boardReplyNo=${r.boardReplyNo}&boardNo=${b.boardNo}">삭제</a>
+							</dd>
+						</c:if>
+					</dl>
+				</div>
+
 			</c:forEach>
-			
-			
-			<form action="boardDetailView" method="post">
-				<dl>
-					<dt>${memName}</dt>
-					<dd><textarea class="content" id="content" name="content" placeholder="댓글을 남겨보세요" required></textarea></dd>
-					<dd class="ref_btn"><input class="on" type="submit" value="등록" onclick="check()"></dd>
-				</dl>
-				<input type="hidden" name="boardNo" value="${b.boardNo}">
-				
-				<script>
-				function check() {
-					if($("#content").val() == "")
-						alert("내용을 입력하세요")
-					
-				}
-				</script>
-			</form>
+
+			<c:if test="${memNo != 0}">
+				<form action="boardDetailView" method="post">
+					<dl>
+						<dt>${memName}</dt>
+						<dd>
+							<textarea class="content" id="content" name="content"
+								placeholder="댓글을 남겨보세요" required></textarea>
+						</dd>
+						<dd class="ref_btn">
+							<input class="on" type="submit" value="등록" onclick="check()">
+						</dd>
+					</dl>
+					<input type="hidden" name="boardNo" value="${b.boardNo}">
+
+					<script>
+						function check() {
+							if ($("#content").val() == "")
+								alert("내용을 입력하세요")
+
+						}
+					</script>
+				</form>
+			</c:if>
 		</div>
 
 

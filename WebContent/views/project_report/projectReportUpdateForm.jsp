@@ -44,7 +44,11 @@
 						<dl>
 							<dt>첨부파일</dt>
 							<dd>
-								<input type="file" name="file" value="${pr.files}"/>
+								<input type="file" name="file"/>
+							</dd>
+							<dt></dt>
+							<dd>
+								<input type="file" name="file" />
 							</dd>
 						</dl>
 					</div>
@@ -52,7 +56,7 @@
 						<dl>
 							<dt>프로젝트번호</dt>
 							<dd>
-								<input type="text" name="prjNo" value="${pr.prjNo}"/>
+								<input type="number" name="prjNo" value="${pr.prjNo}"/>
 							</dd>
 						</dl>
 					</div>

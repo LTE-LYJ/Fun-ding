@@ -53,7 +53,7 @@ public class ProjectReportDetailViewServlet extends HttpServlet {
 		request.setAttribute("memNo", memNo);
 		request.setAttribute("answer", prjReport.getAnswer());
 		
-		request.getRequestDispatcher("/views/project_report/projectReportDetailView").forward(request, response);
+		request.getRequestDispatcher("/views/project_report/projectReportDetailView.jsp").forward(request, response);
 	}
 
 	/**
