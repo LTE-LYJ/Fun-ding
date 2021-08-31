@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"   %>
+<%@ page import = "com.kh.attachment.model.vo.ProfileAttachment" %>
     
 <%
 	//request.setCharacterEncoding("UTF-8");
@@ -11,6 +12,8 @@
 	String phone = m.getPhone();
 	String email = m.getEmail();
 	String address = m.getAddress();
+	
+	ProfileAttachment atf = (ProfileAttachment)session.getAttribute("at");	
 	
 %>    
 <!DOCTYPE html>
@@ -72,7 +75,12 @@
     
         <table class="mpInfotb">
             <caption>
-                <div id="profileImg"></div>
+            	<%if(atf == null){ %>
+					<img id="profileImage" src="<%=request.getContextPath()%>/resources/images/default.PNG" style="width:70px; height:70px;"> 
+					<%} else { %>
+					<img id="profileImage"  src="<%=request.getContextPath() %>/resources/upfiles_profile/<%= at.getChangeName()%>" style="width:70px; height:70px;"> 
+				<%} %>
+                <!-- <div id="profileImg"></div> -->
             </caption>
             <tr>
                 <td>아이디</td>
@@ -111,7 +119,7 @@
     		
     	}
     	function updateBtn(){
-    		location.href="views/mypage/mypageInfoUpdatePwd.jsp";
+    		location.href="<%=request.getContextPath() %>/updatePwdOk.mp";
     	}
     </script>
 

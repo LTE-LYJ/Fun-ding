@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page  import="com.kh.member.model.vo.Member, com.kh.mypage.model.vo.*"%>
+
 <%
 	String contextPath = request.getContextPath();
 %>
@@ -89,8 +90,8 @@
 			<%--location.href = "views/mypage/mypageProject.jsp";--%>
 		}
 		function mpList(){
-			<%--location.href = "<%=request.getContextPath()%>/boardMainList.mp";--%>
-			location.href = "views/mypage/mypageBoardMain.jsp";
+			location.href = "<%=request.getContextPath()%>/boardMainList.mp";
+			<%--location.href = "mypageBoardMainList.jsp";--%>
 		}
 		<%--function mpAlert(){
 			location.href = "<%=request.getContextPath()%>/alert.mp";

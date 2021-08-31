@@ -142,7 +142,7 @@
 			$(function(){
 				$(".bmtb>tbody>tr").click(function(){
 					var bno = $(this).children().eq(0).text();
-					location.href="<%= contextPath%>/boardMainDetail.mp?bno="+bno;
+					location.href="<%= contextPath%>/views/project_report/projectReportDetailView?bno="+bno;
 				})
 			})
 		<%}%>

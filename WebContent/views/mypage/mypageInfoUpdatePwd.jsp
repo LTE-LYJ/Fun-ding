@@ -10,7 +10,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-</script>
 <style>
 	.upwrap{
 		margin-top: 170px;
@@ -70,7 +69,7 @@
 			</tr>
 		</table>
 		<br>
-		<div id="updatePwdForm" class="upbtn" onclick="upPwdBtn();">변경하기</div>
+		<div id="upPwdBtn" class="upbtn" onclick="upPwdBtn();">변경하기</div>
 	</form>
 	
 	</div>

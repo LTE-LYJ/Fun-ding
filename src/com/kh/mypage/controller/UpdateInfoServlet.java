@@ -11,10 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.board.model.service.BoardService;
+import com.kh.board.model.vo.Board;
+
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.kh.attachment.model.vo.ProfileAttachment;
-import com.kh.board.model.service.BoardService;
 import com.kh.common.MyFileRenamePolicy;
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
@@ -70,37 +72,66 @@ public class UpdateInfoServlet extends HttpServlet {
 			view.forward(request, response);
 		}*/
 		
+			
+		/*///////////
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+	
+		String memId = loginUser.getMemId();
+		
+		Member member = new MemberService().selectMember(memId);
+		
+		System.out.println("member : " + member);
 		
 		
-			
-			
-			Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		//ProfileAttachment at = null;
 		
-			String memId = loginUser.getMemId();
+		
+		
+		Member result = new MypageService().updateMember(member);
+		
+		RequestDispatcher view = null;
+		
+		if(member != null) {
+			request.setAttribute("loginUser", loginUser);
+			view = request.getRequestDispatcher("views/mypage/mypageInfoUpdate.jsp");
+		}else {
 			
-			Member member = new MemberService().selectMember(memId);
-			
-			System.out.println("member : " + member);
-			
-			
-			ProfileAttachment at = null;
-			
-			
-			
-			Member result = new MypageService().updateMember(member);
-			
-			RequestDispatcher view = null;
-			
-			if(member != null) {
-				request.setAttribute("loginUser", loginUser);
-				view = request.getRequestDispatcher("views/mypage/mypageInfoUpdate.jsp");
-			}else {
-				
-				request.setAttribute("msg", "조회에 실패하였습니다.");
-				view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			}
-			
+			request.setAttribute("msg", "조회에 실패하였습니다.");
+			view = request.getRequestDispatcher("views/common/errorPage.jsp");
+		}
+		
+		view.forward(request, response);
+		*/
+		
+		
+		
+		
+		///
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		
+		String memId = loginUser.getMemId();
+		//int memNo = loginUser.getMemNo();
+		
+		//
+		Member member = new MemberService().selectMember(memId);
+		System.out.println("member : " + member);
+		
+		int memNo = new MemberService().selectMemNo(memId);
+		
+		
+		ProfileAttachment at = new MypageService().selectAttachment(memNo);
+		
+		int result = new MemberService().insertAttachment(at, memNo);
+		
+		if(result > 0) {
+			request.setAttribute("loginUser", loginUser);
+			request.setAttribute("at", at);
+			request.getRequestDispatcher("views/mypage/mypageInfoUpdate.jsp").forward(request, response);
+		}else {
+			request.setAttribute("msg", "회원정보 변경에 실패했습니다.");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
+		}
 		
 		
 		

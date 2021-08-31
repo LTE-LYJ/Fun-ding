@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.attachment.model.vo.ProfileAttachment;
+import com.kh.board.model.dao.BoardDao;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
 import com.kh.mypage.model.dao.MypageDao;
@@ -107,11 +108,14 @@ public class MypageService {
 		return result;
 	}
 
-	public Member updatePwd(String memId, String memPwd, String changePwd) {
+	public Member updatePwd(String memPwd, String memId, String changePwd) {
 		
 		Connection conn = getConnection();
 		Member updateMem = null;
-		int result = new MypageDao().updatePwd(conn, memId, memPwd, changePwd);
+		int result = new MypageDao().updatePwd(conn, memPwd, memId, changePwd);
+		
+		System.out.println(result); // result 값 출력해서 결과 확인 //0
+		
 		if(result > 0) {
 			commit(conn);
 			updateMem = new MemberDao().selectMember(conn, memId);
@@ -161,6 +165,19 @@ public class MypageService {
 		//System.out.println(m);
 		return updateMem;
 	}
+
+
+	public ProfileAttachment selectAttachment(int memNo) {
+		Connection conn = getConnection();
+		
+		ProfileAttachment at = new MypageDao().selectAttachment(conn, memNo);
+		
+		close(conn);
+		return at;
+	}
+
+
+	
 
 
 	

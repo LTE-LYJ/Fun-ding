@@ -1,7 +1,7 @@
 package com.kh.mypage.model.dao;
 
-import static com.kh.common.JDBCTemplate.close;
-//import static com.kh.common.JDBCTemplate.*;
+//import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -314,12 +314,13 @@ public class MypageDao {
 		return result;
 	}
 
-	public int updatePwd(Connection conn, String memId, String memPwd, String changePwd) {
+	public int updatePwd(Connection conn, String memPwd, String memId,String changePwd) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
+		//Member m = null;
 		String sql = prop.getProperty("updatePwd");
-		//String sql = "UPDATE MEMBER SET MEM_PWD=? WHERE MEM_ID=? AND MEM_PWD=?"
+		//String sql = "UPDATE MEMBER SET MEM_PWD=? WHERE MEM_ID=? AND MEM_PWD=?";
 
 		
 		try {
@@ -335,7 +336,7 @@ public class MypageDao {
 		}finally {
 			close(pstmt);
 		}
-		
+		//System.out.println(result);
 		return result;
 	}
 
@@ -437,6 +438,35 @@ public class MypageDao {
 		}
 		//System.out.println(m);
 		return result;
+	}
+
+	public ProfileAttachment selectAttachment(Connection conn, int memNo) {
+		
+		ProfileAttachment at = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAttachment");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				at = new ProfileAttachment();
+				at.setFileNo(rset.getInt("FILE_NO"));
+				at.setOriginName(rset.getString("ORIGIN_NAME"));
+				at.setChangeName(rset.getString("CHANGE_NAME"));		
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return at;
 	}
 	
 	
