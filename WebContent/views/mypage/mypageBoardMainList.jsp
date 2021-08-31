@@ -165,7 +165,7 @@
 			$(function(){
 				$(".bmtb>tbody>tr").click(function(){
 					var bno = $(this).children().eq(0).text();
-					location.href="<%= contextPath%>/boardDetailView.mp?bno="+bno;
+					location.href="<%= contextPath%>/views/board/boardDetailView?bno="+bno;
 				})
 			})
 		<%}%>

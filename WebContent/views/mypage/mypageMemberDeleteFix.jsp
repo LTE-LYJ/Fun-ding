@@ -1,17 +1,6 @@
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ page import="java.sql.*" %>
 <%
 		//String memId = (String)session.getAttribute("memId");
 	
@@ -20,32 +9,44 @@
 		//String memId = m.getMemId();
 		//String memPwd = m.getMemPwd();
 		
-		request.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("UTF-8");
 		
 		//Member m = (Member)request.getAttribute("loginUser");
 		
 		//String memId = m.getMemId();
 		//String memPwd = m.getMemPwd();
 		
+		//String id = (String)session.getAttribute("id");
+		//String pw = request.getParameter("passwd");
+		
 		String id = request.getParameter("id");
 		String passwd = request.getParameter("passwd");
+		
+		
 		
 		ResultSet rset = null;
 		
 		Connection conn = null;
+		
 		String url = "jdbc:oracle:thin:@127.0.0.1:1521:XE";
 		String username = "FUNDING";
 		String password = "FUNDING";
-		//String driver = oracle.jdbc.driver.OracleDriver;
+		
+		String driver = "oracle.jdbc.driver.OracleDriver";
 		
 		PreparedStatement pstmt = null;
 		String sql = "";
 		
+		
 		try{
-			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Class.forName(driver);
+			
 			conn = DriverManager.getConnection(url, username, password);
+			//conn = JDBC
 			sql = "SELECT MEM_PWD FROM MEMBER WHERE MEM_ID = ?";
+			
 			pstmt = conn.prepareStatement(sql);
+			
 			pstmt.setString(1, id);
 			
 			rset = pstmt.executeQuery();
@@ -55,56 +56,50 @@
 				String dbPass = rset.getString("passwd");
 				
 				if(passwd.equals(dbPass)){
-					//sql="DELETE FROM MEMBER WHERE MEM_ID = ?";
+					
+					//sql="DELETE FROM MEMBER WHERE MEM_ID = ? ";
 					sql = "UPDATE MEMBER SET STATUS = 'N' WHERE MEM_ID=?";
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setString(1, id);
 					
 					pstmt.executeUpdate();
-					out.println("삭제");
-					//System.out.println("삭제");
+					//out.println("삭제");
+					System.out.println("삭제");
+					
 					session.removeAttribute("loginUser");
 					
 				}else{
-					out.println("비밀번호가 일치하지 않음");
+					System.out.println("비밀번호가 일치하지 않음");
 				}
 				
 			}else{
-				out.println("아이디가 일치하지 않음");
+				System.out.println("아이디가 일치하지 않음");
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
-
-			if(rset != null){
-				try {
-					rset.close();
-				} catch (SQLException ex) {
-					
-				}
-			}
 			
-		    if(pstmt != null){
-		    	try {
-		    		pstmt.close();
-		    	} catch (SQLException ex) {
-		    		
-		    	}
-		    }
-		    
-		    if(conn != null) {
-		    	try {
-		    		conn.close();
-		    	} catch (SQLException ex) {
-		    		
-		    	}
-		    }
+		} finally {
+
+			rset.close();
+				
+			pstmt.close();
+		    	
+		    conn.close();
+		
 		    
 		}
 		
 		
 	%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
 <%@ include file = "../common/menubar.jsp" %>
 <%@ include file = "../mypage/mypageMenubar.jsp" %>
 

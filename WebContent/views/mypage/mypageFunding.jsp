@@ -77,15 +77,15 @@
 
         
         
-        <div class="fd2">
+        <!-- <div class="fd2">
         	<h3>종료된 펀딩</h3>
             
             <!-- <div id="temp4">
             	<div class="fdp" style="background-color: gray; width:50px; height: 50px;"></div>
                 <div id="st">상태</div>
-            </div> -->
+            </div>
             <table class="fdtb2" align="center">
-				<%if(list.isEmpty()){ %>
+				<%--<%if(list.isEmpty()){ %>
 				<tr>
 					<td colspan="2">조회된 리스트가 없습니다.</td>
 				</tr>
@@ -98,9 +98,9 @@
 						
 					</tr>
 					<%} %>
-				<%} %>
+				<%} %>--%>
 			</table>
-        </div>
+        </div> -->
     </div>
     
 </div>
@@ -110,7 +110,7 @@
 	$(function(){
 		$(".bmtb>tbody>tr").click(function(){
 			var bno = $(this).children().eq(0).text();
-			location.href="<%= contextPath%>/fdDetailView.mp?bno="+bno;
+			location.href="<%= contextPath%>/proInfo.list?bno="+bno;
 		})
 	})
 	<%}%>

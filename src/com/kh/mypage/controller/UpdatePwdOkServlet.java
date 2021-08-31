@@ -9,21 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.member.model.service.MemberService;
-import com.kh.member.model.vo.Member;
-import com.kh.mypage.model.service.MypageService;
-
 /**
- * Servlet implementation class UpdatePwdServlet
+ * Servlet implementation class UpdatePwdOkServlet
  */
-@WebServlet("/updatePwd.mp")
-public class UpdatePwdServlet extends HttpServlet {
+@WebServlet("/updatePwdOk.mp")
+public class UpdatePwdOkServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdatePwdServlet() {
+    public UpdatePwdOkServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,25 +28,8 @@ public class UpdatePwdServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String memId = ((Member)request.getSession().getAttribute("loginUser")).getMemId();
-		
-		String memPwd = request.getParameter("memPwd");
-		String changePwd = request.getParameter("changePwd");
-		
-		Member updateMem = new MypageService().updatePwd(memPwd, memId, changePwd);
-		
-		RequestDispatcher view  = request.getRequestDispatcher("views/mypage/mypageInfoUpdatePwd.jsp");
-		
-		if(updateMem != null) {
-			request.setAttribute("sTag", "Y");
-			request.setAttribute("msg", "비밀번호가 변경되었습니다.");
-			request.getSession().setAttribute("loginUser", updateMem);
-		}else {
-			
-			request.setAttribute("msg", "비밀번호 변경 실패");
-		}
-		
+		// TODO Auto-generated method stub
+		RequestDispatcher view = request.getRequestDispatcher("views/mypage/mypageInfoUpdatePwd.jsp");
 		view.forward(request, response);
 	}
 

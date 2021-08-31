@@ -137,6 +137,17 @@
         
     </div>
     
+    <script>
+		<%if(!list.isEmpty()){%>
+			$(function(){
+				$(".bmtb>tbody>tr").click(function(){
+					var bno = $(this).children().eq(0).text();
+					location.href="<%= contextPath%>/writeAsk.de?bno="+bno;
+				})
+			})
+		<%}%>
+	</script>
+    
     <div class="ft" style="margin-top: 200px;">
 		<%@ include file="../common/footer.jsp" %>
 	</div>

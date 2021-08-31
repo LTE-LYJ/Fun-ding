@@ -6,8 +6,10 @@
     //request.setCharacterEncoding("UTF-8"); /////////
 
 	Member m = (Member)request.getAttribute("loginUser");
+	ProfileAttachment atf = (ProfileAttachment)request.getAttribute("at");
 
 	String memId = m.getMemId();
+	//int memNo = m.getMemNo();
 	String memName = m.getMemName();
 	String phone = m.getPhone();
 	String email = m.getEmail();
@@ -67,14 +69,35 @@
 <%@ include file = "../mypage/mypageMenubar.jsp" %>
 
 	<div class="mypageinfo">
+	
+		<form action="profileImageUpdate.mp" method="post" enctype="multipart/form-data">
+			<div class="image-section">
+				<div class="img-area">
+					<img id="image_section" src="<%=request.getContextPath() %>/resources/upfiles_profile/<%= at.getChangeName()%>" alt=""/>
+						<label for="imgFile" class="del-button img-up">
+							<input type="file" id="imgFile" name="imgFile" value=""/>업로드
+						</label>
+					<button class="up-button" type="submit">저장</button>
+					<button class="del-button" onclick="delImg()" type="button">제거</button>
+				</div>
+			</div>
+		</form>
+	
 
 	<form action="<%=request.getContextPath() %>/updateInfoOk.mp" method="post" id="infoForm" name="infoForm">
     
         <table class="mpInfotb">
-            <tr>
-                <td id="profileImg" name="proImg"></td>
+            <!--<tr>
+                <!--<td id="profileImg" name="proImg">
+                <td>
+	                <%--<%if(atf == null){ %>--%>
+						<!--<img id="profileImage" src="<%--<%=request.getContextPath()%>--%>/resources/images/default.PNG" style="width:70px; height:70px;"> 
+						<%--<%} else { %>--%>
+						<img id="profileImage"  src="<%--<%=request.getContext가나다Path() %>--%>/resources/upfiles_profile/<%--<%= at.getChangeName()%>--%>" style="width:70px; height:70px;"> 
+					<%--<%} %>--%>
+				<!--</td>
                 <td><input type="file" name="fileName" style="float: bottom;"></td>
-            </tr>
+            </tr>-->
             <tr>
                 <td>아이디</td>
                 <td><input type="text" class="mpi" id="mpId" name="memId" value = "<%= memId %>" readonly></td>
@@ -109,5 +132,39 @@
 		<%@ include file="../common/footer.jsp" %>
 	</div>
 
+
+<script>
+	function readURL(input){
+		if(input.files && input.files[0]){
+			var reader = new FileReader();
+			
+			reader.onload = function(e){
+				$('#image_section').attr('src', target.result);
+			}
+			
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+	$('#imgFile').change(function(){
+		readURL(this);
+	});
+	function delImg(){
+		$('#image_section').removeAttr('src');
+		$('#image_section').attr('src', '../resources/images/default.PNG');
+	}
+</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
