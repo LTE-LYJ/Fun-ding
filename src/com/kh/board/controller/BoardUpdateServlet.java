@@ -24,7 +24,7 @@ import com.kh.member.model.vo.Member;
 /**
  * Servlet implementation class BoardUpdateServlet
  */
-@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 50, maxRequestSize = 1024 * 1024 * 50 * 5)
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 50, maxRequestSize = 1024 * 1024 * 50 * 2)
 @WebServlet("/bUpdate.bo")
 public class BoardUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

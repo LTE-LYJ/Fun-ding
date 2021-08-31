@@ -102,7 +102,7 @@
 						<th>이전글</th>
 						<td><a id="prev"
 							href="noticeDetailView?noticeNo=${prev.noticeNo }">${prev.noticeTitle}</a>
-							<c:if test="${prev.noticeNo == null}">다음글이 없습니다.</c:if></td>
+							<c:if test="${prev.noticeNo == null}">이전글이 없습니다.</c:if></td>
 					</tr>
 
 				</tbody>

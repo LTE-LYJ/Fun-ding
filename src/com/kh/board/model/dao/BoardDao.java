@@ -204,9 +204,10 @@ public class BoardDao {
 	public Board getPrevBoard(Connection con, int id) {
 		Board board = null;
 
-		String sql = "SELECT BOARD_NO, BOARD_TITLE FROM (SELECT * FROM BOARD \r\n"
-				+ "				ORDER BY CREATE_DATE DESC) \r\n"
-				+ "				WHERE CREATE_DATE < (SELECT CREATE_DATE FROM BOARD WHERE BOARD_NO=? AND STATUS = 'Y' ) \r\n"
+		String sql = "SELECT BOARD_NO, BOARD_TITLE FROM (SELECT * FROM BOARD "
+				+ "				ORDER BY CREATE_DATE DESC) "
+				+ "				WHERE CREATE_DATE < (SELECT CREATE_DATE FROM BOARD WHERE BOARD_NO=? ) "
+				+ "				AND STATUS = 'Y' "
 				+ "				AND ROWNUM = 1";
 
 		PreparedStatement st = null;

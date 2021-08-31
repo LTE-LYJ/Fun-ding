@@ -24,7 +24,9 @@ import com.kh.member.model.vo.Member;
 /**
  * Servlet implementation class BoardEnrollFormServlet
  */
-@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 50, maxRequestSize = 1024 * 1024 * 50 * 5)
+@MultipartConfig(fileSizeThreshold = 1024 * 1024,
+				 maxFileSize = 1024 * 1024 * 50,
+				 maxRequestSize = 1024 * 1024 * 50 * 2)
 @WebServlet("/views/board/boardEnrollForm")
 public class BoardEnrollFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -93,14 +95,14 @@ public class BoardEnrollFormServlet extends HttpServlet {
 			}
 			fos.close();
 			fis.close();
-
-
 		}
+		
 		Board board = new Board(title, content.replaceAll("\n", "<br>"), category, writer, builder.toString());
 		int result = new BoardService().insertBoard(board);
 		if(result>0){
 			response.sendRedirect("boardListView");
-		}else {
+		}
+		else {
 			System.out.println("에러");
 		}
 	}

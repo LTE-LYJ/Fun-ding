@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>신고게시판</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
 <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
 <link rel="stylesheet"
@@ -56,7 +56,7 @@
 						<dl>
 							<dt>프로젝트번호</dt>
 							<dd>
-								<input type="number" name="prjNo" value="${pr.prjNo}"/>
+								<input type="number" name="prjNo" value="${pr.prjNo} required"/>
 							</dd>
 						</dl>
 					</div>
