@@ -219,9 +219,10 @@ public class NoticeDao {
 	public Notice getPrevNotice(Connection con, int id) {
 		Notice notice = null;
 		
-		String sql = "SELECT NOTICE_NO, NOTICE_TITLE FROM (SELECT * FROM NOTICE A\r\n"
-				+ "				ORDER BY CREATE_DATE DESC) \r\n"
-				+ "				WHERE CREATE_DATE < (SELECT CREATE_DATE FROM NOTICE WHERE NOTICE_NO=? AND STATUS = 'Y' ) \r\n"
+		String sql = "SELECT NOTICE_NO, NOTICE_TITLE FROM (SELECT * FROM NOTICE A"
+				+ "				ORDER BY CREATE_DATE DESC) "
+				+ "				WHERE CREATE_DATE < (SELECT CREATE_DATE FROM NOTICE WHERE NOTICE_NO=?  ) "
+				+ "				AND STATUS = 'Y' "
 				+ "				AND ROWNUM = 1";
 		
 		PreparedStatement st =null;

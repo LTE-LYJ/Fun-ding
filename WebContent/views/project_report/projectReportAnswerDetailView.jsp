@@ -16,7 +16,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/board/common.css" />
 
-<title>공지사항</title>
+<title>신고게시판</title>
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp"%>

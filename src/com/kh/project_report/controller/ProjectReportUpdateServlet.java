@@ -22,7 +22,7 @@ import com.kh.project_report.model.vo.ProjectReport;
 /**
  * Servlet implementation class ProjectUpdateServlet
  */
-@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 50, maxRequestSize = 1024 * 1024 * 50 * 5)
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 50, maxRequestSize = 1024 * 1024 * 50 * 2)
 @WebServlet("/pinsert.pr")
 public class ProjectReportUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

@@ -13,7 +13,7 @@
 	href="${pageContext.request.contextPath}/resources/css/board/common.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/board/write.css" />
-<title>Insert title here</title>
+<title>커뮤니티</title>
 </head>
 <body>
 	<body>

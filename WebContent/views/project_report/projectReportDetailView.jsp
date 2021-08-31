@@ -16,7 +16,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/board/common.css" />
 
-<title>공지사항</title>
+<title>신고게시판</title>
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp"%>
@@ -107,7 +107,7 @@
 						<th>이전글</th>
 						<td><a id="prev"
 							href="projectReportDetailView?prjReportNo=${prev.prjReportNo }">${prev.prjReportTitle}</a>
-							<c:if test="${prev.prjReportNo == null}">다음글이 없습니다.</c:if></td>
+							<c:if test="${prev.prjReportNo == null}">이전글이 없습니다.</c:if></td>
 					</tr>
 
 				</tbody>
