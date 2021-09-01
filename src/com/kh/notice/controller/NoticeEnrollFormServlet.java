@@ -91,6 +91,8 @@ public class NoticeEnrollFormServlet extends HttpServlet {
 
 
 		}
+		builder.delete(builder.length()-1, builder.length());
+		
 		Notice notice = new Notice(title, content.replaceAll("\n", "<br>"), writer, builder.toString());
 		int result = new NoticeService().insertNotice(notice);
 		response.sendRedirect("noticeListView");

@@ -97,6 +97,9 @@ public class BoardUpdateServlet extends HttpServlet {
 			fis.close();
 
 		}
+		
+		builder.delete(builder.length()-1, builder.length());
+		
 		Board board = new Board(boardNo, title, content.replaceAll("\n", "<br>"), category, writer, builder.toString());
 		int result = new BoardService().updateBoard(board);
 		if(result>0) {
