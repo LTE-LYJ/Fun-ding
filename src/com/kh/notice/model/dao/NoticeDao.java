@@ -88,9 +88,10 @@ public class NoticeDao {
 		int count = 0;
 		String sql = "SELECT COUNT(NOTICE_NO) COUNT FROM ("
 				+ "SELECT ROWNUM NUM, P.* "
-				+ " FROM (SELECT * FROM NOTICE  "
+				+ " FROM (SELECT * FROM NOTICE N "
+				+ "	LEFT JOIN MEMBER ON MEM_NO = NOTICE_WRITER "
 				+ " WHERE "+ field +" LIKE  ? "
-				+ " AND STATUS = 'Y' "
+				+ " AND N.STATUS = 'Y' "
 				+ "ORDER BY CREATE_DATE DESC) P "
 				+ ") ";
 		PreparedStatement st =null;
