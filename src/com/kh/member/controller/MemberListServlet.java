@@ -43,7 +43,7 @@ public class MemberListServlet extends HttpServlet {
 		int boardLimit;
 		
 		listCount =  new MemberService().getListCount(); //관리자를 제외한 전체 회원수
-		
+	
 		currentPage = 1;
 		
 		if(request.getParameter("currentPage") != null) {
@@ -63,8 +63,6 @@ public class MemberListServlet extends HttpServlet {
 		if(maxPage < endPage) {
 			endPage = maxPage;
 		}
-		System.out.println("currentPage : " + currentPage);
-		//System.out.println(maxPage);
 		
 		MemberPageInfo pi = new MemberPageInfo(listCount, currentPage, startPage, endPage,  maxPage, pageLimit, boardLimit);
 				
@@ -73,9 +71,7 @@ public class MemberListServlet extends HttpServlet {
 		
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
-		
 		request.getRequestDispatcher("views/member/memberList.jsp").forward(request, response);
-
 	}
 
 	/**

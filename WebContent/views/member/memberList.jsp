@@ -220,14 +220,10 @@
              </div>
              	
        
-           <script>
+           	<script>
              		$("#searchBtn").click(function(){
              			var mem = $("#mem").val();
-             			console.log(mem);
-             			
              			var selValue = $("#category option:selected").text();
-             		
-             			console.log(selValue);
              			
              			$.ajax({
              				url: "searchMember.bo",
@@ -237,10 +233,7 @@
              				type:"post",
              				dataType:"json",
              				success: function(list){
-             					console.log(list);
-             					
              					if(list.length != 0){
-             						
              						$("#memberTable > tbody").empty();
              						$(".pagingArea").empty();
              					
@@ -254,14 +247,10 @@
  		                  		 		list[i].email + '</td><th class="line">'+
  		                  				'&nbsp;<button id="deleteBtn" type="button" onclick="deleteMember()">탈퇴</button>' + '</th>'
  		                  				+ '</tr>'
- 		               			   
  		           					});
-             						
  									$("#memberTable").append(str); 
              						
              					} else if(list.length == 0) {
-             						
-             						//$("#memberTable > thead").empty();
              						$("#memberTable > tbody").empty();
              						$(".pagingArea").empty();
              						
@@ -269,15 +258,11 @@
              						'<td colspan="4" style="width:500px; padding:30px;">'
              						+ "조회된 회원 리스트가 없습니다. 정확히 입력해주세요." + '</td>' 
              						+ '</tr></<tbody>'
-             						
              						$("#memberTable").append(str); 
              					}
-             					
-                     
              				},
              				error:function(){
     							console.log("Ajax 통신 실패");
-    							
     							$("#memberTable > tbody").empty();
          						$(".pagingArea").empty();
          						
@@ -285,13 +270,10 @@
          						'<td colspan="4" style="width:500px; padding:30px;">'
          						+ "조회된 회원 리스트가 없습니다. 정확히 입력해주세요." + '</td>' 
          						+ '</tr></<tbody>'
-         						
          						$("#memberTable").append(str); 
     						}
-             			
-             			})
+             			});
              		})
-             		
              		<%if(!list.isEmpty()) {%>
              		$(function(){
              			$(document).on("mouseenter", "#memberTable > tbody >tr", function (e) { 
@@ -310,7 +292,7 @@
              			});
              
              		})
-             		<%}%>
+               		<%}%>
              		
              		function deleteMember() {
              			for (let i = 1; i < memberTable.rows.length; i++) {
@@ -327,6 +309,8 @@
              	    	}
              	    });
              </script>
+             
+             
   <%@ include file ="../common/footer.jsp" %>
 </body>
 </html>

@@ -41,9 +41,7 @@ public class MemberDao {
 		Member member = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
 		String sql = prop.getProperty("loginMember");
-	
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
@@ -65,8 +63,6 @@ public class MemberDao {
 				member.setStatus(rset.getString("STATUS"));
 				member.setCoin(rset.getInt("COIN"));
 			}
-		
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -74,45 +70,34 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);
 		}
-		
-		
-		
 		return member;
 	}
-
-	public ProfileAttachment memberProfile(Connection conn, String userId) {
-		ProfileAttachment at = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-	//	private int fileNo; // 파일번호 ATTACHMENT_NO
+	
+	//	private int fileNo;        // 파일번호 ATTACHMENT_NO
 	//	private String originName; // 원본파일명 ORIGIN_NAME
 	//	private String changeName; // 수정파일명 CHANGE_NAME
 	//	private String filePath;   // 저장폴더경로 ATTACHMENT_PATH
 	//	private Date uploadDate;   // 업로드날짜 	UPLOAD_DATE
 	//	private String status;     // 상태값(Y/N) STATUS
-	//	private int memNo;       //회원번호
-
-		
+	//	private int memNo;         //회원번호
+	
+	public ProfileAttachment memberProfile(Connection conn, String userId) {
+		ProfileAttachment at = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		String sql = prop.getProperty("loginMemberAttachment");
-		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
 			pstmt.setString(1, userId);
-			
 			rset = pstmt.executeQuery();
-			
 			if(rset.next()) {
 				at = new ProfileAttachment();
-				
 				at.setFileNo(rset.getInt("ATTACHMENT_NO"));
 				at.setOriginName(rset.getString("ORIGIN_NAME"));
 				at.setChangeName(rset.getString("CHANGE_NAME"));
 				at.setFilePath(rset.getString("ATTACHMENT_PATH"));
 				at.setUploadDate(rset.getDate("UPLOAD_DATE"));
 				at.setStatus(rset.getString("STATUS"));
-						
 			}
 			
 		} catch (SQLException e) {
@@ -122,7 +107,6 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);
 		}
-		
 		return at;
 	}
 
@@ -309,7 +293,6 @@ public class MemberDao {
 	}
 
 	public ArrayList<Member> selectList(Connection conn, MemberPageInfo pi) {
-		
 		ArrayList<Member> list = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -317,11 +300,8 @@ public class MemberDao {
 		String sql = prop.getProperty("selectList");
 		
 		int startRow = (pi.getCurrentPage()-1)*pi.getBoardLimit()+1;
-		
 		int endRow = startRow + pi.getBoardLimit()-1;
 		
-		System.out.println("startRow : " + startRow);
-		System.out.println("endRow : " + endRow);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
@@ -352,7 +332,6 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);
 		}
-		
 		return list;
 	}
 	
@@ -360,14 +339,11 @@ public class MemberDao {
 		ArrayList<Member> list = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
 		String sql = prop.getProperty("searchList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
 			rset = pstmt.executeQuery();
-			
 			while(rset.next())  {
 				Member member = new Member();
 				
@@ -391,7 +367,6 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);
 		}
-		
 		return list;
 	}
 
@@ -437,9 +412,7 @@ public class MemberDao {
 
 	public int deleteMember(Connection conn, String memId) {
 		int result = 0;
-		
 		PreparedStatement pstmt = null;
-		
 		String sql = prop.getProperty("deleteMember");
 		
 		try {
@@ -454,7 +427,6 @@ public class MemberDao {
 		} finally {
 			close(pstmt);
 		}
-		
 		return result;
 	}
 
