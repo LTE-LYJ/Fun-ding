@@ -47,9 +47,7 @@ public class MemberService {
 	public int insertMember(Member m) { //회원객체 정보
 		Connection conn = getConnection();
 		int result =new MemberDao().insertMember(conn,m); 
-	      
 	      if(result >0) {
-	    	  
 	         commit(conn);
 	      }else {
 	         rollback(conn);
@@ -61,7 +59,6 @@ public class MemberService {
 	public int selectMemNo(String memId) { //회원가입한 유저 번호 알아내기 
 		Connection conn = getConnection();
 		int result = new MemberDao().selectMemNo(conn, memId);
-		
 		if(result>0) {
 			commit(conn);
 		} else {
@@ -73,9 +70,7 @@ public class MemberService {
 	
 	public int insertAttachment(ProfileAttachment at, int memNo) { //회원프로필
 		Connection conn = getConnection();
-		
 		int result = 0;
-		
 	    if(at != null) {
 	         result = new MemberDao().insertAttachment(conn, at, memNo);
 	    }
@@ -85,11 +80,8 @@ public class MemberService {
 	    } else {
 	    	rollback(conn);
 	    } 
-	    
 	    close(conn);
-		  return result;
-	    
-	     
+		return result;
 	}
 	
 

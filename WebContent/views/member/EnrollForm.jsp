@@ -138,7 +138,6 @@
 							<c:set var="address1" value="${ addr }"/>
 						</c:if>
 					</c:forTokens>
-					
                         <th>
 							<input type="text" id='address'  name="address1" class="form-control postcodify_address" value="${ address1 }"  placeholder="Address">   
 						</th>  
@@ -209,8 +208,9 @@
 		
 		//비밀번호, 비밀번호 확인이 일치하는지 확인
 		if($("#enrollForm input[name=userPwd]").val() != $("#enrollForm input[name=checkPwd]").val()){
+			console.log("불일치")
 			$("#pwdResult").text("비밀번호 불일치").css("color", "red");
-			$("#pwdResult").focus();
+			$("#pwdResult").select();
 			return false;			
 		}
 		//이름이 한글로 2글자 이상인지 확인 
@@ -224,7 +224,7 @@
 	
 	// 전화번호 자동 (-) 추가
 	$("#enrollForm input[name=phone]").on("keyup", function() { 
-	      $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
+	    $(this).val($(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-")); 
 	 });
 	
 	
@@ -245,15 +245,15 @@
 			success : function(result) {
 				if (result == "fail") {
 					alert("사용할 수 없는 아이디입니다.");
-					 $("#enrollForm input[name=userId]").focus();
+					 $("#enrollForm input[name=userId]").select();
 
 				} else {
 					if (confirm("사용가능한 아이디입니다. 사용하시겠습니까?")) {
-						userId.attr("readonly", "true");
+						 $("#enrollForm input[name=userId]").attr("readonly","true");
 						$("#joinBtn").removeAttr("disabled");
 						
 					} else {
-						 $("#enrollForm input[name=userId]").focus();
+						userId.focus();
 					}
 				}
 			},

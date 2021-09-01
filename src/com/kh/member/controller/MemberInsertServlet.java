@@ -37,25 +37,10 @@ public class MemberInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//private int memNo; //회원번호
-		//private String memId; //아이디
-		//private String memPwd; //비밀번호
-		//private String memName; //이름
-		//private String phone; //연락처
-		//private String email; //이메일
-		//private String address; //주소
-		//private Date enrollDate; //회원가입일
-		//private String status; //상태값(Y/N)
-		//private int coin; //보유코인
-		//private int prjNo; //프로젝트 번호
-		
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize = 10 * 1024 *1024;
-			
 			String resources = request.getSession().getServletContext().getRealPath("/resources");
-			
 			String savePath = resources + "\\upfiles_profile\\";
-			
 			MultipartRequest multiRequest = new MultipartRequest(request,savePath,maxSize,"UTF-8",new MyFileRenamePolicy());
 			
 			String userId = multiRequest.getParameter("userId");
@@ -64,8 +49,6 @@ public class MemberInsertServlet extends HttpServlet {
 			String phone = multiRequest.getParameter("phone");
 			String email = multiRequest.getParameter("email");
 			String address = multiRequest.getParameter("address1");
-			
-			System.out.println(userPwd);
 			
 			Member m = new Member();
 			m.setMemId(userId);
@@ -78,7 +61,6 @@ public class MemberInsertServlet extends HttpServlet {
 			int result1 = new MemberService().insertMember(m);
 			
 			int memNo = new MemberService().selectMemNo(userId); //가입한 유저아이디의 memNo를 받아온다. 
-			System.out.println(memNo);
 			
 			ProfileAttachment at = null;
 			
@@ -112,7 +94,6 @@ public class MemberInsertServlet extends HttpServlet {
 			     view.forward(request, response);
 			}
 		}
-		
 	}
 
 	/**

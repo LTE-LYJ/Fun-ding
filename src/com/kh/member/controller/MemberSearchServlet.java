@@ -36,25 +36,16 @@ public class MemberSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String mem = request.getParameter("mem");
 		String selValue = request.getParameter("selValue");
-		
 		ArrayList<Member> list = new MemberService().searchList();	
-		
 		JSONArray jArr = new JSONArray(); 
-		
 		JSONObject jsonUser = null;
-		
 
 		if(selValue.equals("회원번호")) {
-			System.out.println("회원번호로 검색");
-			
 			for(Member member : list) {
-				
 				if(member.getMemNo() == Integer.parseInt(mem)) {
 					jsonUser = new JSONObject();
-					
 					jsonUser.put("no", member.getMemNo());
 					jsonUser.put("name", member.getMemName());
 					jsonUser.put("id", member.getMemId());
@@ -63,15 +54,10 @@ public class MemberSearchServlet extends HttpServlet {
 					jArr.add(jsonUser);
 				}
 			}
-			
 		} else if (selValue.equals("회원이름")) {
-			System.out.println("회원이름으로 검색");
-			
 			for(Member member : list) {
-				
 				if(member.getMemName().contains(mem)) {
 					jsonUser = new JSONObject();
-					
 					jsonUser.put("no", member.getMemNo());
 					jsonUser.put("name", member.getMemName());
 					jsonUser.put("id", member.getMemId());
@@ -80,16 +66,10 @@ public class MemberSearchServlet extends HttpServlet {
 					jArr.add(jsonUser);
 				}
 			}
-			
-			
 		} else if (selValue.equals("아이디")) {
-			System.out.println("아이디로 검색");
-			
 			for(Member member : list) {
-				
 				if(member.getMemId().contains(mem)) {
 					jsonUser = new JSONObject();
-					
 					jsonUser.put("no", member.getMemNo());
 					jsonUser.put("name", member.getMemName());
 					jsonUser.put("id", member.getMemId());
@@ -98,7 +78,6 @@ public class MemberSearchServlet extends HttpServlet {
 					jArr.add(jsonUser);
 				}
 			}
-			
 		}
 		
 		
