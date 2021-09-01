@@ -1,17 +1,14 @@
 package com.kh.mypage.controller;
 
-import java.io.IOException;
+import com.kh.member.model.vo.Member;
+import com.kh.mypage.model.service.MypageService;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.kh.member.model.service.MemberService;
-import com.kh.member.model.vo.Member;
-import com.kh.mypage.model.service.MypageService;
+import java.io.IOException;
 
 /**
  * Servlet implementation class UpdatePwdServlet
@@ -19,7 +16,7 @@ import com.kh.mypage.model.service.MypageService;
 @WebServlet("/updatePwd.mp")
 public class UpdatePwdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -33,25 +30,27 @@ public class UpdatePwdServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String memId = ((Member)request.getSession().getAttribute("loginUser")).getMemId();
-		
+		Member member = (Member)request.getSession().getAttribute("loginUser");
+
+		String memId = member.getMemId();
 		String memPwd = request.getParameter("memPwd");
 		String changePwd = request.getParameter("changePwd");
+
+		Member updateMem = new MypageService().updatePwd(memId, memPwd, changePwd);
 		
-		Member updateMem = new MypageService().updatePwd(memPwd, memId, changePwd);
-		
-		RequestDispatcher view  = request.getRequestDispatcher("views/mypage/mypageInfoUpdatePwd.jsp");
-		
-		if(updateMem != null) {
-			request.setAttribute("sTag", "Y");
+		if (updateMem != null) {		
+			request.setAttribute("sTag", "Y");		
 			request.setAttribute("msg", "비밀번호가 변경되었습니다.");
-			request.getSession().setAttribute("loginUser", updateMem);
-		}else {
 			
+			member = updateMem;
+		} else {
 			request.setAttribute("msg", "비밀번호 변경 실패");
 		}
-		
-		view.forward(request, response);
+
+		request.setAttribute("loginUser", member);
+		request.getSession().setAttribute("loginUser", member);
+
+		request.getRequestDispatcher("views/mypage/mypageInfo.jsp").forward(request, response);
 	}
 
 	/**

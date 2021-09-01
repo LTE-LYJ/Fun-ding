@@ -10,14 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-
-import com.kh.mypage.model.service.MypageService;
-import com.oreilly.servlet.MultipartRequest;
 import com.kh.attachment.model.vo.ProfileAttachment;
 import com.kh.common.MyFileRenamePolicy;
 import com.kh.member.model.service.MemberService;
+import com.kh.mypage.model.service.MypageService;
 import com.kh.member.model.vo.Member;
+import com.oreilly.servlet.MultipartRequest;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 /**
  * Servlet implementation class UpdateInfoOkServlet
@@ -25,7 +24,11 @@ import com.kh.member.model.vo.Member;
 @WebServlet("/updateInfoOk.mp")
 public class UpdateInfoOkServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private static final int MAX_MULTIPART_SIZE = 10 * 1024 *1024;
+	private static final String PROFILE_PATH = "\\upfiles_profile\\";
+
+	private static final MemberService memberService = new MemberService();
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -39,108 +42,52 @@ public class UpdateInfoOkServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		/*
-		request.setCharacterEncoding("UTF-8");
-		
-		String memId = request.getParameter("memId");
-		String memName = request.getParameter("memName");
-		String phone = request.getParameter("phone");
-		String email = request.getParameter("email");
-		String address = request.getParameter("address");
-		
-		Member updateMem = new MypageService().updateMember(new Member(memId, memName, phone, email, address));
-		
-		if(updateMem != null) {
-			request.getSession().setAttribute("msg", "성공적으로 회원 정보를 수정하였습니다.");
-			request.getSession().setAttribute("loginUser", updateMem); //최신 정보
-			response.sendRedirect(request.getContextPath());
-		}else {
-			
-			request.setAttribute("msg", "회원 정보 수정에 실패했습니다");
-			
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
-		}*/
-		request.setCharacterEncoding("UTF-8");
-		
-		
-		//
-		if(ServletFileUpload.isMultipartContent(request)) {
-			int maxSize = 10 * 1024 *1024;
-			
-			String resources = request.getSession().getServletContext().getRealPath("/resources");
-			
-			String savePath = resources + "\\upfiles_profile\\";
-			
-			MultipartRequest multiRequest = new MultipartRequest(request,savePath,maxSize,"UTF-8",new MyFileRenamePolicy());
-			
-			String memId = multiRequest.getParameter("memId");
-			String memName = multiRequest.getParameter("memName");
-			String phone = multiRequest.getParameter("phone");
-			String email = multiRequest.getParameter("email");
-			String address = multiRequest.getParameter("address");
-			
-			Member m = new Member();
-			m.setMemId(memId);
-			m.setMemName(memName);
-			m.setPhone(phone);
-			m.setEmail(email);
-			m.setAddress(address);
-			
-			
-			
-			int result = new MemberService().insertMember(m);
-			
-			int memNo = new MemberService().selectMemNo(memId);
-			
-			ProfileAttachment at = null;
-			
-			if(multiRequest.getOriginalFileName("upfile") != null) {
-				
-				
-				at = new ProfileAttachment();
-				
-				at.setOriginName(multiRequest.getOriginalFileName("upFile"));
-				at.setChangeName(multiRequest.getFilesystemName("upFile"));
-				at.setFilePath(savePath);
-				
-				
-				if(multiRequest.getParameter("originFile") != null ) {
-					
-					File deleteFile = new File(savePath + multiRequest.getParameter("originFile"));
-					System.out.println("deleteFile   "+ deleteFile);
-					deleteFile.delete();
-					
-					at.setFileNo(Integer.parseInt(multiRequest.getParameter("originFileNo")));
-				}
-				
-				
-			}
-			
-			Member updateMem = new MypageService().updateMember(new Member(memId, memName, phone, email, address));
-			
-			int result2 = new MemberService().insertAttachment(at, memNo);
-			
-			
-			if(result2 > 0) {
-				request.getSession().setAttribute("msg", "회원정보 변경");
-				response.sendRedirect(request.getContextPath());
-				
-			} else {
-				
-				if(at != null) {
-					File failedFile = new File(savePath+at.getChangeName());
-					
-					failedFile.delete();
-				}
-				request.setAttribute("msg", "회원정보 변경 실패");
-				
-				 RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			     view.forward(request, response);
-			}
+		if (!ServletFileUpload.isMultipartContent(request)) {
+			fail(request, response);
+			return;
 		}
+
+		String savePath = request.getSession().getServletContext().getRealPath("/resources") + PROFILE_PATH;
+		MultipartRequest multipart = new MultipartRequest(
+				request,
+				savePath,
+				MAX_MULTIPART_SIZE,
+				"UTF-8",
+				new MyFileRenamePolicy()
+		);
+
+		String memId = multipart.getParameter("memId");
+		String memName = multipart.getParameter("memName");
+		String phone = multipart.getParameter("phone");
+		String email = multipart.getParameter("email");
+		String address = multipart.getParameter("address");
+
+		Member updateMem = new MypageService().updateMember(new Member(memId, memName, phone, email, address));
+
+		if (updateMem == null) {
+			fail(request, response);
+			return;
+		}
+
+		if (multipart.getOriginalFileName("profileImage") != null) {
+			removeProfileAttachmentIfExists(memId, updateMem.getMemNo(), savePath);
+
+			String originName = multipart.getOriginalFileName("profileImage");
+			String changeName = multipart.getFilesystemName("profileImage");
+
+			ProfileAttachment at = new ProfileAttachment();
+			at.setFilePath(savePath);
+			at.setOriginName(originName);
+			at.setChangeName(changeName);
+
+			memberService.insertAttachment(at, updateMem.getMemNo());
+			request.getSession().setAttribute("at", at);
+		}
+
+		request.getSession().setAttribute("msg", "회원 정보가 수정되었습니다.");
+		request.getSession().setAttribute("loginUser", updateMem);
 		
-		
+		response.sendRedirect(request.getContextPath());
 	}
 
 	/**
@@ -151,4 +98,18 @@ public class UpdateInfoOkServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
+	private void fail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("msg", "회원 정보 수정에 실패했습니다");
+
+		RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+		view.forward(request, response);
+	}
+
+	private void removeProfileAttachmentIfExists(String userId, int memNo, String savePath) {
+		ProfileAttachment profileAttachment = memberService.memberProfile(userId);
+		if (profileAttachment == null) return;
+
+		new File(savePath + profileAttachment.getChangeName()).delete();
+		memberService.removeAttachment(memNo);
+	}
 }

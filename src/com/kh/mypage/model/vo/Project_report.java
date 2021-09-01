@@ -1,9 +1,11 @@
 package com.kh.mypage.model.vo;
 
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Project_report {
-	
+
 	private int prjReportNo; //	신고게시글번호
 	private String prjReportTitle; //	신고게시글제목
 	private String prjReportContent;//	신고게시글내용
@@ -13,13 +15,14 @@ public class Project_report {
 	private int prjReportLevel;//	게시글레벨 신고글:1/신고글답변:2
 	private int prjNo;//	상태값(Y/N)
 	private int files;//	프로젝트번호
+	private String answer;
 
 	public Project_report() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Project_report(int prjReportNo, String prjReportTitle, String prjReportContent, int prjReportWriter,
-			int count, Date createDate, int prjReportLevel, int prjNo, int files) {
+			int count, Date createDate, int prjReportLevel, int prjNo, int files, String answer) {
 		super();
 		this.prjReportNo = prjReportNo;
 		this.prjReportTitle = prjReportTitle;
@@ -30,6 +33,7 @@ public class Project_report {
 		this.prjReportLevel = prjReportLevel;
 		this.prjNo = prjNo;
 		this.files = files;
+		this.answer = answer;
 	}
 
 	public Project_report(int prjReportNo, String prjReportTitle, int prjReportWriter, Date createDate) {
@@ -119,6 +123,19 @@ public class Project_report {
 				+ ", createDate=" + createDate + ", prjReportLevel=" + prjReportLevel + ", prjNo=" + prjNo + ", files="
 				+ files + "]";
 	}
-	
-	
+
+	public static Project_report fromResultSet(ResultSet rset) throws SQLException {
+		return new Project_report(
+				rset.getInt("PRJ_REPORT_NO"),
+				rset.getString("PRJ_REPORT_TITLE"),
+				rset.getString("PRJ_REPORT_CONTENT"),
+				rset.getInt("PRJ_REPORT_WRITER"),
+				rset.getInt("COUNT"),
+				rset.getDate("CREATE_DATE"),
+				0,
+				rset.getInt("PRJ_NO"),
+				rset.getInt("FILES"),
+				rset.getString("ANSWER")
+		);
+	}
 }

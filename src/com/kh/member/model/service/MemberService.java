@@ -164,6 +164,22 @@ public class MemberService {
 	}
 
 	
+	//mypage
+	public boolean removeAttachment(int memNo) {
+		
+		Connection conn = getConnection();
+		boolean result = new MemberDao().removeMemberProfile(conn, memNo);
+		
+		if (result) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+
+		close(conn);
+		return result;
+	}
+	
 	
 
 }

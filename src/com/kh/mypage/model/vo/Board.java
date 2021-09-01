@@ -1,6 +1,8 @@
 package com.kh.mypage.model.vo;
 
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Board {
 
@@ -12,18 +14,16 @@ public class Board {
 	private int categoryNo; //카테고리번호
 	private int boardWriter; //작성자회원번호
 	private String statues; //상태값(Y/N)
-	
+
 	public Board() {
 		// TODO Auto-generated constructor stub
 	}
-
-	
 
 	public Board(int boardNo, String boardTitle, int boardWriter, Date createDate) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
-		
+
 		this.boardWriter = boardWriter;
 		this.createDate = createDate;
 	}
@@ -124,9 +124,16 @@ public class Board {
 				+ boardWriter + ", statues=" + statues + "]";
 	}
 
-	
-	
-	
-	
-	
+	public static Board fromResultSet(ResultSet rset) throws SQLException {
+		return new Board(
+				rset.getInt("BOARD_NO"),
+				rset.getString("BOARD_TITLE"),
+				rset.getString("BOARD_CONTENT"),
+				rset.getInt("COUNT"),
+				rset.getDate("CREATE_DATE"),
+				rset.getInt("CATEGORY_NO"),
+				rset.getInt("BOARD_WRITER"),
+				rset.getString("STATUS")
+		);
+	}
 }
