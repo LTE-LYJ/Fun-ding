@@ -192,10 +192,12 @@ h1 {
 		                        <% if(today.getTime() < startDate.getTime()) { %>
 		                        	<div class="card-header-text">공개 예정</div>
 		                        	<div class="card-header-number">D-<%= (startDate.getTime() - today.getTime()) / (24*60*60*1000) %></div>
-		                        <% } else { %>
-		                        <div class="card-header-text">남은 기간 </div>
-		                        <div class="card-header-number"><%= (endDate.getTime() - today.getTime()) / (24*60*60*1000) %>일 </div>
-		                        <% } %> 
+		                        <% } else if(today.getTime() > endDate.getTime()) { %>
+			                        	<div class="card-header-text">마감 </div>
+			                    <% } else { %>
+			                        <div class="card-header-text">남은 기간 </div>
+			                        <div class="card-header-number"><%= (endDate.getTime() - today.getTime()) / (24*60*60*1000) %>일 </div>
+			                    <% } %> 
 		                    </div>
 		                    <img src="resources/upfiles_project/<%= p.getAttachmentName() %>" width="100%" height="100%">
 		                </div>
