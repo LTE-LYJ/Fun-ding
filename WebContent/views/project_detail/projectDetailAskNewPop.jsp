@@ -37,7 +37,7 @@ $(function() {
         <form id="AskForm" action="<%=request.getContextPath()%>/insert.ask" method="post">
         <table>
             <tr>
-                <th><h4 class="modal_n">받는 사람</h4></th>
+                <th><h4 class="modal_n">작성자 </h4></th>
                 <th><textarea class="modal_con" cols="50" rows="1" readonly name="creator"><%=loginUser.getMemId() %> </textarea></th>
             </tr>
             <tr>

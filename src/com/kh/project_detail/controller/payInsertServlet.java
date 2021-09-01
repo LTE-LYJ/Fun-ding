@@ -61,8 +61,6 @@ public class payInsertServlet extends HttpServlet {
 		Order order = new Order(deliName, deliPhone, deliReci, deliAddr);
 		int result2 =  new PrjDeService().insertOrder(order, fNum);
 		Pay pay = new Pay(writer, num, rewordPrice, fNum );
-		System.out.println(order);
-		System.out.println(pay);
 		int result3 = new PrjDeService().insertPay(pay);
 		int result4 = new PrjDeService().setPrjCurrentAdd(rewordPrice, num);
 		int result5 = new PrjDeService().payCoin(rewordPrice, writer);
