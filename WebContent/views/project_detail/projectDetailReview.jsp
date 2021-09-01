@@ -221,6 +221,10 @@ SimpleDateFormat sdFormat = new SimpleDateFormat("yy/MM/dd");
 	         $("#btn_con").click(function(){ //댓글 등록
 	            var content = $("#replyContent").val();
 	            var num = <%=num%>;
+	            if($("#replyContent").val()==0){
+	            	alert("내용을 입력해주세요!");
+	            	return false;
+	            }
 	            
 	            $.ajax({
 	               url:"reinsert.de",

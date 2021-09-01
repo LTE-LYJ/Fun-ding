@@ -167,7 +167,7 @@ Date date = new Date();
                 </tr>--%>
                   <% if(askList.isEmpty()){ %>
 				 	<tr class="table0">
-						<td colspan="5" style="height: 40px;">존재하는 공지사항이 없습니다.</td>
+						<td colspan="5" style="height: 40px;">존재하는 문의사항이 없습니다.</td>
 					</tr>
 				 <% }else{  %>
 				 	<% for(ProjectAsk n : askList){ %>
