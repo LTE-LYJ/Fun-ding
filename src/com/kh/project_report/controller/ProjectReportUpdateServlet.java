@@ -90,6 +90,8 @@ public class ProjectReportUpdateServlet extends HttpServlet {
 
 
 		}
+		
+		if(builder.toString() != "" || builder.toString() == null)
 		builder.delete(builder.length()-1, builder.length());
 		
 		ProjectReport prjReport = new ProjectReport(prjReportNo, title, content.replaceAll("\n", "<br>"), writer, builder.toString(), prjNo);
