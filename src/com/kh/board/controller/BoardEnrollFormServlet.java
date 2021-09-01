@@ -59,9 +59,10 @@ public class BoardEnrollFormServlet extends HttpServlet {
 		String content = request.getParameter("content");
 		String category = request.getParameter("cate");
 		String writer = String.valueOf(((Member) request.getSession().getAttribute("loginUser")).getMemNo());
+		StringBuilder builder = new StringBuilder();
+		
 		Collection<Part> parts = request.getParts();
 		
-		StringBuilder builder = new StringBuilder();
 		for (Part p : parts) {
 			if (!p.getName().equals("file"))
 				continue;
@@ -96,6 +97,8 @@ public class BoardEnrollFormServlet extends HttpServlet {
 			fos.close();
 			fis.close();
 		}
+		
+		builder.delete(builder.length()-1, builder.length());
 		
 		Board board = new Board(title, content.replaceAll("\n", "<br>"), category, writer, builder.toString());
 		int result = new BoardService().insertBoard(board);

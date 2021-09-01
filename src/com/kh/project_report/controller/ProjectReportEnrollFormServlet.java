@@ -92,6 +92,8 @@ public class ProjectReportEnrollFormServlet extends HttpServlet {
 
 
 		}
+		builder.delete(builder.length()-1, builder.length());
+		
 		ProjectReport prjReport = new ProjectReport(title, content.replaceAll("\n", "<br>"), writer, builder.toString(), prjNo);
 		int result = new ProjectReportService().insertProjectReport(prjReport);
 		if(result >0) {
