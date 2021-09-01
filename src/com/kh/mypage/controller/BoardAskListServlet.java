@@ -34,6 +34,7 @@ public class BoardAskListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int memNo = Member.loginMember(request).getMemNo();
+		
 		PageInfo pageInfo = PageInfo.fromRequest(request, new MypageService().getAskListCount(memNo));
 		List<Project_ask> list = new MypageService().selectAskList(memNo, pageInfo);
 
