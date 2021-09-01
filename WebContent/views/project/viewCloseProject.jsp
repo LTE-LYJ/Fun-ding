@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" import = "java.util.ArrayList, com.kh.project.model.vo.*" %>
 <%@ page import="java.util.Date, java.text.SimpleDateFormat" %>
 <% 
+	//close project
 	Date date = new Date();
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
