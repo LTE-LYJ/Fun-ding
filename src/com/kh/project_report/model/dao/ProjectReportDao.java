@@ -70,8 +70,12 @@ public class ProjectReportDao {
 	public int getProjectReportCount(Connection con, String field, String query) {
 		int count = 0;
 		String sql = "SELECT COUNT(PRJ_REPORT_NO) COUNT FROM (" + "SELECT ROWNUM NUM, P.* "
-				+ " FROM (SELECT * FROM PROJECT_REPORT " + " WHERE " + field + " LIKE  ? " + " AND STATUS = 'Y' "
-				+ "ORDER BY CREATE_DATE DESC) P " + ") ";
+				+ " FROM (SELECT * FROM PROJECT_REPORT P "
+				+ " LEFT JOIN MEMBER ON MEM_NO = PRJ_REPORT_WRITER " 
+				+ " WHERE " + field + " LIKE  ? " 
+				+ " AND P.STATUS = 'Y' "
+				+ "ORDER BY CREATE_DATE DESC) P "
+				+ ") ";
 		PreparedStatement st = null;
 		ResultSet rs = null;
 
