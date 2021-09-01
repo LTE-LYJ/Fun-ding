@@ -93,6 +93,8 @@ public class NoticeUpdateServlet extends HttpServlet {
 
 
 		}
+		
+		if(builder.toString() != "" || builder.toString() == null)
 		builder.delete(builder.length()-1, builder.length());
 		Notice notice = new Notice(noticeNo, title, content.replaceAll("\n", "<br>"), writer, builder.toString());
 		int result = new NoticeService().updateNotice(notice);
