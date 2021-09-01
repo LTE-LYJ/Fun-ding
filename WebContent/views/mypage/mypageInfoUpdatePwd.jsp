@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>마이페이지 비밀번호 변경</title>
 
 <style>
 	.upwrap{
@@ -94,8 +94,8 @@
 			}
 			
 			alert("비밀번호가 변경되었습니다.")
+			
 			$("#updatePwdForm").submit();
-		
 		}
 	</script>
 

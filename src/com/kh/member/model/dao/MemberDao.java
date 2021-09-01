@@ -456,5 +456,18 @@ public class MemberDao {
 		return listCount;
 	}
 
-	
+	//mypage
+	public boolean removeMemberProfile(Connection conn, int memNo) {
+        
+		String sql = prop.getProperty("removeMemberAttachment");
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, memNo);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }

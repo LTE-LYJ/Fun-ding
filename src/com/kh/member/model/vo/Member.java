@@ -2,6 +2,8 @@ package com.kh.member.model.vo;
 //테스트
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 import lombok.Data;
 @Data
 public class Member {
@@ -20,7 +22,9 @@ public class Member {
 	private int coin; //보유코인
 	private int prjNo; //프로젝트 번호	
 	
-	///
+	
+	
+	//mypage
 	public Member() {}
 
 	public Member(String memId, String memName, String phone, String email, String address) {
@@ -30,6 +34,10 @@ public class Member {
 		this.phone = phone;
 		this.email = email;
 		this.address = address;
+	}
+	
+	public static Member loginMember(HttpServletRequest request) {
+		return (Member)request.getSession().getAttribute("loginUser");
 	}
 	
 }

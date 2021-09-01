@@ -1,6 +1,8 @@
 package com.kh.mypage.model.vo;
 
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Project_ask {
 
@@ -9,15 +11,15 @@ public class Project_ask {
 	private String prjAskContent;//	문의내용
 	private int count;//	조회수
 	private Date enrollDate;//	작성일
-	private int status;//	상태값(Y/N)
+	private String status;//	상태값(Y/N)
 	private int prjNo;//	프로젝트 번호
 	private int memNo;//	회원번호
-	
+
 	public Project_ask() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Project_ask(int prjAskNo, String prjAskTitle, String prjAskContent, int count, Date enrollDate, int status,
+	public Project_ask(int prjAskNo, String prjAskTitle, String prjAskContent, int count, Date enrollDate, String status,
 			int prjNo, int memNo) {
 		super();
 		this.prjAskNo = prjAskNo;
@@ -78,11 +80,11 @@ public class Project_ask {
 		this.enrollDate = enrollDate;
 	}
 
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
@@ -108,6 +110,17 @@ public class Project_ask {
 				+ ", count=" + count + ", enrollDate=" + enrollDate + ", status=" + status + ", prjNo=" + prjNo
 				+ ", memNo=" + memNo + "]";
 	}
-	
-	
+
+	public static Project_ask fromResultSet(ResultSet rset) throws SQLException {
+		return new Project_ask(
+				rset.getInt("PRJ_ASK_NO"),
+				rset.getString("PRJ_ASK_TITLE"),
+				rset.getString("PRJ_ASK_CONTENT"),
+				rset.getInt("COUNT"),
+				rset.getDate("ENROLL_DATE"),
+				rset.getString("STATUS"),
+				rset.getInt("PRJ_NO"),
+				rset.getInt("MEM_NO")
+		);
+	}
 }
