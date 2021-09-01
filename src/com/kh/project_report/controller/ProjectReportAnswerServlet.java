@@ -93,6 +93,8 @@ public class ProjectReportAnswerServlet extends HttpServlet {
 			fis.close();
 
 		}
+		
+		if(builder.toString() != "" || builder.toString() == null)
 		builder.delete(builder.length()-1, builder.length());
 		
 		PrAnswer prAnswer = new PrAnswer(prjReportNo, title, content.replaceAll("\n", "<br>"), writer,

@@ -97,7 +97,7 @@ public class BoardEnrollFormServlet extends HttpServlet {
 			fos.close();
 			fis.close();
 		}
-		
+		if(builder.toString() != "" || builder.toString() == null)
 		builder.delete(builder.length()-1, builder.length());
 		
 		Board board = new Board(title, content.replaceAll("\n", "<br>"), category, writer, builder.toString());
